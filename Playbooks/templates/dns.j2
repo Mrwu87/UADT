@@ -1,0 +1,16 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA    @ {{ domain }}. (
+                              2         ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+       IN      NS     @
+       IN      A       127.0.0.1
+{% for host in  dns_a_record  %}
+{{ host.0 }}    IN  A  {{ host.1 }}
+{% endfor %}

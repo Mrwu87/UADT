@@ -1,0 +1,21 @@
+2022-04-02 09:58:50,524 - 'ansible_run_cmd.py' - [line: 346] - INFO : {'success': {}, 'failed': {}, 'unreachable': {'172.16.42.132': {'unreachable': True, 'msg': 'Failed to connect to the host via ssh: ssh_askpass: exec(/usr/bin/ssh-askpass): No such file or directory\r\nHost key verification failed.', 'changed': False}, '172.16.42.135': {'unreachable': True, 'msg': 'Failed to connect to the host via ssh: wlw@172.16.42.135: Permission denied (publickey,password).', 'changed': False}, '172.16.42.133': {'unreachable': True, 'msg': 'Failed to connect to the host via ssh: wlw@172.16.42.133: Permission denied (publickey,password).', 'changed': False}, '172.16.42.141': {'unreachable': True, 'msg': 'Failed to connect to the host via ssh: wlw@172.16.42.141: Permission denied (publickey,password).', 'changed': False}}}
+2022-04-02 09:58:50,525 - 'ansible_run_cmd.py' - [line: 371] - INFO : Playbooks/apt.yaml This file  execute failed
+2022-04-02 10:02:02,649 - '     init.py' - [line:  14] - INFO : [COMMAND] [rm log] RUN CMD: [rm -rf initCheck/sshcopycheck/sshcopyfail.log], CWD: [None], TIMEOUT: [600]
+2022-04-02 10:02:02,656 - '     init.py' - [line:  49] - INFO : [COMMAND] [rm log] SUCCESS:[rm -rf initCheck/sshcopycheck/sshcopyfail.log], CODE:[0]
+2022-04-02 10:02:02,656 - '     init.py' - [line:  14] - INFO : [COMMAND] [ssh-copy] RUN CMD: [bash sh/ssh-copy-id.sh wlw 172.16.42.141 123], CWD: [None], TIMEOUT: [600]
+2022-04-02 10:02:03,097 - '     init.py' - [line:  49] - INFO : [COMMAND] [ssh-copy] SUCCESS:[bash sh/ssh-copy-id.sh wlw 172.16.42.141 123], CODE:[0]
+2022-04-02 10:02:03,097 - '     init.py' - [line:  14] - INFO : [COMMAND] [ssh-copy] RUN CMD: [bash sh/ssh-copy-id.sh wlw 172.16.42.132 123], CWD: [None], TIMEOUT: [600]
+2022-04-02 10:02:04,240 - '     init.py' - [line:  49] - INFO : [COMMAND] [ssh-copy] SUCCESS:[bash sh/ssh-copy-id.sh wlw 172.16.42.132 123], CODE:[0]
+2022-04-02 10:02:04,240 - '     init.py' - [line:  14] - INFO : [COMMAND] [ssh-copy] RUN CMD: [bash sh/ssh-copy-id.sh wlw 172.16.42.133 123], CWD: [None], TIMEOUT: [600]
+2022-04-02 10:02:05,775 - '     init.py' - [line:  49] - INFO : [COMMAND] [ssh-copy] SUCCESS:[bash sh/ssh-copy-id.sh wlw 172.16.42.133 123], CODE:[0]
+2022-04-02 10:02:05,775 - '     init.py' - [line:  14] - INFO : [COMMAND] [ssh-copy] RUN CMD: [bash sh/ssh-copy-id.sh wlw 172.16.42.135 123], CWD: [None], TIMEOUT: [600]
+2022-04-02 10:02:07,554 - '     init.py' - [line:  49] - INFO : [COMMAND] [ssh-copy] SUCCESS:[bash sh/ssh-copy-id.sh wlw 172.16.42.135 123], CODE:[0]
+2022-04-02 10:02:07,554 - '     init.py' - [line:  14] - INFO : [COMMAND] [success log] RUN CMD: [touch  initCheck/sshcopycheck/Success.log], CWD: [None], TIMEOUT: [600]
+2022-04-02 10:02:07,557 - '     init.py' - [line:  49] - INFO : [COMMAND] [success log] SUCCESS:[touch  initCheck/sshcopycheck/Success.log], CODE:[0]
+2022-04-02 10:02:13,359 - 'ansible_run_cmd.py' - [line: 378] - INFO : This system is not ready
+2022-04-02 10:12:06,265 - 'ansible_run_cmd.py' - [line: 378] - INFO : This system is not ready
+2022-04-02 10:14:32,376 - 'ansible_run_cmd.py' - [line: 378] - INFO : This system is not ready
+2022-04-02 10:19:06,028 - 'ansible_run_cmd.py' - [line: 378] - INFO : This system is not ready
+2022-04-02 10:20:40,147 - 'ansible_run_cmd.py' - [line: 378] - INFO : This system is not ready
+2022-04-02 10:24:19,659 - 'ansible_run_cmd.py' - [line: 378] - INFO : This system is not ready
+2022-04-02 10:25:19,629 - 'ansible_run_cmd.py' - [line: 380] - INFO : This system is not ready

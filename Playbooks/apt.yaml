@@ -1,0 +1,43 @@
+---
+- hosts: deploy_ip
+  tasks:
+  -  name: mv
+     shell: sudo mv {{ inventory_dir }}/Playbooks/debPackets/*.deb /var/cache/apt/archives/
+     args:
+       removes: "{{ inventory_dir }}/Playbooks/debPackets/ssl-cert_1.0.39_all.deb"
+  -  name: apt install apache2 dpkg-dev
+     shell: sudo dpkg -i {{ inventory_dir }}/Stepfiles/apt/*.deb
+  -  name: change apache2
+     shell: sudo sed -i "s/80/31111/g" /etc/apache2/ports.conf
+  -  name: restart apache2
+     command: 'sudo systemctl restart apache2'
+  -  name: mkdir file
+     command: 'sudo mkdir /var/www/html/repo'
+     args:
+       creates: /var/www/html/repo
+  -  name: mv
+     shell: sudo mv /var/cache/apt/archives/*.deb /var/www/html/repo/
+     args:
+       creates: /var/www/html/repo/ssl-cert_1.0.39_all.deb
+  -  name: touch update-debs
+     shell: 'sudo touch /bin/update-debs;sudo chmod 777 /bin/update-debs'
+  -  name: make command
+     shell:
+      cmd: |
+       sudo echo """#!/bin/bash
+       cd /var/www/html/repo
+       sudo touch Packages.gz
+       sudo chmod 777 Packages.gz
+       sudo dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz""" > /bin/update-debs
+  -  name: run script
+     command: 'sudo update-debs'
+- hosts: server
+  tasks:
+     -   name: apt client config backup
+         shell: 'cd /etc/apt/;sudo cp -p sources.list sources.list.back'
+     -   name: create sources file
+         shell: 'sudo touch /etc/apt/sources.list;sudo chmod 777 /etc/apt/sources.list'
+     -   name: apt sources file config
+         shell: sudo echo 'deb [trusted=yes] http://{{ deployip }}:31111/repo ./' > /etc/apt/sources.list
+     -   name: update apt
+         command: 'sudo apt update'

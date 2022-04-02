@@ -1,0 +1,20 @@
+---
+- name: This is a fact example
+  hosts: server
+  tasks:
+        - name: get_info
+          debug:
+            msg:  '''{"Hostname": "{{ ansible_hostname }}",
+            "OS":"{{ ansible_distribution + "-" + ansible_distribution_version }}",
+            "vcpu":"{{ ansible_processor_vcpus }}",
+            "Kernel": "{{ ansible_kernel }}",
+            "Disk": "{{ ansible_mounts[0]["size_available"] // 1024 // 1024 // 1024 }}G",
+            "x64/x32": "{{ ansible_userspace_bits }}",
+            "Address": "{{ ansible_ens33["ipv4"]["address"] }}",
+            "Mem_total": "{{ ansible_memory_mb["real"]["total"] / 1024 }}g",
+            "Mem_free": "{{ ansible_memfree_mb / 1024 }}g",
+            "python_version": "{{ ansible_python_version }}",
+            "datetime": "{{ ansible_date_time["date"] + "-" + ansible_date_time["time"] }}"}
+            '''
+
+

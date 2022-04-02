@@ -1,0 +1,31 @@
+#! /bin/expect
+set name [ lindex  $argv 0 ]
+set passwd [ lindex $argv 1 ]
+set ip [ lindex $argv 2  ]
+set new_ip [ lindex $argv 3  ]
+set gateway [ lindex $argv 4  ]
+set dns [ lindex $argv 5  ]
+set interface [ lindex $argv 6  ]
+set hostname [ lindex $argv 7 ]
+spawn ssh $name@$ip
+               expect {
+               "yes/no?" {send "yes\r";exp_continue;}
+               "password:" { send "$passwd\r" }}
+               expect "#"
+               send "echo $passwd | sudo -S chmod 644 /etc/sudoers\r"
+               send "echo $passwd | sudo -S sed -i '26,26s/ALL=(ALL:ALL) ALL/ ALL=(ALL:ALL) NOPASSWD: ALL/g' /etc/sudoers\r"
+               send "sudo rm -rf /etc/netplan/*\r"
+               send "sudo touch /etc/netplan/config.yaml\r"
+               send "sudo chmod 777 /etc/netplan/config.yaml\r"
+               send "sudo hostnamectl set-hostname $hostname\r"
+               send "sudo echo '''network:
+  ethernets:
+    $interface:
+            addresses: \[$new_ip\]
+            gateway4: $gateway
+            nameservers:
+                addresses: \[$dns\]
+            dhcp4: no
+  version: 2''' > /etc/netplan/config.yaml\r"
+               send "sudo netplan apply\r"
+               expect eof
