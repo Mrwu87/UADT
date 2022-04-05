@@ -1,0 +1,52 @@
+---
+- hosts: master
+  tasks:
+    - name: install bind9
+      command: sudo apt install -y bind9
+    - name: bind option config
+      template:
+        src: dns_option.j2
+        dest: /home/{{ user }}/named.conf.options
+    - name: move file to /etc
+      command: 'sudo mv named.conf.options /etc/bind/'
+      args:
+        removes: named.conf.options
+
+- hosts: deploy_ip
+  tasks:
+    - name: bind  local config
+      template:
+        src: dns_master_local.j2
+        dest: /home/{{ user }}/named.conf.local
+    - name: bind resolve config
+      template:
+        src: dns.j2
+        dest: /home/{{ user }}/uisee.resolve
+      #每次执行必覆盖文件
+    - name: move file to /etc/bind/
+      command: 'sudo mv named.conf.local  /etc/bind/'
+      args:
+          removes: named.conf.local
+    - name: move file to /etc/bind/
+      command: 'sudo mv uisee.resolve /var/cache/bind/'
+      args:
+          removes: uisee.resolve
+    - name: chown bind user to uisee.resolve
+      command: 'sudo chown bind /var/cache/bind/uisee.resolve'
+    - name: restart master bind9
+      command: 'sudo systemctl restart bind9'
+
+- hosts: deploy_client
+  tasks:
+    - name: bind slave local config
+      template:
+        src: dns_slave_local.j2
+        dest: /home/{{ user }}/named.conf.local
+
+    - name: move file to /etc/bind/
+      command: 'sudo mv named.conf.local  /etc/bind/'
+      args:
+          removes: named.conf.local
+
+    - name: restart slave bind9
+      command: 'sudo systemctl restart bind9'

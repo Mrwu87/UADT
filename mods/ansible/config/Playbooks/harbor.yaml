@@ -1,0 +1,40 @@
+---
+- hosts: deploy_ip
+  tasks:
+    - name: unarchive tar.gz
+      #copy：在解压文件之前，是否先将文件复制到远程主机，默认为yes。若为no，则要求目标主机上压缩包必须存在。
+      unarchive: src="{{inventory_dir }}/Playbooks/images/harbor.v2.3.2.tar.gz" dest="/home/{{ user }}/" copy=no
+    - name: install docker-compose
+      command: sudo mv harbor/docker-compose /usr/bin/docker-compose
+    - name: chmod
+      command: sudo chmod +x /usr/bin/docker-compose
+    - name: create  harbor data dir
+      #command: sudo mkdir harbor/harbor_data
+      #args:
+      #  create: harbor/harbor_data
+      file:
+           path: harbor/harbor_data
+           state: directory
+    - name:  upload image to docker images
+      command: sudo docker load -i harbor/harbor.v2.3.2.tar.gz
+    - name:  copy harbor config file
+      command: sudo cp -f harbor/harbor.yml.tmpl harbor/harbor.yml
+    - name:  edit config file
+      shell:
+        cmd: |
+            sudo sed -i "s/hostname: reg.mydomain.com/hostname: {{ deployip }}/g" harbor.yml
+            sudo sed -i "s/port: 80/port: 31150/g" harbor.yml
+            sudo sed -i '13,18d' harbor.yml
+            sudo sed -i 's/harbor_admin_password: Harbor12345/harbor_admin_password: uisee123./g' harbor.yml
+            sudo sed -i 's$data_volume: \/data$data_volume: \/home\/{{ user }}\/harbor\/harbor_data$g' harbor.yml
+        chdir: harbor/
+    - name:  prepare Ready
+      shell: sudo bash harbor/prepare
+    - name:  install Harbor
+      shell: sudo bash harbor/install.sh
+    - name: wait for service up
+      wait_for: port=31150 delay=5
+    - name: docker login harbor
+      shell:
+         cmd: |
+           sudo echo uisee123. | sudo docker login -u admin --password-stdin {{ deployip }}:31150

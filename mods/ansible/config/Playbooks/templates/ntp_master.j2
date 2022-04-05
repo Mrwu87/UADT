@@ -1,0 +1,10 @@
+driftfile /var/lib/ntp/ntp.drift
+statistics loopstats peerstats clockstats
+filegen loopstats file loopstats type day enable
+filegen peerstats file peerstats type day enable
+filegen clockstats file clockstats type day enable
+restrict default  nomodify
+restrict 127.0.0.1
+restrict ::1
+server 127.127.1.0
+fudge  127.127.1.0    stratum 5

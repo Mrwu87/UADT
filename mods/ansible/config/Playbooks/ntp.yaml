@@ -1,0 +1,34 @@
+---
+- hosts: master
+  tasks:
+    - name: change timezone to Shanghai
+      command: sudo timedatectl set-timezone Asia/Shanghai
+    - name: install ntp
+      command: sudo apt install -y ntp ntpdate
+    - name: ntp config
+      template:
+        src: ntp_master.j2
+        dest: /home/{{ user }}/ntp.conf
+    - name: move file to /etc
+      command: 'sudo mv ntp.conf /etc/'
+      args:
+        removes: ntp.conf
+    - name: restart ntp_server
+      command: 'sudo systemctl restart ntp'
+
+- hosts: client
+  tasks:
+     - name: change timezone
+       command: sudo timedatectl set-timezone Asia/Shanghai
+     - name: install ntp
+       command: sudo apt install -y ntp ntpdate
+     - name: test jinja2 01
+       template:
+         src: ntp_client.j2
+         dest: /home/{{ user }}/ntp.conf
+     - name: move file to /etc
+       command: 'sudo mv ntp.conf /etc/'
+       args:
+         removes: ntp.conf
+     - name: restart ntp
+       command: 'sudo systemctl restart ntp'

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+url="http://{{ deployip }}:31150"
+user="admin"
+passwd="uisee123."
+
+
+harbor_projects=(
+                calico \
+	coredns \
+	fluent \
+	kubesphere \
+                openebs\
+
+
+
+)
+
+for project in ${harbor_projects[@]} ; do curl -u "${user}:${passwd}" -X POST -H "Content-Type: application/json" "${url}/api/v2.0/projects" -d "{\"project_name\": \"${project}\", \"metadata\": {\"public\": \"true\"}, \"storage_limit\": -1}"; done

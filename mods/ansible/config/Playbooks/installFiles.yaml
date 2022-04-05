@@ -1,0 +1,10 @@
+---
+- name: This is a ntp install
+  hosts: server
+  tasks:
+        - name: cp file to servers
+          copy: src=images/ntp.tar.gz dest=/home/{{ user }}/ntp.tar.gz
+
+
+
+

@@ -1,0 +1,14 @@
+driftfile /var/lib/ntp/ntp.drift
+statistics loopstats peerstats clockstats
+filegen loopstats file loopstats type day enable
+filegen peerstats file peerstats type day enable
+filegen clockstats file clockstats type day enable
+{% for host in  master  %}
+restrict {{ host.1 }}
+{% endfor %}
+restrict 127.0.0.1
+restrict ::1
+server  {{ deployip }} prefer iburst
+{% for i in  master  %}
+server {{ i.1 }} iburst
+{% endfor %}

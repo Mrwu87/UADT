@@ -1,0 +1,46 @@
+---
+- hosts: server
+  tasks:
+    - name: install k8s init deb
+      command: sudo apt install -y socat conntrack
+- hosts: deploy_ip
+  tasks:
+    - name: mv kubekey dirctory
+      command: sudo  mv {{ inventory_dir }}/Stepfiles/k8s/k8s_install   k8sInstall
+      args:
+        creates: k8sInstall/kk
+    - name: templates
+      template:
+        src:  k8s.j2
+        dest: k8sInstall/installConfig.yaml
+    - name: templates
+      template:
+          src:  harbor_registry.j2
+          dest: k8sInstall/harbor.sh
+          mode: 0777
+    - name: create harbor registry
+      script: /home/{{ user }}/k8sInstall/harbor.sh
+
+#    - name: load images to docker
+#      command: sudo bash  k8sInstall/offline-installation-tool.sh -s -l k8sInstall/image.txt -d k8sInstall/image
+    - name: push images to harbor
+      shell:
+        cmd: |
+          sudo echo uisee123. | sudo docker login -u admin --password-stdin {{ deployip }}:31150
+          sudo bash  /home/{{ user }}/k8sInstall/offline-installation-tool.sh -l /home/{{ user }}/k8sInstall/image.txt -d /home/{{ user }}/k8sInstall/image -r {{ deployip }}:31150
+          sudo touch /home/{{ user }}/k8sInstall/image_ready
+      args:
+        creates: /home/{{ user }}/k8sInstall/image_ready
+    - name: install k8s
+      shell:
+        cmd: |
+          expect -c    " set timeout -1
+                                 spawn /home/{{ user }}/k8sInstall/./kk  create cluster -f /home/{{ user }}/k8sInstall/installConfig.yaml
+                                 expect {
+                                     \"yes/no\" {send \"yes\r\"; exp_continue}}
+                                       " >  /home/{{ user }}/k8sInstall/installk8s.log
+
+    - name: check install process
+      shell: cat  /home/{{ user }}/k8sInstall/installk8s.log | grep 'kubectl get pod -A'
+
+

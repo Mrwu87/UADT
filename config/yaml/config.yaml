@@ -1,0 +1,13 @@
+hosts:
+- last_address: 172.16.42.131
+  new_address: 172.16.42.151/24
+  hostname: k8s-master1
+  ssh_port: 22
+  username: wlw
+  password: 123
+  dns_server: 172.16.42.141,172.16.42.142,172.16.42.143
+  gateway: 172.16.42.3
+  interface: ens33
+  master: true
+  deploy: true
+  deploy_ip: 172.16.42.131

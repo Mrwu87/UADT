@@ -1,0 +1,6 @@
+*.deb
+*.tgz
+*.tar.gz
+*.tar
+kubekey
+kk

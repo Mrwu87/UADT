@@ -1,0 +1,19 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+zone "{{ domain }}"  {
+    type master;
+    file "uisee.resolve";
+
+    allow-transfer {
+{% for i in master %}
+    {% if i.1 != deployip %}
+        {{ i.1 }};
+     {% endif %}
+{% endfor %}
+};
+};

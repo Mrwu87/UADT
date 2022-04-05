@@ -1,0 +1,10 @@
+---
+- hosts: deploy_ip
+  tasks:
+    - name: templates
+      template:
+        src:  k8s.j2
+        dest: k8s.conf
+
+
+

@@ -1,0 +1,41 @@
+initasks:
+     -   log: "mods/services/config/ipcheck/ipLastfail.log"
+         sh: "mods/services/config/sh/check_ip.sh"
+         error_message: 'IP不可到达请检查主机IP，具体信息请查看IPfail文件'
+         task_id: 'checkip'
+         vars: ['last_address']
+     -   log: "mods/services/config/portcheck/ssh_fail.log"
+         sh: "mods/services/config/sh/ssh.sh"
+         error_message: 'Port不可到达请检查主机IP，具体信息请查看ssh_fail文件'
+         task_id: 'checkPort'
+         vars: ['last_address','ssh_port']
+     -   log: "mods/services/config/expectcheck/expectfail.log"
+         sh: "mods/services/config/sh/expect.sh"
+         error_message: '具体信息请查看expectfail文件'
+         task_id: 'expect_ip'
+         vars: ['username','password','last_address','new_address','gateway','dns_server','interface','deploy_ip','hostname']
+     -   log: "mods/services/config/sshcopycheck/sshcopyfail.log"
+         sh: "mods/services/config/sh/ssh-copy-id.sh"
+         error_message: '具体信息请查看sshcopyfail文件'
+         task_id: 'ssh-copy'
+         vars: ['username','last_address','password']
+     -   log: "mods/services/config/ansiblecheck/ansiblefail.log"
+         sh: "mods/services/config/sh/ansibleInstall.sh"
+         error_message: '具体信息请查看ansiblefail.log文件'
+         task_id: 'ansible-install'
+         vars: ['last_address','deploy_ip']
+ansibletasks:
+     -   log: "mods/ansible/config/Stepfiles/getinfo/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/getSysinfo.yaml'
+     -   log: "mods/ansible/config/Stepfiles/apt/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/apt.yaml'
+     -   log: "mods/ansible/config/Stepfiles/ntp/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/ntp.yaml'
+     -   log: "mods/ansible/config/Stepfiles/dns/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/dns.yaml'
+     -   log: "mods/ansible/config/Stepfiles/docker/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/docker.yaml'
+     -   log: "mods/ansible/config/Stepfiles/harbor/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/harbor.yaml'
+     -   log: "mods/ansible/config/Stepfiles/k8s/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/k8s.yaml'
