@@ -8,7 +8,7 @@ if __name__ == '__main__':
     if os.path.exists(f'mods/services/config/ansiblecheck/Success.log') == True:
         user=hostIni()
         from mods.ansible.ansible import MyAnsiable
-        ansible = MyAnsiable2(remote_user=user)
+        ansible = MyAnsiable(remote_user=user)
         ansible.playbookRun()
     else:
         os.system(exit)

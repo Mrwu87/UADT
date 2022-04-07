@@ -365,7 +365,7 @@ class MyAnsiable():
                 self.playbook([i["playbookfile"], ])
                 self.get_fact_result()
                 continue
-            # self.Countine=True
+            self.Countine=True
             if self.Countine:
                 time.sleep(0.3)
                 pbar.update()

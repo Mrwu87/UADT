@@ -1,6 +1,6 @@
 hosts:
 - last_address: 172.16.42.131
-  new_address: 172.16.42.151/24
+  new_address: 172.16.42.131/24
   hostname: k8s-master1
   ssh_port: 22
   username: wlw

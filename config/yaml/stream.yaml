@@ -27,15 +27,17 @@ initasks:
 ansibletasks:
      -   log: "mods/ansible/config/Stepfiles/getinfo/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/getSysinfo.yaml'
-     -   log: "mods/ansible/config/Stepfiles/apt/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/apt.yaml'
-     -   log: "mods/ansible/config/Stepfiles/ntp/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/ntp.yaml'
-     -   log: "mods/ansible/config/Stepfiles/dns/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/dns.yaml'
-     -   log: "mods/ansible/config/Stepfiles/docker/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/docker.yaml'
-     -   log: "mods/ansible/config/Stepfiles/harbor/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/harbor.yaml'
-     -   log: "mods/ansible/config/Stepfiles/k8s/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/k8s.yaml'
+#     -   log: "mods/ansible/config/Stepfiles/apt/Success.log"
+#         playbookfile: 'mods/ansible/config/Playbooks/apt.yaml'
+#     -   log: "mods/ansible/config/Stepfiles/ntp/Success.log"
+#         playbookfile: 'mods/ansible/config/Playbooks/ntp.yaml'
+#     -   log: "mods/ansible/config/Stepfiles/dns/Success.log"
+#         playbookfile: 'mods/ansible/config/Playbooks/dns.yaml'
+#     -   log: "mods/ansible/config/Stepfiles/docker/Success.log"
+#         playbookfile: 'mods/ansible/config/Playbooks/docker.yaml'
+#     -   log: "mods/ansible/config/Stepfiles/harbor/Success.log"
+#         playbookfile: 'mods/ansible/config/Playbooks/harbor.yaml'
+#     -   log: "mods/ansible/config/Stepfiles/k8s/Success.log"
+#         playbookfile: 'mods/ansible/config/Playbooks/k8s.yaml'
+     -   log: "mods/ansible/config/Stepfiles/helm/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/helm.yaml'

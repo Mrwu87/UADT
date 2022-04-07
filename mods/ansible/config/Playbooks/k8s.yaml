@@ -43,4 +43,3 @@
     - name: check install process
       shell: cat  /home/{{ user }}/k8sInstall/installk8s.log | grep 'kubectl get pod -A'
 
-

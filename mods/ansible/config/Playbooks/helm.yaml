@@ -1,0 +1,13 @@
+---
+- hosts: master
+  tasks:
+    - name: install helm v3.8.1
+      copy:
+        src: "images/helm"
+        dest: "helm"
+        mode: 0755
+
+    - name: move to /usr/local/bin/
+      command: sudo mv helm /usr/local/bin/helm
+      args:
+         creates: /usr/local/bin/helm
