@@ -3,13 +3,15 @@
   tasks:
     - name: install docker
       command: sudo apt install -y docker-ce
+    - name:
+      command: sudo systemctl restart docker
     - name: templates
       template:
         src: docker_daemon.j2
         dest: daemon.json
     - name: move file to /etc/docker
-      command: 'sudo mv daemon.json /etc/docker/'
+      command: sudo mv daemon.json /etc/docker/
       args:
           removes: daemon.json
     - name: restart master docker
-      command: 'sudo systemctl restart docker'
+      command: sudo systemctl restart docker

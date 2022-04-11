@@ -19,7 +19,7 @@ from ansible.utils.display import Display
 import yaml
 import os
 import time
-from mods.logs.log import logger
+from mods.logs.log import service_logger
 
 # Create a callback plugin so we can capture the output
 class ResultsCollectorJSONCallback(CallbackBase):
@@ -303,10 +303,10 @@ class MyAnsiable():
             result_raw['success'][host] = result._result
         for host, result in self.results_callback.host_failed.items():
             result_raw['failed'][host] = result._result
-            logger.info(result_raw['failed'][host])
+            service_logger.info(result_raw['failed'][host])
         for host, result in self.results_callback.host_unreachable.items():
             result_raw['unreachable'][host] = result._result
-            logger.info(result_raw['unreachable'][host])
+            service_logger.info(result_raw['unreachable'][host])
 
         # 最终打印结果，并且使用 JSON 继续格式化
         result=result_raw['success']
@@ -319,8 +319,8 @@ class MyAnsiable():
         currentEnvTable = PrettyTable(['Hostname','Address', 'OS','vcpu', 'Kernel', 'Disk', 'x64/x32','Mem_total','Mem_free','python_version','datetime'])
 
         for ii in result_list:
-            if int(ii['Disk'][:-1]) <= 10 or round(float(ii['Mem_free'][:-1]),2) <= 2.0 or int(ii['vcpu'][:-1]) < 2 :   #判断条件在这加系统的参数是否符合你的需求disk单位为G mem单位为M
-                print(f"{ii['Address']} this system is not avaible")
+            if int(ii['Disk'][:-1]) <= 10 or round(float(ii['Mem_free'][:-1]),2) <= 2.0 or int(ii['vcpu']) < 2 :   #判断条件在这加系统的参数是否符合你的需求disk单位为G mem单位为M
+                service_logger.info(f"{ii['Address']} this system is not avaible")
                 self.Countine = False
             total=str(round(float(ii['Mem_total'][:-1]),2))+'G'
             free=str(round(float(ii['Mem_free'][:-1]),2))+'G'
@@ -345,7 +345,7 @@ class MyAnsiable():
                 f.write('Success')
 
         if result_raw['failed'] != {} or result_raw['unreachable']  != {}:
-            logger.info(result_raw)
+            service_logger.info(result_raw)
             return False
             # with open(f'{dir}/xxx.log','w') as f:
             #     f.write(result_raw)
@@ -372,14 +372,14 @@ class MyAnsiable():
                 if os.path.exists(f'{dir}/Success.log') == False:
                     self.playbook([i["playbookfile"], ])
                     if self.get_result(dir)==False:
-                        logger.info(f'{i["playbookfile"]} This file  execute failed')
+                        service_logger.info(f'{i["playbookfile"]} This file  execute failed')
                         break  #有失败消息的直接退出循环 并且打印文件failed
 
                 else:  #对于生成success.log的直接放过
                     continue
 
             else:
-                logger.info('This system is not ready')
+                service_logger.info('This system is not ready')
                 break
         manager.stop()
 

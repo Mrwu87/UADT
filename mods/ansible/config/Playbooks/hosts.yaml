@@ -1,0 +1,11 @@
+---
+- hosts: server
+  tasks:
+    - name: bind resolve config
+      template:
+          src: hosts.j2
+          dest: hosts
+    - name: move to /etc
+      command: sudo mv -fb hosts /etc/hosts
+      args:
+          removes: hosts
