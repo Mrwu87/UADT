@@ -31,6 +31,7 @@
           sudo touch /home/{{ user }}/k8sInstall/image_ready
       args:
         creates: /home/{{ user }}/k8sInstall/image_ready
+      async: 0
     - name: install k8s
       shell:
         cmd: |
@@ -42,4 +43,6 @@
 
     - name: check install process
       shell: cat  /home/{{ user }}/k8sInstall/installk8s.log | grep 'kubectl get pod -A'
+
+
 

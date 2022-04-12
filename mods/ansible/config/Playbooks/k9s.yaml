@@ -1,0 +1,12 @@
+---
+- hosts: master
+  tasks:
+    - name: k9s install
+      copy:
+        src: "images/k9s"
+        dest: "k9s"
+        mode: 0755
+    - name: move k9s to /usr/local/bin/
+      command: sudo mv k9s /usr/local/bin/k9s
+      args:
+        creates: /usr/local/bin/k9s

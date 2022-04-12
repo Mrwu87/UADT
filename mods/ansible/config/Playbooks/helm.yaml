@@ -6,8 +6,22 @@
         src: "images/helm"
         dest: "helm"
         mode: 0755
-
     - name: move to /usr/local/bin/
       command: sudo mv helm /usr/local/bin/helm
       args:
-         creates: /usr/local/bin/helm
+          creates: /usr/local/bin/helm
+    - name: plugin install
+      shell: sudo helm  plugin  install  {{ inventory_dir }}/Playbooks/images/diff  > /dev/null 2>&1 || /bin/true
+      ignore_errors: yes
+    - name: install helmfile
+      copy:
+        src: "images/helmfile"
+        dest: "helmfile"
+        mode: 0755
+    - name: move to /usr/local/bin/
+      command: sudo mv helmfile /usr/local/bin/helmfile
+      args:
+          creates: /usr/local/bin/helmfile
+
+
+

@@ -31,6 +31,8 @@ ansibletasks:
          playbookfile: 'mods/ansible/config/Playbooks/apt.yaml'
      -   log: "mods/ansible/config/Stepfiles/ntp/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/ntp.yaml'
+     -   log: "mods/ansible/config/Stepfiles/basetools/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/basetools.yaml'
 #     -   log: "mods/ansible/config/Stepfiles/dns/Success.log"
 #         playbookfile: 'mods/ansible/config/Playbooks/dns.yaml'
      -   log: "mods/ansible/config/Stepfiles/hosts/Success.log"
@@ -41,7 +43,11 @@ ansibletasks:
          playbookfile: 'mods/ansible/config/Playbooks/harbor.yaml'
      -   log: "mods/ansible/config/Stepfiles/k8s/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/k8s.yaml'
+     -   log: "mods/ansible/config/Stepfiles/openebs/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/openebs.yaml'
      -   log: "mods/ansible/config/Stepfiles/helm/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/helm.yaml'
+     -   log: "mods/ansible/config/Stepfiles/k9s/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/k9s.yaml'
 
          

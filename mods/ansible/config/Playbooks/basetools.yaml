@@ -1,0 +1,5 @@
+---
+- hosts: server
+  tasks:
+    - name: install base_tools
+      command: sudo apt install -y net-tools lrzsz
