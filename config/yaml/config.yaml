@@ -5,7 +5,7 @@ hosts:
   ssh_port: 22
   username: wlw
   password: 123
-  dns_server: 172.16.42.141,172.16.42.142,172.16.42.143
+  dns_server: 114.114.114.114
   gateway: 172.16.42.3
   interface: ens33
   master: true
