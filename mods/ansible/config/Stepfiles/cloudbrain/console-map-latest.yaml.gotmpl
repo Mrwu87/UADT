@@ -1,0 +1,50 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "2.4.7" }}
+  repository: harbor.uisee.cn/cloud/console-map
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+initContainers:
+- name: init-mysql
+  image: busybox
+  imagePullPolicy: IfNotPresent
+  env:
+  - name: DB_HOST
+    value: 10.23.189.252
+  - name: DB_PORT
+    value: "3306"
+  command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 5; done" ]
+
+mysql:
+  host: 10.23.189.252
+
+redis:
+  dsn: 10.23.29.25:6379
+  password: uisee123
+  db: "0"
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+
+
+
+storage:
+  host: console-minio-{{ env "VER" | default "latest" }}
+
+
+gateway:
+  enabled: false
+
+cloudAmqpUrl: amqp://compass:compass@cloud-event-bus-rabbitmq-ha-latest:5672/
+
+
+resources:
+  limits:
+    cpu: 15m
+    memory: 150Mi
+  requests:
+    cpu: 10m
+    memory: 100Mi

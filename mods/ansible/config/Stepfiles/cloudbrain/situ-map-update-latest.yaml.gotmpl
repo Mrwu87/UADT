@@ -1,0 +1,27 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.7.2-2021-03-1c5c086-20210317" }}
+  repository: harbor.uisee.cn/situ/service-map-update
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+
+
+
+config:
+  consoleUrl: http://console-core.kube-public.svc.cluster.local:80
+  loshuUrl: http://loshu-map-management-latest.map-management.svc.cluster.local:8080
+  consoleMapUrl: http://console-map-{{ env "VER" | default "latest" }}:80
+  consoleVehicleUrl: http://console-vehicle-{{ env "VER" | default "latest" }}:80
+  mqttVehilceHost: emqx-{{ env "VER" | default "latest" }}
+  mqttCloudHost: cloud-emqx-{{ env "VER" | default "latest" }}
+
+persistence:
+  enabled: true
+  size: 5Gi
+
+resources: 
+  requests: 
+    memory: 300Mi
+  limits:
+    memory: 500Mi

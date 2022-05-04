@@ -1,0 +1,43 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "2.6.9" }}
+  repository: harbor.uisee.cn/cloud/console-media
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+
+
+
+config:
+  rtmpPort: 1935
+  minio:
+    host: console-minio-{{ env "VER" | default "latest" }}
+    port: 9000
+    accessKey: minio@console
+    secretKey: minio@console
+    bucket: console-hawkeye
+    ssl: false
+  combineVideo: NONE
+  db:
+    host: 10.23.189.252
+    port: 3306
+    username: utcmedia
+    password: utcmedia
+    name: utcmedia
+  mergeTime: 0
+  timezone: Asia/Shanghai
+  resourceServer: https://dongwu.uisee.com
+  ffmpegArgs: ""
+
+persistence: 
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 20Gi
+
+resources:
+  limits:
+    cpu: "6"
+    memory: 8Gi
+  requests:
+    cpu: "4"
+    memory: 4Gi

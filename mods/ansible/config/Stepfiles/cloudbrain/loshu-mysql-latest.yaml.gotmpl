@@ -1,0 +1,23 @@
+image:  harbor.uisee.cn/library/mysql
+imageTag: "8.0.16"
+  
+mysqlRootPassword: uisee@2020
+
+mysqlUser: loshu
+mysqlPassword: loshu
+mysqlDatabase: maintenance_test 
+
+livenessProbe:
+  initialDelaySeconds: 150
+
+configurationFiles:
+  mysql.cnf: |-
+    [mysqld]
+    skip-name-resolve
+    # bind-address=0.0.0.0
+
+resources:
+  limits: 
+    memory: 1Gi
+  requests:
+    memory: 500Mi

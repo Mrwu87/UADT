@@ -1,0 +1,23 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.4.11" }}
+  repository: harbor.uisee.cn/cloud/console-front-resource
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+
+mysql:
+  host: "console-mysql-{{ env "VER" | default "latest" }}"
+
+
+service:
+  type: NodePort
+
+resources:
+  limits:
+    cpu: 30m
+    memory: 200Mi
+  requests:
+    cpu: 20m
+    memory: 120Mi

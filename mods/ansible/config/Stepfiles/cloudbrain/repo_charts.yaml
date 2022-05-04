@@ -1,0 +1,168 @@
+cloud_emqx_latest:
+  IMAGE_TAG: 4.3.2
+  CHART_VER: compass/emqx-ee 4.2.4
+emqx_latest:
+  IMAGE_TAG: 4.3.2
+  CHART_VER: compass/emqx-ee 4.2.4
+scheduler_rabbitmq_ha_latest:
+  IMAGE_TAG: 3.8.0-alpine-custom
+  CHART_VER: stable/rabbitmq-ha 1.36.5
+cloud_event_bus_rabbitmq_ha_latest:
+  IMAGE_TAG: 3.8.0-alpine-custom
+  CHART_VER: stable/rabbitmq-ha 1.36.5
+compass_mysql_latest:
+  IMAGE_TAG: 5.7.14
+  CHART_VER: stable/mysql 1.4.0
+compass_redis_latest:
+  IMAGE_TAG: 5.0.5-debian-9-r169
+  CHART_VER: stable/redis 9.5.5
+scheduler_redis_latest:
+  IMAGE_TAG: 5.0.5-debian-9-r169
+  CHART_VER: stable/redis 9.5.5
+compass_backend_latest:
+  IMAGE_TAG: 2.11.0-prod-nome2-2022-02.f2bad33.shadow.base-20220217
+  CHART_VER: compass/cloud-backend-service 0.6.15
+compass_cooperative_latest:
+  IMAGE_TAG: 1.3.11-stable.223ff06-20220223
+  CHART_VER: compass/compass-cooperative-service 0.3.0
+ota_service_latest:
+  IMAGE_TAG: 2.0.0-2022-02-1e22138-20220210
+  CHART_VER: cloud/service-ota 0.1.4
+scheduler_general_latest:
+  IMAGE_TAG: 1.4.12-prod-nome2-2021-09-0a7b3e1-20211130
+  CHART_VER: compass/scheduler-general 0.1.4
+compass_backend_celery_latest:
+  IMAGE_TAG: 2.11.0-prod-nome2-2022-02.f2bad33.celery-20220217
+  CHART_VER: compass/cloud-backend-celery 0.1.0
+vehicle_shadow_latest:
+  IMAGE_TAG: 0.4.1-prod-nome2-2022-02-4a1b6ff-20220218
+  CHART_VER: compass/vehicle-shadow 0.1.3
+vehicle_resume_latest:
+  IMAGE_TAG: 0.1.0-prod-nome2-2021-12-28f51d5-20211209
+  CHART_VER: compass/vehicle-resume 0.1.0
+app_console_latest:
+  IMAGE_TAG: 1.2.0-release_2.2.0-246ec6f7-20220222-dw
+  CHART_VER: cloud/app-console 0.3.9
+app_console_operator_latest:
+  IMAGE_TAG: 1.2.0-release_2.2.0-3c13d8f8-20220217-dw-op
+  CHART_VER: cloud/app-console 0.3.8
+console_mysql_latest:
+  IMAGE_TAG: 8.0.16
+  CHART_VER: stable/mysql 1.4.0
+console_mongodb_latest:
+  IMAGE_TAG: 4.2.4-debian-10-r0
+  CHART_VER: stable/mongodb 7.8.10
+emqx_influxdb_latest:
+  IMAGE_TAG: 1.7.3-alpine
+  CHART_VER: stable/influxdb 2.0.1
+console_core_latest:
+  IMAGE_TAG: 1.17.22-prod-nome2-2022-02-f5bf24b-20220210
+  CHART_VER: cloud/console-core 0.5.3
+console_vehicle_latest:
+  IMAGE_TAG: 4.4.4-prod-nome2-2021-12-c3c450d-20211217
+  CHART_VER: cloud/console-vehicle 0.4.9
+console_map_latest:
+  IMAGE_TAG: 2.8.3-prod-nome2-2021-12-905f494-20211217
+  CHART_VER: cloud/console-map 0.2.9
+console_preference_latest:
+  IMAGE_TAG: 0.1.7-prod-nome2-2021-03-84756dd-20210408
+  CHART_VER: cloud/console-preference 0.2.4
+console_proxy_compass_latest:
+  IMAGE_TAG: 1.25.2-prod-nome2-2021-12-ca639f1-20211223
+  CHART_VER: cloud/console-proxy-compass 0.3.5
+console_front_resource_latest:
+  IMAGE_TAG: 0.4.11-prod-nome2-2021-03-335e21a-20210408
+  CHART_VER: cloud/console-front-resource 0.1.3
+console_project_metadata_latest:
+  IMAGE_TAG: 1.0.4-prod-nome2-2021-03-8e3be43-20210408
+  CHART_VER: cloud/console-project-metadata 0.1.1
+monitor_notice_latest:
+  IMAGE_TAG: 2.0.0-prod-nome2-2021-03-e46bd39-20210409
+  CHART_VER: cloud/monitor-notice-service 0.1.2
+console_vehicle_report_latest:
+  IMAGE_TAG: 1.1.0-prod-nome2-2021-12-1a54845-20211224
+  CHART_VER: cloud/console-vehicle-report 0.1.2
+console_notification_latest:
+  IMAGE_TAG: 1.7.1-prod-nome2-2021-12-189fcbd-20220120
+  CHART_VER: cloud/console-notification 0.1.5
+console_proxy_log_latest:
+  IMAGE_TAG: 0.3.0-prod-nome2-2021-09-fc1b3b2-20211213
+  CHART_VER: cloud/console-proxy-log 0.1.0
+cloud_nome_latest:
+  IMAGE_TAG: 0.3.0-prod-nome2-2022-02-6cb2157-202202160623
+  CHART_VER: cloud/nome 0.2.7
+cloud_nome_oam_latest:
+  IMAGE_TAG: 0.2.4-prod-nome2-2021-06-f03c4e1-20210625
+  CHART_VER: cloud/nome-oam 0.1.1
+data_aggregator_latest:
+  IMAGE_TAG: 1.2.10-prod-nome2-2021-12-ba6af23-20220124
+  CHART_VER: cloud/data-aggregator 0.2.0
+console_media_latest:
+  IMAGE_TAG: 2.6.28-prod-nome2-2021-06-ff5a2ee-20210901
+  CHART_VER: cloud/console-media 0.1.3
+hawkeye_relay_latest:
+  IMAGE_TAG: 0.1.2-master-e41f9bd-20220120
+  CHART_VER: cloud/hawkeye-relay 0.1.1
+console_biz_latest:
+  IMAGE_TAG: 2.11.14-general-prod-nome2-2021-12-22a9567-20220222
+  CHART_VER: cloud/console-biz-general 0.1.5
+console_ticket_latest:
+  IMAGE_TAG: 2.16.1-general-prod-nome2-2021-09-f5845df-20211215
+  CHART_VER: cloud/console-ticket-general 0.1.5
+event_engine_latest:
+  IMAGE_TAG: 0.2.9-prod-nome2-2021-12-edaf778-20220111
+  CHART_VER: cloud/event-engine 0.1.1
+console_minio_latest:
+  IMAGE_TAG: RELEASE.2021-02-14T04-01-33Z
+  CHART_VER: stable/minio 5.0.33
+oam_emqx_latest:
+  IMAGE_TAG: v4.1.0
+  CHART_VER: compass/emqx v4.1.1
+loshu_mysql_latest:
+  IMAGE_TAG: 5.7.14
+  CHART_VER: stable/mysql 1.4.0
+loshu_redis_latest:
+  IMAGE_TAG: 5.0.5-debian-9-r169
+  CHART_VER: stable/redis 9.5.5
+loshu_oam_data_latest:
+  IMAGE_TAG: 1.0.3-prod-nome2-2021-12-0ecd0fb-20211209
+  CHART_VER: loshu/data-service 0.1.0
+loshu_lite_rabbitmq_ha_latest:
+  IMAGE_TAG: 3.8.0-alpine
+  CHART_VER: stable/rabbitmq-ha 1.36.5
+loshu_lite_redis_latest:
+  IMAGE_TAG: 5.0.7-debian-10-r32
+  CHART_VER: stable/redis 10.5.7
+loshu_lite_mysql_latest:
+  IMAGE_TAG: 8.0.16
+  CHART_VER: stable/mysql 1.4.0
+loshu_lite_data_processor_latest:
+  IMAGE_TAG: 1.0.3-processor_lite.8791f79-20210702
+  CHART_VER: loshu/data-processor 0.1.1
+loshu_lite_data_receiver_latest:
+  IMAGE_TAG: 1.0.0-prod-nome2-2021-03-a987f23-20210409
+  CHART_VER: loshu/data-receiver 0.1.0
+loshu_lite_data_report_latest:
+  IMAGE_TAG: 1.0.13-prod-nome2-2021-12.9362895-20211229
+  CHART_VER: loshu/data-report 0.3.1
+loshu_lite_data_indexer_latest:
+  IMAGE_TAG: 0.0.5-prod-nome2-2021-03-bb49871-20210409
+  CHART_VER: loshu/data-indexer 0.1.0
+loshu_lite_data_report_api_latest:
+  IMAGE_TAG: 1.0.13-prod-nome2-2021-12.9362895-20211229
+  CHART_VER: loshu/data-report-api 0.2.3
+elasticsearch_latest:
+  IMAGE_TAG: 7.16.1
+  CHART_VER: elastic/elasticsearch 7.16.1
+elasticsearch_cleaner_latest:
+  IMAGE_TAG: v0.0.1
+  CHART_VER: loshu/elasticsearch-cleaner 0.1.1
+situ_map_update_latest:
+  IMAGE_TAG: 1.1.0-prod-nome2-2022-02-c57615f-20220219
+  CHART_VER: situ/service-map-update 0.1.3
+situ_map_proxy_latest:
+  IMAGE_TAG: 0.6.0-prod-nome2-2022-02-f07def9-20220211
+  CHART_VER: cloud/situ-map-proxy 0.1.0
+global_planning_latest:
+  IMAGE_TAG: 0.1.9-prod-nome2-2021-10-6c1ea87-20211029
+  CHART_VER: situ/global-planning 0.1.2

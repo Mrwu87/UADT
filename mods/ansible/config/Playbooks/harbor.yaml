@@ -31,7 +31,7 @@
     - name:  prepare Ready
       shell: sudo bash harbor/prepare
     - name:  install Harbor
-      shell: sudo bash harbor/install.sh
+      shell: sudo bash harbor/install.sh  --with-chartmuseum
     - name: wait for service up
       wait_for: port=31150 delay=5
     - name: docker login harbor

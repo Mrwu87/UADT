@@ -1,0 +1,138 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "1.0.1-processor_lite.3c45162-20200813" }}
+  repository: harbor.uisee.cn/loshu/data-processor
+
+
+
+
+replicaCount: 3
+
+configurationFilesPath: /etc/
+
+configurationFiles:
+    configuration.processor.yml: |-
+      log_level: INFO
+      log_path: /data/logs
+      log_console: true
+      rabbitmq_config:
+        rabbitmq_host: loshu-lite-rabbitmq-ha-{{ env "VER" | default "latest" }}
+        rabbitmq_port: 5672
+        rabbitmq_username: "loshu"
+        rabbitmq_password: "loshu"
+        rabbitmq_queue: "data_receiver_queue"
+        retry_interval: 30
+      elasticsearch_config:
+        hosts:
+          - host: elasticsearch-master
+            port: 9200
+        timeout: 7100
+        max_retry_times: 5
+        batch_size: 800
+      redis_config:
+        config:
+          host: loshu-lite-redis-{{ env "VER" | default "latest" }}-master
+          port: 6379
+          db: 0
+          passwd: "loshu"
+        queue_num: 2
+        task_queue_prefix: "log_process_task_queue"
+        finish_suffix: "_finish"
+        error_suffix: "_error"
+        max_queue_size: 100
+        bulk_sleep_time: 0.1
+      params_field_config:
+        - "attached_stop"
+        - "planner_state.mission_error"
+        - "planner_state.route_planner_state"
+        - "planner_state.veh_error"
+        - "acc"
+        - "service_mode"
+        - "stat"
+        - "loc.lat"
+        - "loc.lon"
+        - "loc.state"
+        - "shift"
+        - "mission_state"
+        - "speed"
+        - "mode"
+        - "attached_map"
+        - "attached_map_version"
+        - "auto_odometer"
+        - "manual_odometer"
+        - "is_veh_on_layby"
+        - "battery.soc"
+        - "battery.voltage"
+        - "steering_angle"
+        - "localization.confidence"
+        - "localization.qrcode_confidence"
+        - "localization.vslam_confidence"
+        - "localization.vslam1_confidence"
+        - "localization.gps_confidence"
+        - "localization.lslam_carto_confidence"
+        - "condition"
+        - "veh_run_state"
+        - "take_over.take_over_state"
+        - "uos_error_level"
+        - "height"
+        - "theta"
+        - "motorcade_enabled"
+        - "is_veh_still"
+        - "needing_resume_by_cavp"
+        - "plan_state.mode"
+        - "auto_confirm_lane_change"
+        - "manual_confirm_lane_change"
+        - "traffic_light_state"
+        - "dispatch_state"
+        - "user_limit_vel"
+        - "action.dir"
+        - "action.speed"
+        - "action.obs"
+        - "action.attached"
+        - "action.lane"
+        - "is_veh_emergency_paused"
+        - "rsu_decision.cloud"
+        - "rsu_decision.rsu"
+        - "rsu_decision.final"
+        - "to_give_way"
+        - "uos_detail_error_level"
+        - "warn_info"
+        - "emergency_ctrl.cloud"
+        - "emergency_ctrl.hawkeye"
+        - "emergency_ctrl.wireless"
+        - "emergency_ctrl.error_brake"
+        - "emergency_ctrl.action_to_release"
+        - "human_intervention"
+        - "meas_east_hist_cnt"
+        - "meas_north_hist_cnt"
+        - "is_avail_meas"
+        - "in_fusion_cnt"
+        - "precision_cnt"
+        - "meas_in_fusion_cnt"
+        - "meas_theta_hist_cnt"
+        - "epb"
+        - "break_en"
+        - "auto_duration"
+        - "manual_duration"
+        - "type"
+        - "time"
+        - "source"
+        - "id"
+        - "status.service_mode"
+        - "content.code"
+        - "content.is_recover"
+        - "content.nome_type"
+        - "content.mark"
+        - "content.nome_level"
+        - "content.is_show"
+        - "content.node"
+        - "content.desc"
+        - "content.mod"
+        - "node"
+        - "recover_state"
+        - "recover_countdown"
+        - "filter_reset_cnt"
+resources:
+  requests:
+    memory: 300Mi
+  limits:
+    memory: 1Gi

@@ -1,0 +1,29 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "1.7.2" }}
+  repository: harbor.uisee.cn/cloud/console-compass-proxy
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+replicaCount: 1
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+proxy:
+  logBodyActive: true
+  projectUrls: "default:http://compass-backend-{{ env "VER" | default "latest" }}:8000;1:http://compass-backend-{{ env "VER" | default "latest" }}:8000"
+
+
+gateway:
+  enabled: false
+
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 200Mi
+  requests:
+    cpu: 50m
+    memory: 100Mi

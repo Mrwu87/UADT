@@ -1,0 +1,18 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "prod-nome2-2021-06" }}
+  repository: harbor.uisee.cn/cloud/hawkeye-relay 
+
+logging:
+  cluster: UcloudKubernetes
+resources:
+  limits:
+    cpu: "1"
+    memory: 1Gi
+  requests:
+    cpu: 250m
+    memory: 500Mi
+
+
+
+
+

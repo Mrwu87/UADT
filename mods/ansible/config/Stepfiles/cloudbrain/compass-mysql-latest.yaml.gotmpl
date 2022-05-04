@@ -1,0 +1,84 @@
+
+image: "harbor.uisee.cn/library/mysql"
+imageTag: "5.7.14"
+
+mysqlRootPassword: uisee@2019
+
+mysqlUser: hmi_user
+mysqlPassword: hmi
+
+livenessProbe:
+  initialDelaySeconds: 180
+
+configurationFiles:
+  mysql.cnf: |-
+    [mysqld]
+    skip-name-resolve
+    # bind-address=0.0.0.0
+
+initializationFiles:
+  ha.sql: |-
+    CREATE DATABASE if not exists cloud_ha character set utf8;
+    USE cloud_ha;
+    create table if not exists hosted_ids (
+        id char(36) primary key not null,
+        md5_sum bigint unsigned not null,
+        info text
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    GRANT ALL on cloud_ha.* to 'hmi_user'@'%';
+  hmi.sql: |-
+    CREATE DATABASE if not exists hmi character set utf8;
+    GRANT ALL on hmi.* to 'hmi_user'@'%';
+  efence.sql: |-
+    CREATE DATABASE if not exists efence character set utf8;
+    USE efence;
+    CREATE TABLE if not exists efence_list (
+        id char(36) NOT NULL,
+        name varchar(200) NOT NULL,
+        description varchar(1000) NOT NULL,
+        created datetime NOT NULL,
+        polygon text NOT NULL,
+        PRIMARY KEY (id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+    CREATE TABLE if not exists monitor_list (
+        obj_id char(36) NOT NULL,
+        fence_id char(36) NOT NULL,
+        enable boolean NOT NULL DEFAULT '1',
+        PRIMARY KEY (obj_id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  emqtt.sql: |-
+    CREATE DATABASE if not exists emqtt character set utf8;
+    USE emqtt;
+    CREATE TABLE if not exists `mqtt_user` (
+      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+      `username` varchar(100) DEFAULT NULL,
+      `password` varchar(100) DEFAULT NULL,
+      `salt` varchar(35) DEFAULT NULL,
+      `is_superuser` tinyint(1) DEFAULT 0,
+      `created` datetime DEFAULT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `mqtt_username` (`username`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    CREATE TABLE if not exists `mqtt_acl` (
+      `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+      `allow` int(1) DEFAULT 1 COMMENT '0: deny, 1: allow',
+      `ipaddr` varchar(60) DEFAULT NULL COMMENT 'IpAddress',
+      `username` varchar(100) DEFAULT NULL COMMENT 'Username',
+      `clientid` varchar(100) DEFAULT NULL COMMENT 'ClientId',
+      `access` int(2) NOT NULL COMMENT '1: subscribe, 2: publish, 3: pubsub',
+      `topic` varchar(100) NOT NULL DEFAULT '' COMMENT 'Topic Filter',
+      PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+    INSERT INTO mqtt_user (username, password, salt) VALUES ('compass', 'd1068beeb96a6a79937661d5cc9f290dddaa5730e64b7ab2b238078a1194c614', NULL);
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+resources:
+  limits:
+    cpu: "0.5"
+    memory: 2Gi
+  requests:
+    cpu: "0.2"
+    memory: 1Gi

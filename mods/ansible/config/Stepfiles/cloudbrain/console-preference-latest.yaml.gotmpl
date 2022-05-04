@@ -1,0 +1,23 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.1.7" }}
+  repository: harbor.uisee.cn/cloud/console-preference
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+
+
+mysql:
+  host: "console-mysql-{{ env "VER" | default "latest" }}"
+
+gateway:
+  enabled: false 
+
+resources:
+  limits:
+    cpu: 20m
+    memory: 150Mi
+  requests:
+    cpu: 10m
+    memory: 80Mi

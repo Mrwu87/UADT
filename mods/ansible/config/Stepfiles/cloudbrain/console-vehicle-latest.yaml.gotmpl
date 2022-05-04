@@ -1,0 +1,51 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "4.1.3" }}
+  repository: harbor.uisee.cn/cloud/console-vehicle
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+macSource:
+  dsn: root:uisee@2019@tcp(140.207.19.50:30722)/provision
+
+
+
+
+mysql:
+  host: "console-mysql-{{ env "VER" | default "latest" }}"
+
+grpc:
+  host: "console-proxy-compass-{{ env "VER" | default "latest" }}"
+
+storage:
+  host: console-minio-{{ env "VER" | default "latest" }}
+
+operation:
+  host: http://loshu-oam-data-latest:8000
+
+gateway:
+  enabled: false
+
+cloudAmqpUrl: amqp://compass:compass@cloud-event-bus-rabbitmq-ha-latest:5672/
+
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 200Mi
+  requests:
+    cpu: 50m
+    memory: 100Mi
+
+backup:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 200Mi
+    requests:
+      cpu: 50m
+      memory: 100Mi

@@ -1,0 +1,29 @@
+image:
+  repository: harbor.uisee.cn/cloud/service/console-biz
+  tag: {{ env "IMAGE_TAG" | default "1.0.10-general" }}
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+redis:
+  nodes:
+  - addr: 10.23.29.25:6379
+  password: uisee123
+mysql:
+  dsn: utc_biz:utc_biz@tcp(10.23.189.252:3306)/utc_biz?charset=utf8&parseTime=True&loc=UTC
+biz:
+  auto-switch-on: false
+
+resources:
+  limits:
+    memory: 500Mi
+  requests:
+    memory: 200Mi
+
+
+
+

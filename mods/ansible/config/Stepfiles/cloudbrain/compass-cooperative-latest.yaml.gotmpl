@@ -1,0 +1,74 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "1.4.0-cooperative-basf-2021-03.1925819-20210512" }}
+  repository: harbor.uisee.cn/compass/compass_cooperative_service
+sidecar:
+  enabled: true
+config: |
+    {
+        "server.mqtt": "tcp://union-emqx.kube-public.svc.cluster.local:1883",
+        "mqtt.broker_id": "/efence_k8s_backend",
+        "mqtt.password": "compass",
+        "mqtt.username": "compass",
+        "available_maps": [20190819,201908192,20190911,201912091,20200727,20201019001,20201019002,25,26,49,54,58,59,106,197],
+        "cooperative_maps": [[20190819,201908192,20190911,201912091,20200727,20201019001,20201019002,25,26,49,54,58,59,106,197]],
+        "log_rotate_days": 30,
+        "traffic_light_control_distance": 30.0,
+        "traffic_light_outline_state": "RED",
+        "traffic_light_outline_time": 10,
+        "traffic_light_apply_hold_time": 3,
+        "light_apply_in_still_count_thresh": 120,
+        "light_apply_restore_count_thresh": 60,
+        "is_send_cmd_before_traffic_light": false,
+        "unallowed_pass_traffic_light_set": [[]],
+        "unallowed_pass_start_time": [[0, 0]],
+        "unallowed_pass_end_time":[[0, 0]],
+    
+        "is_enable_motorcade": [true],
+        "motorcade_dist_threshold": [60.0],
+        "intersect_dist_thresh": [1.5],
+        "intersect_min_safe_dist": [3.0],
+        "intersect_max_safe_dist": [10.0],
+        "crossing_stop_count_thresh": [20],
+        "is_use_pause_for_cooperative": [false],
+        "is_check_reverse_intersect_length": [false],
+        "max_reverse_intersect_length": [100],
+        "is_avoidance_cooperative": [false],
+        "avoidance_lat_dist_thresh": [4.0],
+        "avoidance_long_dis_thresh": [80.0],
+        "high_avoid_priority_stop_count_thresh": [10],
+        "avoidance_coop_wait_dist_thresh": [50.0],
+        "is_consider_trailer_in_cooperative": [false],
+        "block_other_dis_thresh": [1.5],
+        "is_consider_curvature_cal_intersect": [false],
+        "curvature_threshold_in_intersect": [0.03],
+        "curvature_intersect_dist_thresh": [3.0],
+        "v2v_communication_distance": [300],
+        "is_to_layby_wait": [false],
+        "vehicle_clash_count_thresh": [120]
+    }
+
+
+env:
+  mqttUrl: tcp://emqx-{{ env "VER" | default "latest" }}:1883
+  mqttBrokerID:  /efence_k8s_backend
+  mqttUsername: compass
+  mqttPassword: compass
+  mqttCACertFile: ""
+  mqttCertFile: ""
+  mqttKeyFile: ""
+  availableMaps: ""
+  cooperativeMaps: ""
+
+persistence:
+  enabled: true
+  storageClass: 
+  accessMode: ReadWriteOnce
+  size: 50Gi
+
+resources:
+  limits:
+    cpu: "4"
+    memory: 8Gi
+  requests:
+    cpu: "4"
+    memory: 8Gi

@@ -1,0 +1,44 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.0.5-indexer_lite.bb49871-20200721" }}
+  repository: harbor.uisee.cn/loshu/indexer-service   
+
+configurationFiles:
+    configuration.indexer.yml: |-
+        log_level: INFO
+        log_path: /data/logs
+        log_console: true
+        elasticsearch_config:
+          hosts:
+            - host: 10.23.120.78
+              port: 9200 # 32481 test, 30843 product
+          chunk_size: 400
+          max_chunk_bytes: 268435456 # 256M = 268435456
+          retry_interval: 30
+          retry_interval_factor: 2
+          retry_max_times: 3
+        redis_config:
+          host: 10.23.29.25
+          port: 6379
+          db: 0
+          password: "loshu" # ePQ5GRpFBV test, UqD2dwMEAa product
+        redis_keys:
+          redis_task_queue_prefix: "log_process_task_queue"
+          redis_batch_list_prefix: "log_process_batch_list"
+          redis_batch_info_suffix: "info"
+          redis_finish_suffix: "_finish"
+          redis_error_suffix: "_error"
+        redis_default_ttl: 86400 # 86400 seconds = 1 day
+        redis_statistic_ttl: 864000 # 10 days
+        number_of_redis_queue: 2
+        number_of_tasks_indexer: 5
+        max_tasks_cache_size: 10
+        index_interval: 0.5
+
+
+
+
+resources:
+  requests:
+    memory: 100Mi
+  limits:
+    memory: 200Mi

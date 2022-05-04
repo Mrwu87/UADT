@@ -1,0 +1,55 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.1.20-2021-03-f0848cd-20210323" }}
+  repository: harbor.uisee.cn/cloud/ota_cloud_service
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+nacos:
+  namespace: {{ .Namespace }}
+  serverUrl: http://nacos-cs.kube-public.svc.cluster.local:8848
+  timeout: 30
+
+resources:
+  limits:
+    memory: 800Mi
+  requests:
+    memory: 500Mi
+
+mysql:
+  dsn: mysql+pymysql://ota:ota@10.23.189.252:3306/ota
+
+minio:
+  type: us3
+  accessKey: TOKEN_66db259f-38d3-42bb-b3ad-f688625d4f46
+  bucket: uisee-ota
+  endpoint: http://s3-cn-sh2.ufileos.com
+  secretKey: 8fb10098-a0d7-4d0b-a442-167d6dbceff8
+  folderName: jiashan-dongwu
+
+configService:
+  url: http://ucloud.uisee.cn:39920
+  namespace: {{ .Namespace }}
+
+
+persistence:
+  enabled: true
+  storageClass: managed-nfs-storage
+  accessMode: ReadWriteOnce
+  size: 5Gi
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+
+
+mqtt:
+  vehicle:
+    host: emqx-{{ env "VER" | default "latest" }}
+  cloud:
+    host: cloud-emqx-{{ env "VER" | default "latest" }}
+
+
+service:
+  type: NodePort

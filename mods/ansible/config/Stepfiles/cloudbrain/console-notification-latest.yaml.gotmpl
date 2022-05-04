@@ -1,0 +1,33 @@
+image: 
+  tag: {{ env "IMAGE_TAG" | default "0.8.5" }}
+  repository: harbor.uisee.cn/cloud/console-notification
+
+imagePullSecrets:
+- name: docker-reg-secret
+migration:
+  compassDSN: root:uisee@123@tcp(10.23.189.252:3306)/hmi
+  cloudEventSource: cloud-nome-{{ env "VER" | default "latest" }}
+
+utcntRedisDsn: 10.23.29.25:6379
+
+mongodb:
+  host: 10.23.19.227
+  port: 27017
+  username: root
+  password: uisee%40123
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+
+
+
+mqtt:
+  host: cloud-emqx-{{ env "VER" | default "latest" }}:1883
+
+resources:
+  limits:
+    memory: 500Mi
+  requests:
+    memory: 200Mi

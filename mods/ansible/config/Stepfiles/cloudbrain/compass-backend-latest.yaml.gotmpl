@@ -1,0 +1,66 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "2.5.0-refactoring-2021-03.25a9678.others-20210316" }}
+  repository: harbor.uisee.cn/compass/cloud-backend-service
+  pullPolicy: IfNotPresent
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+env:
+  mapfileServerUrl: 140.207.19.50:9090
+  mqttUpstreamBrokerUrl: 140.207.19.50
+  logBackupCount: 30
+  hook_url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c1243d57-36e8-48e7-92f1-7374267a46ae
+  vehicleHost: vehicle-shadow-latest
+  haDatabase: cloud_ha
+  haPassword: uisee@123
+  haUsername: root
+  mysqlHost: 10.23.189.252
+  mysqlRootPass: uisee@123
+  mysqlRootUser: root
+  redisHost: 10.23.167.82
+  redisPass: uisee123
+  redisPort: 6379
+  memcacheLoc: compass-memcached-{{ env "VER" | default "latest" }}:11211
+  mqttBrokerUrl: emqx-{{ env "VER" | default "latest" }}
+  mqttBrokerID: efence_k8s_backend
+  mqttUpstreamBrokerId: /compass_backend
+  consoleMqttBrokerUrl: cloud-emqx-{{ env "VER" | default "latest" }}
+  consoleMqttBrokerID: /mqtt_backend
+  influxdbHost: http://compass-influxdb-{{ env "VER" | default "latest" }}
+  moduleCAVP: "False"
+  oamMqttBrokerUrl: oam-emqx-{{ env "VER" | default "latest" }}
+
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+
+resources:
+  limits:
+    cpu: "2"
+    memory: 4Gi
+  requests:
+    cpu: "1"
+    memory: 2Gi
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteMany
+  storageClass: managed-nfs-storage
+  size: 100Gi
+
+
+sync:
+  enabled: false
+  maps:
+    - id: 20181007
+      version: 4
+    - id: 20181005
+      version: 1
+
+
+service:
+  type: NodePort
+

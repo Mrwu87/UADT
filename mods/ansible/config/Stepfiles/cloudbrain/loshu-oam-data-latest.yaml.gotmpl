@@ -1,0 +1,92 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "1.0.0-app.d5b2dc7-20201225" }}
+  repository: harbor.uisee.cn/loshu/data-service
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+configurationFiles:
+  configuration.yml: |-
+    log_level: NOSET
+    log_path: /data/logs
+    log_console: True
+    http_host: 0.0.0.0
+    http_port: 8000
+    max_buffer_size: 1073741824 # 1073741824 = 1G
+    mysql_config:
+      host: loshu-mysql-{{ env "VER" | default "latest" }}
+      port: 3306
+      user: loshu
+      password: loshu
+      db: maintenance_test
+    redis_config:
+      host: loshu-redis-{{ env "VER" | default "latest" }}-master
+      port: 6379
+      db: 0
+      password: "loshu"
+    data_path: data
+    mqtt_client_postfix: "test"
+    mqtt_receive:
+      host: oam-emqx-{{ env "VER" | default "latest" }}
+      port: 1883
+      user: compass
+      password: compass
+      keepalive: 10
+      topics:
+        - topic: "/mqtt_OAM/+/command_reply"
+          qos: 2
+        - topic: "/mqtt_OAM/+/+/command_reply"
+          qos: 2
+        - topic: "/mqtt_OAM/+/+/+/command_reply"
+          qos: 2
+        - topic: "/mqtt_OAM/+/heartbeat"
+          qos: 2
+        - topic: "/mqtt_OAM/+/+/heartbeat"
+          qos: 2
+        - topic: "/mqtt_OAM/+/+/+/heartbeat"
+          qos: 2
+        - topic: "/mqtt_OAM/+/network_status"
+          qos: 2
+        - topic: "/mqtt_OAM/+/+/network_status"
+          qos: 2
+        - topic: "/mqtt_OAM/+/+/+/network_status"
+          qos: 2
+    mqtt_publish:
+      host: oam-emqx-{{ env "VER" | default "latest" }}
+      port: 1883
+      user: compass
+      password: compass
+      keepalive: 10
+    mqtt_forward_publish:
+      host: cloud-emqx-{{ env "VER" | default "latest" }}
+      port: 1883
+      user: compass
+      password: compass
+      keepalive: 10
+    vehicle_root_path:
+      log: "/home/worker/UISEE_LOGS"
+      lidar: "/home/worker/run/data/pcd_write"
+      camera: "/home/worker/run/data/log/dump_images"
+    minio_config:
+      endpoint: "http://ucloud.uisee.cn:31650"
+      auth_access_key: "minio@loshu"
+      auth_secret_key: "minio@loshu"
+      super_access_key: "minio@console"
+      super_secret_key: "minio@console"
+      bucket: "oam"
+      expired_time: 43200 # max 12 hours
+    app_minio_config:
+      endpoint: "http://ucloud.uisee.cn:31650"
+      auth_access_key: "minio@loshu"
+      auth_secret_key: "minio@loshu"
+      super_access_key: "minio@console"
+      super_secret_key: "minio@console"
+      bucket: "applet"
+      expired_time: 43200 # max 12 hours
+
+
+resources:
+  requests: 
+    memory: 250Mi
+  limits:
+    memory: 500Mi

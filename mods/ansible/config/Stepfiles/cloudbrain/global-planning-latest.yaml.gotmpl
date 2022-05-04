@@ -1,0 +1,19 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.1.1-develop-d4877f4-20210519" }}
+  repository: harbor.uisee.cn/situ/service-global-planning
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+
+
+
+persistence:
+  enabled: true
+  size: 5Gi
+
+resources: 
+  requests: 
+    memory: 100Mi
+  limits:
+    memory: 200Mi

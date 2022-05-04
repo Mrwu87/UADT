@@ -1,0 +1,22 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.1.0-prod-nome2-2021-06-35e6e46-20210707" }}
+  repository: harbor.uisee.cn/cloud/vehicle-resume
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+
+
+
+config:
+  controlIp: compass-backend-{{ env "VER" | default "latest" }}
+  mqttServer: emqx-{{ env "VER" | default "latest" }}
+  mqttCloudServer: cloud-emqx-{{ env "VER" | default "latest" }}
+  etcdEndpoint: cloud-nome-{{ env "VER" | default "latest" }}-etcd:2379
+
+
+resources:
+  requests:
+    memory: 100Mi
+  limits:
+    memory: 1Gi

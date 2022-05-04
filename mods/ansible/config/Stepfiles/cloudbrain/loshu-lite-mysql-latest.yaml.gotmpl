@@ -1,0 +1,39 @@
+image:
+  repository: harbor.uisee.cn/library/mysql
+
+imageTag: "8.0.16"
+
+mysqlRootPassword: root
+mysqlUser: console
+mysqlPassword: console
+
+livenessProbe:
+  initialDelaySeconds: 150
+
+configurationFiles:
+  mysql.cnf: |-
+    [mysqld]
+    skip-name-resolve
+
+initializationFiles:
+  init.sql: |-
+    CREATE DATABASE `loshu_lite` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'loshu'@'%' IDENTIFIED BY 'loshu';
+    GRANT ALL ON loshu_lite.* TO 'loshu'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'loshu'@'%';
+    FLUSH PRIVILEGES;
+
+service:
+  type: NodePort
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
+resources:
+  limits:
+    cpu: 50m
+    memory: 1.5Gi
+  requests:
+    cpu: 20m
+    memory: 800Mi

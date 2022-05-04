@@ -1,0 +1,27 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.2.0-prod-nome2-2021-03-5d4d260-20210408" }}
+  repository: harbor.uisee.cn/cloud/console-proxy-log
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+redmineServiceUrl: http://140.207.19.50:31960
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+resources:
+  limits:
+    cpu: 20m
+    memory: 150Mi
+  requests:
+    cpu: 10m
+    memory: 100Mi
+
+
+vehicleServiceUrl: http://loshu-oam-data-{{ env "VER" | default "latest" }}:8000
+
+cloudmqtt:
+  host: cloud-emqx-{{ env "VER" | default "latest" }}
+

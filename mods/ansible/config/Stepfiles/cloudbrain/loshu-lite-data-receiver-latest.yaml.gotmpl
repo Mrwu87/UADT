@@ -1,0 +1,45 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "1.0.0-receiver_lite.6f188fe-20201110" }}
+  repository: harbor.uisee.cn/loshu/data-receiver
+
+
+
+configurationFilesPath: /etc/
+
+configurationFiles:
+    configuration.receiver.yml: |-
+      log_level: INFO
+      log_path: /data/logs/
+      log_console: true
+      send_batch: 400
+      mqtt_config:
+        client_base: "compass"
+        hosts:
+          - host: emqx-{{ env "VER" | default "latest" }}
+            port: 1883
+            user: "compass"
+            password: "compass"
+            tls: false
+            keepalive: 10
+            topics:
+              - topic: "/+/tracking"
+                qos: 1
+              - topic: "/+/error_info"
+                qos: 1
+              - topic: "compass/coordinate/#"
+                qos: 1
+      rabbitmq_config:
+        rabbitmq_host: loshu-lite-rabbitmq-ha-{{ env "VER" | default "latest" }}
+        rabbitmq_port: 5672
+        rabbitmq_username: "loshu"
+        rabbitmq_password: "loshu"
+        rabbitmq_queue: "data_receiver_queue"
+        retry_interval: 30
+
+resources:
+  requests:
+    cpu: 40m
+    memory: 25Mi
+  limits:
+    cpu: 80m
+    memory: 50Mi

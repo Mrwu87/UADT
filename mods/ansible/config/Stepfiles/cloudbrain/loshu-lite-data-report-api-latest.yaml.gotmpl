@@ -1,0 +1,40 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.2.5-master.6d4ccd1-20201011" }}
+  repository: harbor.uisee.cn/loshu/loshu-report-lite-api
+
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+
+persistence:
+  enabled: true
+  storageClass: "managed-nfs-storage"
+
+
+
+
+env: 
+  LOSHU_REPORT_LITE_ELASTICSEARCH_IP: 10.23.120.78
+  LOSHU_REPORT_LITE_PROJECT_NAME: logistics
+  LOSHU_REPORT_LITE_ELASTICSEARCH_PORT: 9200
+  LOSHU_REPORT_LITE_S3_ENDPOINT: http://console-minio-latest:9000
+  LOSHU_REPORT_LITE_S3_ACCESS_KEY: minio@console
+  LOSHU_REPORT_LITE_S3_SECRET_KEY: minio@console
+  LOSHU_REPORT_LITE_S3_BUCKET_NAME: loshu
+  LOSHU_REPORT_LITE_SERVER_TIMEZONE: Asia/Shanghai
+  LOSHU_REPORT_LITE_SERVER_DEBUG_MODE: 0
+  LOSHU_REPORT_LITE_DOWNLOAD_REPORT: 1
+  LOSHU_REPORT_LITE_PROJECT_TYPE: liushu
+  LOSHU_REPORT_LITE_DB_MYSQL_HOST: loshu-lite-mysql-latest
+  LOSHU_REPORT_LITE_DB_MYSQL_PORT: 3306
+  LOSHU_REPORT_LITE_DB_MYSQL_NAME: loshu_lite
+  LOSHU_REPORT_LITE_DB_MYSQL_USER: loshu
+  LOSHU_REPORT_LITE_DB_MYSQL_PASSWORD: loshu
+
+
+resources:
+  requests:
+    memory: 500Mi
+  limits:
+    memory: 1Gi

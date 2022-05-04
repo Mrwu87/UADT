@@ -1,0 +1,69 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.17.0-devel.2bd9bb6d-20201010-op" }}
+  repository: harbor.uisee.cn/cloud/app-console
+
+imagePullSecrets:
+- name: "docker-reg-secret"
+
+service:
+  type: ClusterIP
+
+ssl:
+  enabled: false
+
+readinessProbe:
+  httpGet:
+    path: /console/
+    port: http
+    scheme: HTTP
+  initialDelaySeconds: 30
+  periodSeconds: 10
+livenessProbe:
+  httpGet:
+    path: /console/
+    port: http
+    scheme: HTTP
+  initialDelaySeconds: 40
+  periodSeconds: 30
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/app-root: /console/
+  hosts:
+    - host: dongwu.uisee.com
+      paths:
+        - /console(/|$)(.*)
+        - /s3-public/
+  tls:
+    - secretName: ingress-tls
+      hosts:
+        - dongwu.uisee.com
+
+
+gateway:
+  proxy: http://kong-new-gateway-proxy.api-gateway-kong-new.svc.cluster.local:80
+  api:
+    namespace: "{{ .Namespace }}"
+    version: {{ env "VER" | default "latest" | quote }}
+
+heartbeatProxy: http://console-ping-{{ env "VER" | default "latest" }}.{{ .Namespace }}.svc.cluster.local:80
+
+hawkeyeProxy: ""
+
+messagebusProxy: http://cloud-emqx-{{ env "VER" | default "latest" }}.{{ .Namespace }}.svc.cluster.local:8083
+
+minioProxy: console-minio-{{ env "VER" | default "latest" }}
+
+minioPublicProxy: http://minio-s3.kube-public.svc.cluster.local:9000
+
+hostPort:
+  http:
+  https:
+
+resources:
+  limits:
+    memory: 100Mi
+  requests:
+    memory: 100Mi

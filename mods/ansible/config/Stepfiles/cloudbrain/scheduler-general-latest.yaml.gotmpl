@@ -1,0 +1,33 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.3.1" }}
+  repository: harbor.uisee.cn/cloud/scheduler-general
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+mqttConfig:
+  generalNome: false
+
+redisConfig:
+  host: 10.23.29.25
+  password: uisee123
+  port: 6379
+
+httpClientConfig:
+  nome:
+    host: ""
+    port: ""
+
+resources:
+  limits:
+    cpu: "0.5"
+    memory: 1Gi
+  requests:
+    cpu: "0.25"
+    memory: 500Mi
+
+

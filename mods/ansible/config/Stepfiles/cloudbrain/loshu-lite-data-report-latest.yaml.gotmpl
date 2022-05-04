@@ -1,0 +1,85 @@
+persistence:
+  enabled: false
+  storageClass: "managed-nfs-storage"
+
+cronjob:
+  # At 01:00 every day
+  schedule: "5 1 * * *"
+
+logging:
+  enabled: true
+  cluster: UcloudKubernetes
+
+image:
+  tag: {{ env "IMAGE_TAG" | default "0.3.0-report_lite.09aeef5-20201124" }}
+  repository: harbor.uisee.cn/loshu/data-report
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+configurationFiles:
+    dongwu.configuration.datareport.yml: |-
+      common:
+        program: logistics
+        elasticsearch_ip: 10.23.120.78
+        elasticsearch_port: 9200
+        upload_url: http://s3-cn-sh2.ufileos.com
+        upload_bucket: uisee-loshu
+        access_key: TOKEN_78ebc873-888c-449b-b23d-15c997c402a6
+        secret_key: 09f99b9f-2fb2-4bc0-924a-c62c5e280d0c
+        upload_folder_name: jiashan-dongwu
+        console_mode: inside
+        report_save_days: 60
+        log_mode: production1
+        single_report_type: ['logistics']
+        coord_report_type: ['logistics']
+        coord_report_summary_days: [1, 7]
+        base_stats: 1
+        coord_report: 1
+        excel_report: 1
+        html_report: 0
+        live_report: 0
+        console_report: 1
+        nome_plus: 1
+        excel_select: 512
+        ahead_day: 1
+        ahead_day_cnt: 1
+        emergency_brake:
+          low_thd: -1.5
+          high_thd: -1.2
+        exclude_trip_pn: -1
+        exclude_trip_error: -1
+        api:
+          console: https://app-console-common-latest:80/
+          compass_alert_api: http://console-notification-latest/notification/internal/records/search
+          compass_odometers_api: http://compass-backend-latest:8000/odometers/
+          compass_statistic_api: http://console-notification-latest/notification/statistics
+          compass_error_codes_api: http://compass-backend-latest:8000/diagnoses/{}/error_codes/
+          console_project_api: http://console-core-latest:80/groups
+          console_map_api: http://console-map-latest:80/internal/maps
+          console_vehicle_api: http://console-vehicle-latest:80/vehicles
+          compass_influxdb_api: http://emqx-influxdb-latest:8086/query
+          compass_parking_history_api: http://compass-backend-latest:8000/parkings/{}/histories/
+          compass_parking_stattistic_api: http://compass-backend-latest:8000/parkings/statistic/
+          console_situ_mapstops_api: http://situ-map-proxy-latest:80/maps/{}/versions/{}/stops
+          console_situ_mapver_api: http://situ-map-proxy-latest:80/vehicles/{}/version
+      projects:
+        csxm:
+          enable: 1
+          single_report_type: ['logistics']
+          project_name: '测试项目'
+
+
+
+
+env:
+  elasticsearch_ip: elasticsearch-master
+  elasticsearch_port: 9200
+
+project: "dongwu"
+
+resources:
+  requests:
+    memory: 500Mi
+  limits:
+    memory: 4Gi

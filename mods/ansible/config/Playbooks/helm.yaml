@@ -10,8 +10,12 @@
       command: sudo mv helm /usr/local/bin/helm
       args:
           creates: /usr/local/bin/helm
-    - name: plugin install
-      shell: sudo helm  plugin  install  {{ inventory_dir }}/Playbooks/images/diff  > /dev/null 2>&1 || /bin/true
+
+    - name: plugin install diff
+      shell: helm  plugin  install  {{ inventory_dir }}/Playbooks/images/diff  > /dev/null 2>&1 || /bin/true
+      ignore_errors: yes
+    - name: plugin install  cm-push
+      shell: helm  plugin  install  {{ inventory_dir }}/Playbooks/images/cm-push  > /dev/null 2>&1 || /bin/true
       ignore_errors: yes
     - name: install helmfile
       copy:

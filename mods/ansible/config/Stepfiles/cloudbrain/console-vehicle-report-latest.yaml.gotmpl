@@ -1,0 +1,27 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "1.0.0" }}
+  repository: harbor.uisee.cn/cloud/console-vehicle-report
+
+imagePullSecrets:
+- name: docker-reg-secret
+
+logging:
+  cluster: UcloudKubernetes
+
+
+
+env:
+  cloudVehilceUrl: http://console-vehicle-latest/internal/vehicles
+  cloudMapUrl: http://console-map-latest/internal/maps
+  tripServiceUrl: http://loshu-lite-data-report-api-latest/reports/list
+  loshuReportServiceUrl: http://loshu-lite-data-report-api-latest
+  forceHost: http://app-console-latest
+
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 200Mi
+  requests:
+    cpu: 50m
+    memory: 100Mi

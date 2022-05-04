@@ -1,0 +1,315 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "2.0.0-common.e46bd39-20210223-test" }}
+  repository: harbor.uisee.cn/cloud/k8s-notice-node-red
+
+
+env:
+  phoneFAE: ''
+  phoneOP: ''
+  serviceHost: http://106.75.225.39:30550
+  webhookFAE: ""
+  webhookOP: ""
+  credential: uisee@node-red
+  mqttUrl: ws://cloud-emqx-{{ env "VER" | default "latest" }}.{{ .Namespace }}.svc.cluster.local:8083/mqtt
+  resumeHost: http://compass-backend-{{ env "VER" | default "latest" }}.{{ .Namespace }}.svc.cluster.local:8000
+  serviceMappingFAE: |
+    {
+      "cloud-nome-{{ env "VER" | default "latest" }}":{
+        "name":"云脑NOME服务",
+        "level":2,
+        "description":"监测云脑各服务的健康状态，出现故障则通知前端该服务下线并给车辆发送故障命令",
+        "cause":"环境原因/配置中心失效/etcd失效",
+        "effect":["无法监测到云脑服务的状态变化，当云脑服务出现故障时无法及时通知车端", "无法实现高可用"]
+      },
+      "compass-provision-{{ env "VER" | default "latest" }}":{
+        "name":"设备初始化服务",
+        "level":2,
+        "description":"车辆证书管理",
+        "cause":"环境原因/依赖失效",
+        "effect":["新车上线无法获得证书"]
+      },
+      "console-vehicle-{{ env "VER" | default "latest" }}":{
+        "name":"车辆资源服务",
+        "level":2,
+        "description":"管理车辆资源",
+        "cause":"环境原因",
+        "effect":["车辆监控页面及 AVP 无法使用"]
+      },
+      "console-proxy-compass-{{ env "VER" | default "latest" }}":{
+        "name":"车辆管控代理服务",
+        "level":2,
+        "description":"用于统一前端服务请求、响应，降低对接车辆管控服务的对接成本，增加项目、资源鉴权等灵活定制的可能性",
+        "cause":"环境原因/依赖失效",
+        "effect":["无法通过CONSOLE、APP 等控车"]
+      },
+      "console-map-{{ env "VER" | default "latest" }}":{
+        "name":"前端地图服务",
+        "level":2,
+        "description":"管理地图资源，为前端提供地图数据",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE上无法获取项目地图，地图加载不出来，导致监控页面不可用"]
+      },
+      "console-front-resource-{{ env "VER" | default "latest" }}":{
+        "name":"前端资源服务",
+        "level":2,
+        "description":"管理 CONSOLE 前端界面涉及到的资源类型，可以同用户或角色进行绑定",
+        "cause":"环境原因",
+        "effect":["CONSOLE 界面上无法显示菜单等内容，导致无法正常使用"]
+      },
+      "monitor-notice-{{ env "VER" | default "latest" }}":{
+        "name":"消息通知中心服务",
+        "level":2,
+        "description":"用于服务故障时向用户推送服务故障消息",
+        "cause":"环境原因/依赖失效",
+        "effect":["通知中心服务不可用"]
+      },
+      "console-notification-{{ env "VER" | default "latest" }}":{
+        "name":"事件通知中心服务",
+        "level":2,
+        "description":"用于承载所有事件，事件查询，事件推送",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 无法获取车端故障历史事件记录"]
+      },
+      "console-minio-{{ env "VER" | default "latest" }}":{
+        "name":"云脑资源存储服务",
+        "level":2,
+        "description":"用于存储所有console需要的地图，图片等资源",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 无法加载地图或显示车辆"]
+      },
+      "console-mongodb-{{ env "VER" | default "latest" }}":{
+        "name":"事件记录数据库服务",
+        "level":2,
+        "description":"用于存储所有车端事件",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 无法获取车端故障历史事件记录"]
+      },
+      "kong-new-gateway-admin":{
+        "name":"网关服务",
+        "level":1,
+        "description":"网关服务，用于连接客户端、权限系统和上游服务",
+        "cause":"环境原因",
+        "effect":["CONSOLE 全部或部分功能无法使用"]
+      },
+      "kong-new-gateway-proxy":{
+        "name":"网关服务",
+        "level":1,
+        "description":"网关服务，用于连接客户端、权限系统和上游服务",
+        "cause":"环境原因",
+        "effect":["CONSOLE 全部或部分功能无法使用"]
+      },
+      "app-console-{{ env "VER" | default "latest" }}":{
+        "name":"云控制台",
+        "level":1,
+        "description":"用于展示，控制，管理车辆、地图及其他资源的客户端",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 全部或部分功能无法使用"]
+      },
+      "console-core-{{ env "VER" | default "latest" }}":{
+        "name":"权限服务",
+        "level":1,
+        "description":"鉴权，授权，审计",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 无法登录及使用，已登录用户无法控车"]
+      },
+      "emqx-{{ env "VER" | default "latest" }}-headless":{
+        "name":"车云控制通道",
+        "level":1,
+        "description":"提供车端数据的订阅、发布",
+        "cause":"环境原因",
+        "effect":["用户无法从云端控制车辆，也接收不到车端上报的数据，关联服务无法使用"]
+      },
+      "oam-emqx-latest-headless":{
+        "name":"oam 消息通道",
+        "level":1,
+        "description":"运维工具消息中间件",
+        "cause":"环境原因/依赖失效",
+        "effect":["用户无法使用远程运维工具"]
+      },
+      "cloud-emqx-{{ env "VER" | default "latest" }}-headless":{
+        "name":"云云消息通道",
+        "level":1,
+        "description":"转发车端及其他消息给云端服务",
+        "cause":"环境原因/依赖失效",
+        "effect":["用户收不到云端部分信息"]
+      },
+      "compass-backend-{{ env "VER" | default "latest" }}":{
+        "name":"云脑运营云端服务",
+        "level":1,
+        "description":"负责收取车端上报的数据并转发给云端，接收控制命令并下发给车端",
+        "cause":"环境原因/依赖失效",
+        "effect":["用户无法从云端控制车辆，也接收不到车端上报的数据"]
+      },
+      "compass-backend-vehicle-ha-{{ env "VER" | default "latest" }}-discovery":{
+        "name":"车辆核心接入服务",
+        "level":1,
+        "description":"负责收取车端上报的数据并转发给云端，接收控制命令并下发给车端",
+        "cause":"环境原因/依赖失效",
+        "effect":["用户无法从云端控制车辆，也接收不到车端上报的数据"]
+      },
+      "compass-efence-ha-{{ env "VER" | default "latest" }}-discovery":{
+        "name":"EFENCE云端服务",
+        "level":1,
+        "description":"用于收取efu上报数据，下发efu控制命令",
+        "cause":"环境原因/依赖失效",
+        "effect":["无法控制efu及获取efu状态"]
+      }
+    }
+  serviceMappingOP: |
+    {
+      "cloud-nome-{{ env "VER" | default "latest" }}":{
+        "name":"云脑NOME服务",
+        "level":2,
+        "description":"监测云脑各服务的健康状态，出现故障则通知前端该服务下线并给车辆发送故障命令",
+        "cause":"环境原因/配置中心失效/etcd失效",
+        "effect":["无法监测到云脑服务的状态变化，当云脑服务出现故障时无法及时通知车端", "无法实现高可用"]
+      },
+      "compass-provision-{{ env "VER" | default "latest" }}":{
+        "name":"设备初始化服务",
+        "level":2,
+        "description":"车辆证书管理",
+        "cause":"环境原因/依赖失效",
+        "effect":["新车上线无法获得证书"]
+      },
+      "console-vehicle-{{ env "VER" | default "latest" }}":{
+        "name":"车辆资源服务",
+        "level":2,
+        "description":"管理车辆资源",
+        "cause":"环境原因",
+        "effect":["车辆监控页面及 AVP 无法使用"]
+      },
+      "console-proxy-compass-{{ env "VER" | default "latest" }}":{
+        "name":"车辆管控代理服务",
+        "level":2,
+        "description":"用于统一前端服务请求、响应，降低对接车辆管控服务的对接成本，增加项目、资源鉴权等灵活定制的可能性",
+        "cause":"环境原因/依赖失效",
+        "effect":["无法通过CONSOLE、APP 等控车"]
+      },
+      "console-map-{{ env "VER" | default "latest" }}":{
+        "name":"前端地图服务",
+        "level":2,
+        "description":"管理地图资源，为前端提供地图数据",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE上无法获取项目地图，地图加载不出来，导致监控页面不可用"]
+      },
+      "console-front-resource-{{ env "VER" | default "latest" }}":{
+        "name":"前端资源服务",
+        "level":2,
+        "description":"管理 CONSOLE 前端界面涉及到的资源类型，可以同用户或角色进行绑定",
+        "cause":"环境原因",
+        "effect":["CONSOLE 界面上无法显示菜单等内容，导致无法正常使用"]
+      },
+      "monitor-notice-{{ env "VER" | default "latest" }}":{
+        "name":"消息通知中心服务",
+        "level":2,
+        "description":"用于服务故障时向用户推送服务故障消息",
+        "cause":"环境原因/依赖失效",
+        "effect":["通知中心服务不可用"]
+      },
+      "console-notification-{{ env "VER" | default "latest" }}":{
+        "name":"事件通知中心服务",
+        "level":2,
+        "description":"用于承载所有事件，事件查询，事件推送",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 无法获取车端故障历史事件记录"]
+      },
+      "console-minio-{{ env "VER" | default "latest" }}":{
+        "name":"云脑资源存储服务",
+        "level":2,
+        "description":"用于存储所有console需要的地图，图片等资源",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 无法加载地图或显示车辆"]
+      },
+      "console-mongodb-{{ env "VER" | default "latest" }}":{
+        "name":"事件记录数据库服务",
+        "level":2,
+        "description":"用于存储所有车端事件",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 无法获取车端故障历史事件记录"]
+      },
+      "kong-new-gateway-admin":{
+        "name":"网关服务",
+        "level":1,
+        "description":"网关服务，用于连接客户端、权限系统和上游服务",
+        "cause":"环境原因",
+        "effect":["CONSOLE 全部或部分功能无法使用"]
+      },
+      "kong-new-gateway-proxy":{
+        "name":"网关服务",
+        "level":1,
+        "description":"网关服务，用于连接客户端、权限系统和上游服务",
+        "cause":"环境原因",
+        "effect":["CONSOLE 全部或部分功能无法使用"]
+      },
+      "app-console-{{ env "VER" | default "latest" }}":{
+        "name":"云控制台",
+        "level":1,
+        "description":"用于展示，控制，管理车辆、地图及其他资源的客户端",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 全部或部分功能无法使用"]
+      },
+      "console-core-{{ env "VER" | default "latest" }}":{
+        "name":"权限服务",
+        "level":1,
+        "description":"鉴权，授权，审计",
+        "cause":"环境原因/依赖失效",
+        "effect":["CONSOLE 无法登录及使用，已登录用户无法控车"]
+      },
+      "emqx-{{ env "VER" | default "latest" }}-headless":{
+        "name":"车云控制通道",
+        "level":1,
+        "description":"提供车端数据的订阅、发布",
+        "cause":"环境原因",
+        "effect":["用户无法从云端控制车辆，也接收不到车端上报的数据，关联服务无法使用"]
+      },
+      "oam-emqx-latest-headless":{
+        "name":"oam 消息通道",
+        "level":1,
+        "description":"运维工具消息中间件",
+        "cause":"环境原因/依赖失效",
+        "effect":["用户无法使用远程运维工具"]
+      },
+      "cloud-emqx-{{ env "VER" | default "latest" }}-headless":{
+        "name":"云云消息通道",
+        "level":1,
+        "description":"转发车端及其他消息给云端服务",
+        "cause":"环境原因/依赖失效",
+        "effect":["用户收不到云端部分信息"]
+      },
+      "compass-backend-{{ env "VER" | default "latest" }}":{
+        "name":"云脑运营云端服务",
+        "level":1,
+        "description":"负责收取车端上报的数据并转发给云端，接收控制命令并下发给车端",
+        "cause":"环境原因/依赖失效",
+        "effect":["用户无法从云端控制车辆，也接收不到车端上报的数据"]
+      },
+      "compass-backend-vehicle-ha-{{ env "VER" | default "latest" }}-discovery":{
+        "name":"车辆核心接入服务",
+        "level":1,
+        "description":"负责收取车端上报的数据并转发给云端，接收控制命令并下发给车端",
+        "cause":"环境原因/依赖失效",
+        "effect":["用户无法从云端控制车辆，也接收不到车端上报的数据"]
+      },
+      "compass-efence-ha-{{ env "VER" | default "latest" }}-discovery":{
+        "name":"EFENCE云端服务",
+        "level":1,
+        "description":"用于收取efu上报数据，下发efu控制命令",
+        "cause":"环境原因/依赖失效",
+        "effect":["无法控制efu及获取efu状态"]
+      }
+    }
+  serviceStatusEnum: '{"INIT":"Init","HEALTHY":"Healthy","WAITING":"Waiting","UNHEALTHY":"Unhealthy","Init":"服务初始化中","Healthy":"已恢复,请复查相关功能","Waiting":"正在重启中,请等待","Unhealthy":"云脑服务故障,请联系运维人员","InitTimeout":"初始化超时","WaitingTimeout":"重启超时","UnhealthyTimeout":"云脑服务故障仍未处理,请立即联系运维人员"}'
+  serviceStatusTimeout: "300"
+
+
+service:
+  type: NodePort
+
+resources:
+  requests:
+    memory: 500Mi
+  limits:
+    memory: 1Gi
+
+backup:
+  enabled: false

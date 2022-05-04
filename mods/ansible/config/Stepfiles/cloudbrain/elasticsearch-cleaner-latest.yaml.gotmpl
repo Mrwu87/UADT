@@ -1,0 +1,27 @@
+image:
+  tag: {{ env "IMAGE_TAG" | default "v0.0.1" }}
+  repository: harbor.uisee.cn/loshu/elasticsearch-cleaner
+
+persistence:
+  storageClass: managed-nfs-storage
+
+
+
+cronjob:
+  schedule: "0 0 */30 * *"
+  concurrencyPolicy: "Allow"
+  failedJobsHistoryLimit: "1"
+  successfulJobsHistoryLimit: "3"
+
+configurationFiles:
+    configuration.clean.yml: |-
+      log_level: DEBUG
+      log_path: /data/logs
+      log_console: true
+      elasticsearch_config:
+        host: "elasticsearch-master"
+        port: 9200
+        timeout: 300
+        max_retry_times: 3
+        retry_on_timeout: true
+      months_retain: 1

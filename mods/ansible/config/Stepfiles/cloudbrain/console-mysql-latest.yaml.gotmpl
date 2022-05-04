@@ -1,0 +1,72 @@
+image: "harbor.uisee.cn/library/mysql"
+imageTag: "8.0.16"
+
+mysqlRootPassword: root
+mysqlUser: console
+mysqlPassword: console
+
+livenessProbe:
+  initialDelaySeconds: 150
+
+configurationFiles:
+  mysql.cnf: |-
+    [mysqld]
+    skip-name-resolve
+
+initializationFiles:
+  init.sql: |-
+    CREATE DATABASE `utcv` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'utcv'@'%' IDENTIFIED BY 'utcv';
+    GRANT ALL ON utcv.* TO 'utcv'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'utcv'@'%';
+    FLUSH PRIVILEGES;
+    CREATE DATABASE `utcmap` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'utcmap'@'%' IDENTIFIED BY 'utcmap';
+    GRANT ALL ON utcmap.* TO 'utcmap'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'utcmap'@'%';
+    FLUSH PRIVILEGES;
+    CREATE DATABASE `utcpref` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'utcpref'@'%' IDENTIFIED BY 'utcpref';
+    GRANT ALL ON utcpref.* TO 'utcpref'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'utcpref'@'%';
+    FLUSH PRIVILEGES;
+    CREATE DATABASE `utcfres` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'utcfres'@'%' IDENTIFIED BY 'utcfres';
+    GRANT ALL ON utcfres.* TO 'utcfres'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'utcfres'@'%';
+    FLUSH PRIVILEGES;
+    CREATE DATABASE `utcpm` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'utcpm'@'%' IDENTIFIED BY 'utcpm';
+    GRANT ALL ON utcpm.* TO 'utcpm'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'utcpm'@'%';
+    FLUSH PRIVILEGES;
+    CREATE DATABASE `ota` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'ota'@'%' IDENTIFIED BY 'ota';
+    GRANT ALL ON ota.* TO 'ota'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'ota'@'%';
+    FLUSH PRIVILEGES;
+    CREATE DATABASE `utc_biz` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'utc_biz'@'%' IDENTIFIED BY 'utc_biz';
+    GRANT ALL ON utc_biz.* TO 'utc_biz'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'utc_biz'@'%';
+    FLUSH PRIVILEGES;
+    CREATE DATABASE `utc_ticket` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'utc_ticket'@'%' IDENTIFIED BY 'utc_ticket';
+    GRANT ALL ON utc_ticket.* TO 'utc_ticket'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'utc_ticket'@'%';
+    FLUSH PRIVILEGES;
+
+service:
+  type: NodePort
+
+persistence:
+  accessMode: ReadWriteOnce
+  size: 8Gi
+
+resources:
+  limits:
+    cpu: 50m
+    memory: 1.5Gi
+  requests:
+    cpu: 20m
+    memory: 800Mi
