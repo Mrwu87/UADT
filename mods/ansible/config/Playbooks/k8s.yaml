@@ -35,11 +35,8 @@
     - name: install k8s
       shell:
         cmd: |
-          expect -c    " set timeout -1
-                                 spawn /home/{{ user }}/k8sInstall/./kk  create cluster -f /home/{{ user }}/k8sInstall/installConfig.yaml
-                                 expect {
-                                     \"yes/no\" {send \"yes\r\"; exp_continue}}
-                                       " >  /home/{{ user }}/k8sInstall/installk8s.log
+              /home/{{ user }}/k8sInstall/./kk  create cluster -y -f /home/{{ user }}/k8sInstall/installConfig.yaml 2>&1 | tee /home/{{ user }}/k8sInstall/installk8s.log
+
 
     - name: check install process
       shell: cat  /home/{{ user }}/k8sInstall/installk8s.log | grep 'kubectl get pod -A'
