@@ -356,7 +356,7 @@ class MyAnsiable():
             self.stream = yaml.safe_load(f)
         import enlighten
         display = Display()
-        display.verbosity = 3
+        display.verbosity = 6
         manager = enlighten.get_manager()
         pbar = manager.counter(total=len(self.stream['ansibletasks'])-1, desc='Run ansibletasks')
         for i in self.stream['ansibletasks']:
