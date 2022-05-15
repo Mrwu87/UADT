@@ -12,3 +12,9 @@ if __name__ == '__main__':
         ansible.playbookRun()
     else:
         os.system(exit)
+
+
+    print('1234567')
+    print('1234567')
+    print('1234567')
+    print('1234567')
