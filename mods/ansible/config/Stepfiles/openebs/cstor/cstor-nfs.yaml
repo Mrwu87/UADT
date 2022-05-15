@@ -9,6 +9,9 @@ metadata:
         value: "kernel"
       - name: BackendStorageClass
         value: "cstor-csi-disk"
+      - name: FilePermissions
+              data:
+                mode: "0777"
       # NFSServerResourceRequests defines the resource requests for NFS Server
       #- name: NFSServerResourceRequests
       #  value: |-
@@ -32,9 +35,7 @@ metadata:
       # Volume-specific file permission configuration can be specified by
       # using the FilePermissions config key in the PVC YAML, instead of
       # the StorageClass's.
-      - name: FilePermissions
-        data:
-          mode: "0777"
+
       # FSGID defines the group permissions of NFS Volume. If it is set
       # then non-root applications should add FSGID value under pod
       # Suplemental groups.
