@@ -1,0 +1,401 @@
+#helmfile --debug  -f helmfile-A.yaml  apply
+
+environments:
+  default:
+    values:
+      - version.yaml
+
+releases:
+
+  # cloud-emqx-latest
+  - name: cloud-emqx-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: emqx
+      emqx: cloud
+    namespace: {{ .Environment.Values.Namespace }}
+    chart: compass/emqx-ee
+    version: {{ .Environment.Values.cloud_emqx_latest.CHART_VER }}
+    values:
+      - cloud-emqx-latest.yaml.gotmpl
+      - fullnameOverride: cloud-emqx-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.cloud_emqx_latest.IMAGE_TAG }}
+
+  # emqx-latest
+  - name: emqx-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: emqx
+      emqx: vehicle
+    namespace: {{ .Environment.Values.Namespace }}
+    chart: compass/emqx-ee
+    version: {{ .Environment.Values.emqx_latest.CHART_VER }}
+    values:
+      - emqx-latest.yaml.gotmpl
+      - fullnameOverride: emqx-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.emqx_latest.IMAGE_TAG }}
+
+  # scheduler-rabbitmq-ha-latest
+  - name: scheduler-rabbitmq-ha-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: mq
+      mq: scheduler
+    namespace: {{ .Environment.Values.Namespace }}
+    chart: stable/rabbitmq-ha
+    version: {{ .Environment.Values.scheduler_rabbitmq_ha_latest.CHART_VER }}
+    values:
+      - scheduler-rabbitmq-ha-latest.yaml.gotmpl
+      - fullnameOverride: scheduler-rabbitmq-ha-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.scheduler_rabbitmq_ha_latest.IMAGE_TAG }}
+
+  # cloud-event-bus-rabbitmq-ha-latest
+  - name: cloud-event-bus-rabbitmq-ha-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: mq
+      mq: cloud-event
+    chart: stable/rabbitmq-ha
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.cloud_event_bus_rabbitmq_ha_latest.CHART_VER }}
+    values:
+      - cloud-event-bus-rabbitmq-ha-latest.yaml.gotmpl
+      - fullnameOverride: cloud-event-bus-rabbitmq-ha-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.cloud_event_bus_rabbitmq_ha_latest.IMAGE_TAG }}
+
+  # compass-mysql-latest
+  - name: compass-mysql-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: db
+      db: rdb
+    namespace: {{ .Environment.Values.Namespace }}
+    chart: stable/mysql
+    version: {{ .Environment.Values.compass_mysql_latest.CHART_VER }}
+    values:
+      - compass-mysql-latest.yaml.gotmpl
+      - fullnameOverride: compass-mysql-{{ env "VER" | default "latest" }}
+    set:
+      - name: imageTag
+        value: {{ .Environment.Values.compass_mysql_latest.IMAGE_TAG }}
+
+  # compass-redis-latest
+  - name: compass-redis-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: db
+      db: kvdb
+      kvdb: compass
+    namespace: {{ .Environment.Values.Namespace }}
+    chart: stable/redis
+    version: {{ .Environment.Values.compass_redis_latest.CHART_VER }}
+    values:
+      - compass-redis-latest.yaml.gotmpl
+      - fullnameOverride: compass-redis-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.compass_redis_latest.IMAGE_TAG }}
+
+  # scheduler-redis-latest
+  - name: scheduler-redis-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: db
+      db: scheduler-redis
+    chart: stable/redis
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.scheduler_redis_latest.CHART_VER }}
+    values:
+      - scheduler-redis-latest.yaml.gotmpl
+      - fullnameOverride: scheduler-redis-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.scheduler_redis_latest.IMAGE_TAG }}
+
+  # compass-backend-latest
+  - name: compass-backend-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: core
+    chart: compass/cloud-backend-service
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.compass_backend_latest.CHART_VER }}
+    values:
+      - compass-backend-latest.yaml.gotmpl
+      - fullnameOverride: compass-backend-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.compass_backend_latest.IMAGE_TAG }}
+
+  # compass-backend-vehicle-ha-latest
+
+
+  # compass-cooperative-latest
+  - name: compass-cooperative-{{ .Environment.Values.Namespace }}-latest
+    labels:
+      type: svc
+      svc: cooperative
+    chart: compass/compass-cooperative-service
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.compass_cooperative_latest.CHART_VER }}
+    values:
+      - compass-cooperative-latest.yaml.gotmpl
+      - fullnameOverride: compass-cooperative-latest
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.compass_cooperative_latest.IMAGE_TAG }}
+
+  # ota-service-latest
+  - name: ota-service-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: ota-service
+    chart: cloud/service-ota
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.ota_service_latest.CHART_VER }}
+    values:
+      - ota-service-latest.yaml.gotmpl
+      - fullnameOverride: ota-service-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.ota_service_latest.IMAGE_TAG }}
+
+  # scheduler-general-latest
+  - name: scheduler-general-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: scheduler
+    chart: compass/scheduler-general
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.scheduler_general_latest.CHART_VER }}
+    values:
+      - scheduler-general-latest.yaml.gotmpl
+      - fullnameOverride: scheduler-general-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.scheduler_general_latest.IMAGE_TAG }}
+
+  # compass-backend-celery-latest
+  - name: compass-backend-celery-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: celery
+    chart: compass/cloud-backend-celery
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.compass_backend_celery_latest.CHART_VER }}
+    values:
+      - compass-backend-celery-latest.yaml.gotmpl
+      - fullnameOverride: compass-backend-celery-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.compass_backend_celery_latest.IMAGE_TAG }}
+
+  # vehicle-shadow-latest
+  - name: vehicle-shadow-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: vehicle-shadow
+    chart: compass/vehicle-shadow
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.vehicle_shadow_latest.CHART_VER }}
+    values:
+      - vehicle-shadow-latest.yaml.gotmpl
+      - fullnameOverride: vehicle-shadow-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.vehicle_shadow_latest.IMAGE_TAG }}
+
+  # vehicle-resume-latest
+  - name: vehicle-resume-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: vehicle-resume
+    chart: compass/vehicle-resume
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.vehicle_resume_latest.CHART_VER }}
+    values:
+      - vehicle-resume-latest.yaml.gotmpl
+      - fullnameOverride: vehicle-resume-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.vehicle_resume_latest.IMAGE_TAG }}
+
+  # conflict-area-cooperative-latest
+
+
+
+  # app-console-latest
+  - name: app-console-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: app
+      app: core
+    chart: cloud/app-console
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.app_console_latest.CHART_VER }}
+    values:
+      - app-console-latest.yaml.gotmpl
+      - fullnameOverride: app-console-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.app_console_latest.IMAGE_TAG }}
+
+  # app-console-operator-latest
+  - name: app-console-operator-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: app
+      app: operator
+    chart: cloud/app-console
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.app_console_operator_latest.CHART_VER }}
+    values:
+      - app-console-operator-latest.yaml.gotmpl
+      - fullnameOverride: app-console-operator-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.app_console_operator_latest.IMAGE_TAG }}
+
+  # app-console-operator-ant-latest
+
+
+  # console-mysql-latest
+  - name: console-mysql-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: db
+      db: rdb
+    chart: stable/mysql
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.console_mysql_latest.CHART_VER }}
+    values:
+      - console-mysql-latest.yaml.gotmpl
+      - fullnameOverride: console-mysql-{{ env "VER" | default "latest" }}
+    set:
+      - name: imageTag
+        value: {{ .Environment.Values.console_mysql_latest.IMAGE_TAG }}
+
+  # console-mongodb-latest
+  - name: console-mongodb-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: db
+      db: docdb
+    chart: stable/mongodb
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.console_mongodb_latest.CHART_VER }}
+    values:
+      - console-mongodb-latest.yaml.gotmpl
+      - fullnameOverride: console-mongodb-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.console_mongodb_latest.IMAGE_TAG }}
+
+  # emqx-influxdb-latest
+  - name: emqx-influxdb-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: db
+      db: tsdb
+    chart: stable/influxdb
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.emqx_influxdb_latest.CHART_VER }}
+    values:
+      - emqx-influxdb-latest.yaml.gotmpl
+      - fullnameOverride: emqx-influxdb-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.emqx_influxdb_latest.IMAGE_TAG }}
+
+  # console-core-latest
+  - name: console-core-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: core
+    chart: cloud/console-core
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.console_core_latest.CHART_VER }}
+    values:
+      - console-core-latest.yaml.gotmpl
+      - fullnameOverride: console-core-{{ env "VER" | default "latest" }}
+      - httpbin:
+          fullnameOverride: console-httpbin-{{ env "VER" | default "latest" }}
+      - mysql:
+          fullnameOverride: console-core-{{ env "VER" | default "latest" }}-mysql
+      - redis:
+          fullnameOverride: console-core-{{ env "VER" | default "latest" }}-redis
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.console_core_latest.IMAGE_TAG }}
+
+  # console-vehicle-latest
+  - name: console-vehicle-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: vehicle
+    chart: cloud/console-vehicle
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.console_vehicle_latest.CHART_VER }}
+    values:
+      - console-vehicle-latest.yaml.gotmpl
+      - fullnameOverride: console-vehicle-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.console_vehicle_latest.IMAGE_TAG }}
+
+  # console-map-latest
+  - name: console-map-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: map
+    chart: cloud/console-map
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.console_map_latest.CHART_VER }}
+    values:
+      - console-map-latest.yaml.gotmpl
+      - fullnameOverride: console-map-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.console_map_latest.IMAGE_TAG }}
+
+  # console-preference-latest
+  - name: console-preference-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: preference
+    chart: cloud/console-preference
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.console_preference_latest.CHART_VER }}
+    values:
+      - console-preference-latest.yaml.gotmpl
+      - fullnameOverride: console-preference-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.console_preference_latest.IMAGE_TAG }}
+
+  # console-proxy-compass-latest
+  - name: console-proxy-compass-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: proxy
+      proxy: compass
+    chart: cloud/console-proxy-compass
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.console_proxy_compass_latest.CHART_VER }}
+    values:
+      - console-proxy-compass-latest.yaml.gotmpl
+      - fullnameOverride: console-proxy-compass-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.console_proxy_compass_latest.IMAGE_TAG }}
+
+  # console-front-resource-latest
+  - name: console-front-resource-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+    labels:
+      type: svc
+      svc: frontres
+    chart: cloud/console-front-resource
+    namespace: {{ .Environment.Values.Namespace }}
+    version: {{ .Environment.Values.console_front_resource_latest.CHART_VER }}
+    values:
+      - console-front-resource-latest.yaml.gotmpl
+      - fullnameOverride: console-front-resource-{{ env "VER" | default "latest" }}
+    set:
+      - name: image.tag
+        value: {{ .Environment.Values.console_front_resource_latest.IMAGE_TAG }}

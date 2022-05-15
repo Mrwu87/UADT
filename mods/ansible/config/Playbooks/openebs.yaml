@@ -1,5 +1,6 @@
 ---
 - hosts: deploy_ip
+  gather_facts:  false
   tasks:
 
     - name: load and push openebs images
@@ -7,7 +8,19 @@
 
 
 - hosts: server
+  gather_facts:  false
   tasks:
+    - name: mkdir hostpath dir
+      command: sudo mkdir -p /var/openebs/local
+
+    - name: mkdir root
+      command: sudo chmod 777 -R /var/openebs/local
+
+    - name: get blockdevice info
+      shell: sudo systemctl enable --now iscsid
+      args:
+        creates: "image-ready"
+
     - name: pull openebs images
       shell:
         cmd: |
@@ -20,7 +33,71 @@
           sudo docker pull {{ deployip }}:31150/openebs/provisioner-localpv:3.1.0
           sudo docker tag  {{ deployip }}:31150/openebs/provisioner-localpv:3.1.0  openebs/provisioner-localpv:3.1.0
 
+    - name: move image to server
+      copy:
+        src: "{{ inventory_dir }}/Stepfiles/openebs/nfs.tar"
+        dest: "nfs.tar"
+    - name: move cstor image to  server
+      copy:
+        src: "{{ inventory_dir }}/Stepfiles/openebs/openebs-cstor.tar"
+        dest: "openebs-cstor.tar"
+
+    - name: move target image to  server
+      copy:
+        src: "{{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-nfs.tar"
+        dest: "cstor-nfs.tar"
+
+    - name:  nfs images
+      shell: sudo docker load -i nfs.tar
+      args:
+              creates: "image-ready"
+
+    - name: load target image
+      shell:
+        cmd: |
+            sudo docker  load -i cstor-nfs.tar
+      args:
+          creates: "image-ready"
+
+
+    - name: load cstor image
+      shell:
+       cmd: |
+         sudo docker  load -i openebs-cstor.tar
+      args:
+              creates: "image-ready"
+    - name: create jump
+      shell: touch image-ready
+
+
+
+
 - hosts: deploy_ip
+  gather_facts:  false
   tasks:
-    - name: openebs hostpath
-      command: sudo kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/openebs.yaml
+
+
+    - name: openebs hostpath and local pv
+      command:  kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/openebs.yaml
+
+    - name: openebs nfs
+      command: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/nfs.yaml
+
+    - name:  create cstor cluster
+      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-operator.yaml
+
+    - name: get blockdevice info
+      shell:  kubectl get bd -n openebs | grep Active | awk '{print $1,$2}' > {{ inventory_dir }}/Stepfiles/openebs/cstor/blockdevice.txt
+
+    - name: insert python script
+      shell: python3 {{ inventory_dir }}/Stepfiles/openebs/cstor/blockdevice.py  {{ inventory_dir }}/Stepfiles/openebs/cstor
+
+    - name: create cstor poll
+      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor_pool.yaml
+
+    - name: apply cstor storageclass yaml
+      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-sc.yaml
+
+    - name: create cstor nfs yaml
+      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-nfs.yaml
+

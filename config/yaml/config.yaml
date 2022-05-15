@@ -11,3 +11,6 @@ hosts:
   master: true
   deploy: true
   deploy_ip: 172.16.42.131
+
+
+  #记得修改openebs的副本数 在cstor-sc.yaml中

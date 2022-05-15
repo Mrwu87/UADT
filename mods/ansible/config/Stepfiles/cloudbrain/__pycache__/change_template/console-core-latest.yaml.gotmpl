@@ -87,12 +87,11 @@ mysql:
     requests:
       cpu: 50m
       memory: 500Mi
-  busybox:
-      image: busybox
-      tag: latest
 imagePullPolicy: IfNotPresent
 
-
+busybox:
+  image: busybox
+  tag: latest
 
 
 

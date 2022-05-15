@@ -60,6 +60,11 @@ for i in a:
         new = sys.argv[1] + '/' + 'library/' + i
     command=f'sudo docker tag {i.strip()} {new}'
     deplopy.run_command(command, taskId='push images_tag')
+    # if i.strip() == 'busybox:1.30.1':
+    #     command = f'sudo docker tag busybox:lastest {sys.argv[1]}/library/busybox:lastest'
+    #     deplopy.run_command(command, taskId='push images_tag')
+    #     command = f'sudo docker push {sys.argv[1]}/library/busybox:lastest'
+    #     deplopy.run_command(command, taskId='push images_tag')
     command=f'sudo docker push {new}'
     deplopy.run_command(command, taskId='push images_tag')
 
@@ -67,7 +72,6 @@ for i in a:
 with open(f'{sys.argv[2]}repo_charts.yaml', mode='r') as r:
     a = yaml.safe_load(r)
 for i in a:
-
     chart_registry=a[i]['CHART_VER'].split('/')[0]
     version = re.findall('[v]?\d+\.\d+.\d+', a[i]['CHART_VER'])
     chart_version = a[i]['CHART_VER'].split(' ')[0]

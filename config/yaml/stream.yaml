@@ -6,7 +6,7 @@ initasks:
          vars: ['last_address']
      -   log: "mods/services/config/portcheck/ssh_fail.log"
          sh: "mods/services/config/sh/ssh.sh"
-         error_message: 'Port不可到达请检查主机IP，具体信息请查看ssh_fail文件'
+         error_message: 'Port不可到达请检查主机PORT是否开放，具体信息请查看ssh_fail文件'
          task_id: 'checkPort'
          vars: ['last_address','ssh_port']
      -   log: "mods/services/config/expectcheck/expectfail.log"
@@ -49,5 +49,7 @@ ansibletasks:
          playbookfile: 'mods/ansible/config/Playbooks/helm.yaml'
      -   log: "mods/ansible/config/Stepfiles/k9s/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/k9s.yaml'
+     -   log: "mods/ansible/config/Stepfiles/cloudbrain/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/cloudbrain.yaml'
 
          

@@ -1,12 +1,13 @@
-image: harbor.uisee.cn/library/mysql
-imageTag: "8.0.16"
+image:
+  repository: harbor.uisee.cn/library/mysql
+
 imagePullPolicy: IfNotPresent
 
 busybox:
   image: busybox
   tag: latest
 
-
+imageTag: "8.0.16"
 
 mysqlRootPassword: root
 mysqlUser: console

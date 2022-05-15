@@ -144,7 +144,8 @@ loshu_lite_data_receiver_latest:
   IMAGE_TAG: 1.0.0-prod-nome2-2021-03-a987f23-20210409
   CHART_VER: 0.1.0
 loshu_lite_data_report_latest:
-  IMAGE_TAG: 1.0.13-prod-nome2-2021-12.9362895-20211229
+#  IMAGE_TAG: 1.0.13-prod-nome2-2021-12.9362895-20211229
+  IMAGE_TAG: 0.7.0-prod-nome2-2021-12.8de890-20220107
   CHART_VER: 0.3.1
 loshu_lite_data_indexer_latest:
   IMAGE_TAG: 0.0.5-prod-nome2-2021-03-bb49871-20210409

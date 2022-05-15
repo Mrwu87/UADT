@@ -42,6 +42,7 @@ replicaCount: 3
 initContainers: 
   - name: wait-for-db
     image: busybox:latest
+    imagePullPolicy: IfNotPresent
     command: [ "/bin/sh", "-c", "until nc -zv compass-mysql-{{ env "VER" | default "latest" }} 3306 -w1; do echo 'waiting for db'; sleep 5; done" ]
 
 emqxLicense:

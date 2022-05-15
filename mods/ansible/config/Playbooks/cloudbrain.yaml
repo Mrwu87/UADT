@@ -1,17 +1,40 @@
 ---
 - hosts: deploy_ip
+  gather_facts:  false
   tasks:
     - name: get cloudbrain image file
       shell: sudo docker load -i {{ inventory_dir }}/Playbooks/images/cloudbrain_images.tar
+      args:
+        creates:  "{{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready"
+      async: 0
 
     - name: rm -rf charts.txt
       command: rm -rf {{ inventory_dir }}/Stepfiles/cloudbrain/charts.txt
 
+   # helm 需要指定crt文件  https://helm.sh/zh/docs/helm/helm/
+    # $KUBECONFIG	设置Kubernetes的可选配置文件(默认是"~/.kube/config")
+    # $HELM_KUBECAFILE	设置Kubernetes证书机构文件   HELM_KUBECAFILE=~/.kube/ca.crt
+    # $HELM_KUBECONTEXT	设置kubeconfig上下文的名称  HELM_KUBECONTEXT=kubernetes-admin@cluster.local
+    - name: env var
+      shell:
+       cmd: |
+          echo '''KUBECONFIG=~/.kube/config
+          HELM_KUBECAFILE=~/.kube/ca.crt
+          HELM_KUBECONTEXT=kubernetes-admin@cluster.local
+          ''' >>  ~/.profile
+
+      args:
+          creates:  "{{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready"
+
+    - name: creae
+      shell:  /bin/bash -c "source ~/.profile"
+
+
     - name: upload image/chart to harbor
       command: "python3 {{ inventory_dir }}/Stepfiles/cloudbrain/tag.py {{ deployip }}:31150 {{ inventory_dir }}/Stepfiles/cloudbrain/    {{ inventory_dir }}/Playbooks/images/cloudbrain/chart/  "
 
-    - name: configure the service config file
-      command: bash {{ inventory_dir }}/Stepfiles/cloudbrain/change_harbor_registry.sh  {{ deployip }}:31150
+#    - name: configure the service config file
+#      command: bash {{ inventory_dir }}/Stepfiles/cloudbrain/change_harbor_registry.sh  {{ deployip }}:31150
 
     - name: change helmfile registry
       shell: sed -i "s%https://reg.uisee.ai%http://{{ deployip }}:31150%g"  {{ inventory_dir }}/Stepfiles/cloudbrain/helmfile.yaml
@@ -31,12 +54,20 @@
     - name: update
       shell: helm repo update
 
-    # helm 需要指定crt文件  https://helm.sh/zh/docs/helm/helm/
-    # $KUBECONFIG	设置Kubernetes的可选配置文件(默认是"~/.kube/config")
-    # $HELM_KUBECAFILE	设置Kubernetes证书机构文件
-    # $HELM_KUBECONTEXT	设置kubeconfig上下文的名称
+
+- hosts: server
+  gather_facts:  false
+  tasks:
+    - name: pull busybox image
+      shell: sudo docker pull {{ deployip }}:31150/library/busybox:1.30.1
+
+    - name: tag busybox to latest
+      shell: sudo docker tag {{ deployip }}:31150/library/busybox:1.30.1 busybox:latest
 
 
+- hosts: deploy_ip
+  gather_facts:  false
+  tasks:
     - name: helmfile deploy cluster
       shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -e  default apply"
 

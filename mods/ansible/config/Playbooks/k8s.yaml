@@ -1,9 +1,11 @@
 ---
 - hosts: server
+  gather_facts:  false
   tasks:
     - name: install k8s init deb
       command: sudo apt install -y socat conntrack
 - hosts: deploy_ip
+  gather_facts:  false
   tasks:
     - name: mv kubekey dirctory
       command: sudo  mv {{ inventory_dir }}/Stepfiles/k8s/k8s_install   k8sInstall
@@ -39,6 +41,8 @@
 
     - name: check install process
       shell: cat  /home/{{ user }}/k8sInstall/installk8s.log | grep 'kubectl get pod -A'
+
+
 
 
 

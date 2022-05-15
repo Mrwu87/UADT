@@ -21,13 +21,7 @@ etcd:
   extraEnvVars:
     - name: ETCD_AUTO_COMPACTION_RETENTION
       value: "1h"
-  tolerations:
-  - key: "key"
-    operator: "Equal"
-    value: "prod-int"
-    effect: "NoSchedule"
-  nodeSelector:
-    feat: prod-int
+
   host: cloud-nome-{{ env "VER" | default "latest" }}-etcd:2379
   resources:
     limits:

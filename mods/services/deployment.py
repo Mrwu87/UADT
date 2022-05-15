@@ -52,6 +52,16 @@ class Deployment(Command):
     def Start(self):
         with open('config/yaml/stream.yaml', 'r') as f:
             stream = yaml.safe_load(f)
+        print('============welcome to UADT!!!===============')
+        print('''$$\   $$\  $$$$$$\  $$$$$$$\ $$$$$$$$|
+$$ |  $$ |$$  __$$\ $$  __$$\\ __$$ __|
+$$ |  $$ |$$ /  $$ |$$ |  $$ |  $$ |   
+$$ |  $$ |$$$$$$$$ |$$ |  $$ |  $$ |   
+$$ |  $$ |$$  __$$ |$$ |  $$ |  $$ |   
+$$ |  $$ |$$ |  $$ |$$ |  $$ |  $$ |   
+\$$$$$$  |$$ |  $$ |$$$$$$$  |  $$ |   
+ \______/ \__|  \__|\_______/   \__|''')
+        print('==============================================')
         for i in stream['initasks']:
             dir = "/".join([ s for s in  i['log'].split("/")[0:-1]])
             # print(dir)
