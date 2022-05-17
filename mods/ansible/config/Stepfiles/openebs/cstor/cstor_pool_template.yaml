@@ -5,3 +5,10 @@ metadata:
  namespace: openebs
 spec:
  pools:
+#  - nodeSelector:
+#     kubernetes.io/hostname: "worker-node-1"
+#    dataRaidGroups:
+#      - blockDevices:
+#         - blockDeviceName: "blockdevice-10ad9f484c299597ed1e126d7b857967"
+#    poolConfig:
+#      dataRaidGroupType: "stripe"

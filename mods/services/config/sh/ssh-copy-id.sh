@@ -5,6 +5,8 @@ name=$1
 ip=$2
 passwd=$3
 
+
+
 if [ -f "$HOME/.ssh/id_rsa.pub" ]; then
 
   cp ~/.ssh/id_rsa* mods/services/config/

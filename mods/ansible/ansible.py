@@ -325,7 +325,9 @@ class MyAnsiable():
             total=str(round(float(ii['Mem_total'][:-1]),2))+'G'
             free=str(round(float(ii['Mem_free'][:-1]),2))+'G'
             currentEnvTable.add_row([ii['Hostname'],ii['Address'], ii['OS'], ii['vcpu'],ii['Kernel'], ii['Disk'], ii['x64/x32'],total,free,ii['python_version'],ii['datetime']])
-        print(currentEnvTable)
+        with open('mods/logs/config/runtime','w') as f:
+            f.write(currentEnvTable.get_string()+'\n')
+        # print(currentEnvTable)
 
     def get_result(self,dir) -> bool:  #得到任务执行结果
         result_raw = {'success': {}, 'failed': {}, 'unreachable': {}}
@@ -350,16 +352,18 @@ class MyAnsiable():
             # with open(f'{dir}/xxx.log','w') as f:
             #     f.write(result_raw)
 
-    def playbookRun(self) -> None:
+    def playbookRun(self,App,count) -> None:
         # ansible2 = MyAnsiable2(remote_user=user)
         with open('config/yaml/stream.yaml', 'r') as f:
             self.stream = yaml.safe_load(f)
-        import enlighten
+        #import enlighten
         display = Display()
         display.verbosity = 6
-        manager = enlighten.get_manager()
-        pbar = manager.counter(total=len(self.stream['ansibletasks'])-1, desc='Run ansibletasks')
+        #manager = enlighten.get_manager()
+        #pbar = manager.counter(total=len(self.stream['ansibletasks'])-1, desc='Run ansibletasks')
+        success_count=0
         for i in self.stream['ansibletasks']:
+            ansible_count = count+ self.stream['ansibletasks'].index(i) + 1
             dir = "/".join([ s for s in  i['log'].split("/")[0:-1]])
             if i["playbookfile"].split("/")[-1] == 'getSysinfo.yaml':
                 self.playbook([i["playbookfile"], ])
@@ -367,21 +371,31 @@ class MyAnsiable():
                 continue
             self.Countine=True
             if self.Countine:
-                time.sleep(0.3)
-                pbar.update()
+                #time.sleep(0.3)
+                #pbar.update()
                 if os.path.exists(f'{dir}/Success.log') == False:
                     self.playbook([i["playbookfile"], ])
                     if self.get_result(dir)==False:
                         service_logger.info(f'{i["playbookfile"]} This file  execute failed')
                         break  #有失败消息的直接退出循环 并且打印文件failed
-
+                    App.vc.set_value(ansible_count)
+                    App.F.display()
+                    success_count+=1
                 else:  #对于生成success.log的直接放过
+                    App.vc.set_value(ansible_count)
+                    App.F.display()
+                    success_count += 1
                     continue
+
 
             else:
                 service_logger.info('This system is not ready')
                 break
-        manager.stop()
+        #manager.stop()
+        if success_count == len(self.stream['ansibletasks'])-1:
+            service_logger.info(f'''\n===============================================\n  UA集群安装成功~~~! \n kubectl get pod -A / helm list 检查集群状态\n ===============================================''')
+        for play in range(5):
+            App.F.DISPLAY()
 
 
 

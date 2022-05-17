@@ -3,6 +3,7 @@ import yaml,json
 from mods.commands.command import Command
 from mods.logs.log import service_logger
 
+
 class Deployment(Command):
     def logic(self, file, sh, error_message, task_id, *args) -> bool:
         file_pwd=os.getcwd()+'/'+file
@@ -43,29 +44,29 @@ class Deployment(Command):
             if action(file, sh, error_message, task_id, *args) == True:
                 # service_logger.info(r'Success！')
                 break
-            retry = input('是否重试？ y/n')
-            if retry == 'y':
-                continue
-            else:
-                os.system(exit())
+            # retry = input('是否重试？ y/n')
+            # if retry == 'y':
+            #     continue
+            # else:
+            #     os.system(exit())
 
     def Start(self):
+        from mods.services.npy import Npy
+        App = Npy()
+        App.run()
         with open('config/yaml/stream.yaml', 'r') as f:
             stream = yaml.safe_load(f)
-        print('============welcome to UADT!!!===============')
-        print('''$$\   $$\  $$$$$$\  $$$$$$$\ $$$$$$$$|
-$$ |  $$ |$$  __$$\ $$  __$$\\ __$$ __|
-$$ |  $$ |$$ /  $$ |$$ |  $$ |  $$ |   
-$$ |  $$ |$$$$$$$$ |$$ |  $$ |  $$ |   
-$$ |  $$ |$$  __$$ |$$ |  $$ |  $$ |   
-$$ |  $$ |$$ |  $$ |$$ |  $$ |  $$ |   
-\$$$$$$  |$$ |  $$ |$$$$$$$  |  $$ |   
- \______/ \__|  \__|\_______/   \__|''')
-        print('==============================================')
         for i in stream['initasks']:
             dir = "/".join([ s for s in  i['log'].split("/")[0:-1]])
             # print(dir)
+            # {key: index for index, key in enumerate(data)}.get('a')  #字典找下标
+            count=stream['initasks'].index(i)+1
+            App.vc.set_value(count)
+            App.F.display()
+            #App.F.edit()
             if os.path.exists(f'{dir}/Success.log') == False:
                 self.loop(i['log'], self.logic, i['sh'], i['error_message'], i['task_id'], *i['vars'])
             else:
                 continue
+        return App,count
+

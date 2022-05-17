@@ -1,3 +1,4 @@
+replicaCount: 3
 hosts:
 - last_address: 172.16.42.131
   new_address: 172.16.42.131/24

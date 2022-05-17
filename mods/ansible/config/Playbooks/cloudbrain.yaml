@@ -68,8 +68,23 @@
 - hosts: deploy_ip
   gather_facts:  false
   tasks:
-    - name: helmfile deploy cluster
-      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -e  default apply"
+    - name: get blockdevice info
+      shell:  kubectl get bd -n openebs | grep Active | awk '{print $1,$2}' > {{ inventory_dir }}/Stepfiles/openebs/cstor/blockdevice.txt
+
+    - name: insert python script
+      shell: python3 {{ inventory_dir }}/Stepfiles/openebs/cstor/blockdevice.py  {{ inventory_dir }}/Stepfiles/openebs/cstor
+
+    - name: create cstor poll
+      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor_pool.yaml
+
+    - name: apply cstor storageclass yaml
+      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-sc.yaml
+
+    - name: create cstor nfs yaml
+      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-nfs.yaml
+
+    - name: helmfile-A deploy cluster
+      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-A.yaml apply"
 
 
 

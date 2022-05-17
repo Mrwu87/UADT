@@ -50,3 +50,19 @@ class Command():
             service_logger.exception('[COMMAND] [%s] EXCEPTION:[%s]:' % (taskId, command))
             return False
 
+# if __name__ == '__main__':
+#
+#     sh = f'''
+#     cd services/config/npyscreen
+#     tar -zxvf npyscreen-4.10.5.tar.gz
+#     cd npyscreen-4.10.5/
+#     sudo python3 setup.py install
+#     '''
+#     sh = sh.split('\n')
+#     workdir = '.'
+#     for i in sh:
+#         if i[0:3] == 'cd ':
+#             workdir = i[3:]
+#             continue
+#
+#         Command.run_command(i, taskId='install_Ansible', cwd=workdir)

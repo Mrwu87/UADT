@@ -1,3 +1,4 @@
+#from nfs.yaml
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -10,8 +11,8 @@ metadata:
       - name: BackendStorageClass
         value: "cstor-csi-disk"
       - name: FilePermissions
-              data:
-                mode: "0777"
+        data:
+            mode: "0777"
       # NFSServerResourceRequests defines the resource requests for NFS Server
       #- name: NFSServerResourceRequests
       #  value: |-
