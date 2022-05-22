@@ -1,0 +1,34 @@
+environments:
+  uisee:
+  ucloud:
+  hkia-ucloud:
+  mini:
+  common:
+
+repositories:
+  - name: cloud
+    url: https://reg.uisee.ai/chartrepo/cloud
+
+
+releases:
+  - name: kong-new
+    namespace: api-gateway-kong-new
+    labels:
+      type: gw
+      gw: kong
+    chart: cloud/kong
+    version: ~1.3.2
+    values:
+      - kong/values.yaml
+      - kong/{{ .Environment.Name }}.yaml
+      - nameOverride: gateway
+  - name: kong-new-ui
+    namespace: api-gateway-kong-new
+    labels:
+      type: app
+    chart: cloud/kong-dashboard
+    version: ~0.1.3
+    values:
+      - konga/values.yaml
+      - konga/{{ .Environment.Name }}.yaml
+      - fullnameOverride: kong-new-ui

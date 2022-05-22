@@ -1,0 +1,5 @@
+## Environment: minikube
+
+mongodb:
+  persistence:
+    size: 10Gi

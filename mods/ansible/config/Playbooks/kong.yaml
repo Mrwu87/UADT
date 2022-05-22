@@ -1,0 +1,54 @@
+---
+- hosts: server
+  gather_facts:  false
+  tasks:
+#kong  image
+    - name: move kong image to servers
+      copy:
+        src: "{{ inventory_dir }}/Stepfiles/baseservice/kong/kong.tar"
+        dest: "baseservice_image/kong.tar"
+    - name: load images kong
+      command: sudo docker load -i  baseservice_image/kong.tar
+
+    - name: move kong plus image to server
+      copy:
+          src: "{{ inventory_dir }}/Stepfiles/baseservice/kong/kong-char-image.tar"
+          dest: "baseservice_image/kong-char-image.tar"
+    - name: load  images plus
+      command: sudo docker load -i  baseservice_image/kong-char-image.tar
+
+
+#kong 安装
+- hosts: deploy_ip
+  vars:
+    - work_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
+  gather_facts:  false
+  tasks:
+      - name: template api.yaml
+        template:
+          src:  kong/ingress-api.j2
+          dest: "{{ inventory_dir }}/Stepfiles/baseservice/kong/api-gateway-kong/ingress/ingress-api.yaml"
+      - name: template ws.yaml
+        template:
+          src:  kong/ingress-ws.j2
+          dest: "{{ inventory_dir }}/Stepfiles/baseservice/kong/api-gateway-kong/ingress/ingress-ws.yaml"
+
+#    - name: replace harbor.uisee
+#      shell: sed -i 's/harbor.uisee.cn/{{ deployIp }}:31150/g'  {{ work_dir }}/kong/api-gateway-kong/kong/common.yaml
+      - name: replace reg.uisee
+        shell: sed -i 's$https://reg.uisee.ai$http://{{ deployip }}:31150$g'  {{ work_dir }}/kong/api-gateway-kong/helmfile.yaml
+
+      - name: helmchart push kong
+        command: helm cm-push {{ work_dir }}/kong/kong-1.3.2.tgz --version 1.3.2 cloud -u admin -p uisee123.
+      - name: helmchart push dashboard
+        command: helm cm-push {{ work_dir }}/kong/kong-dashboard-0.1.3.tgz --version 0.1.3 cloud -u admin -p uisee123.
+
+      - name:  Kong install
+        command: bash {{ work_dir }}/kong/api-gateway-kong/install.sh   {{ work_dir }}/kong
+        ignore_errors: yes
+
+      - name: apply ingress ws-svc
+        command: kubectl apply -f {{ work_dir }}/kong/api-gateway-kong/ingress/ingress-ws.yaml
+
+      - name: apply ingress api-svc
+        command: kubectl apply -f {{ work_dir }}/kong/api-gateway-kong/ingress/ingress-api.yaml

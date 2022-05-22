@@ -1,0 +1,118 @@
+---
+- hosts: server
+  gather_facts:  false
+  tasks:
+    - name: mkdir images
+      shell: mkdir baseservice_image
+      args:
+          creates: "baseservice_image"
+#nginx ingress image
+    - name: move image to servers
+      copy:
+          src: "{{ inventory_dir }}/Stepfiles/baseservice/ingress-nginx/ingress-nginx.tar"
+          dest: "baseservice_image/ingress-nginx.tar"
+
+    - name: load and base images
+      command: sudo docker load -i  baseservice_image/ingress-nginx.tar
+
+##kong  image
+#    - name: move kong image to servers
+#      copy:
+#        src: "{{ inventory_dir }}/Stepfiles/baseservice/kong/kong.tar"
+#        dest: "baseservice_image/kong.tar"
+#    - name: load images kong
+#      command: sudo docker load -i  baseservice_image/kong.tar
+#
+#    - name: move kong plus image to server
+#      copy:
+#          src: "{{ inventory_dir }}/Stepfiles/baseservice/kong/kong-char-image.tar"
+#          dest: "baseservice_image/kong-char-image.tar"
+#    - name: load  images plus
+#      command: sudo docker load -i  baseservice_image/kong-char-image.tar
+#
+##minio image
+#    - name: move minio image to servers
+#      copy:
+#          src: "{{ inventory_dir }}/Stepfiles/baseservice/minio/minio-image.tar"
+#          dest: "baseservice_image/minio-image.tar"
+#
+#    - name: load and minio images
+#      command: sudo docker load -i  baseservice_image/minio-image.tar
+
+
+- hosts: deploy_ip
+  vars:
+    - work_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
+  gather_facts:  false
+  tasks:
+#ingress nginx 安装
+    - name: create namespace
+      run_once: true
+      command: kubectl create namespace ingress-nginx
+    - name: apply ingress
+      command: kubectl apply -f {{ work_dir }}/ingress-nginx/mandatory_1.19.yaml -n ingress-nginx
+    - name: apply ingress type to nodeport
+      command: kubectl apply -f {{ work_dir }}/ingress-nginx/ingress-nodeport.yaml -n ingress-nginx
+    - name: apply ingress HostPort 443
+      command: kubectl apply -f {{ work_dir }}/ingress-nginx/ingress-nginx-dp.yaml -n ingress-nginx
+
+#kong 安装
+#    - name: template api.yaml
+#      template:
+#        src:  kong/ingress-api.j2
+#        dest: "{{ inventory_dir }}/Stepfiles/baseservice/kong/api-gateway-kong/ingress/ingress-api.yaml"
+#    - name: template ws.yaml
+#      template:
+#        src:  kong/ingress-ws.j2
+#        dest: "{{ inventory_dir }}/Stepfiles/baseservice/kong/api-gateway-kong/ingress/ingress-ws.yaml"
+
+#    - name: replace harbor.uisee
+#      shell: sed -i 's/harbor.uisee.cn/{{ deployIp }}:31150/g'  {{ work_dir }}/kong/api-gateway-kong/kong/common.yaml
+#    - name: replace reg.uisee
+#      shell: sed -i 's/reg.uisee.ai/{{ deployIp }}:31150/g'  {{ work_dir }}/kong/api-gateway-kong/kong/values.yaml
+#    - name: helmchart push kong
+#      command: helm cm-push {{ work_dir }}/kong/kong-1.3.2.tgz --version 1.3.2 cloud -u admin -p uisee123.
+#    - name: helmchart push dashboard
+#      command: helm cm-push {{ work_dir }}/kong/kong-dashboard-0.1.3.tgz --version 0.1.3 cloud -u admin -p uisee123.
+#
+#    - name:  Kong install
+#      ignore_errors: yes
+#      command: bash {{ work_dir }}/kong/api-gateway-kong/install.sh   {{ work_dir }}/kong
+#
+#    - name: apply ingress ws-svc
+#      command: kubectl apply -f {{ work_dir }}/kong/api-gateway-kong/ingress/ingress-ws.yaml
+#
+#    - name: apply ingress api-svc
+#      command: kubectl apply -f {{ work_dir }}/kong/api-gateway-kong/ingress/ingress-api.yaml
+## minio 安装
+#    - name: create ns kube-public
+#      ignore_errors: yes
+#      command: kubectl create namespace kube-public
+#    - name: helmchart push minio
+#      command: helm cm-push {{ work_dir }}/minio/minio-5.0.33.tgz --version 5.0.33 stable -u admin -p uisee123.
+#    - name: mv mc to /usr/local/bin/
+#      command: sudo mv {{ work_dir }}/minio/mc  /usr/local/bin/mc
+#    - name:  Kong install
+#      ignore_errors: yes
+#      command: bash {{ work_dir }}/minio/minio-s3/install.sh   {{ work_dir }}/minio/minio-s3
+#    - name: add minio server address
+#      command: mc config host add common-minio-s3  http://{{ deployIp }}:30003 'cloud@uisee.com' 'cloud!234'
+#    - name: add bucket
+#      shell:
+#       cmd: |
+#        mc mb common-minio-s3/console-vehicles
+#        mc mb common-minio-s3/maps
+#        mc mb common-minio-s3/utc-map-gl
+#        mc policy set public common-minio-s3/console-vehicles
+#        mc policy set public common-minio-s3/maps
+#        mc policy set public common-minio-s3/utc-map-gl
+#        mc cp  {{ work_dir }}/minio/utc-map-gl/*  common-minio-s3/utc-map-gl/
+#        mc cp {{ work_dir }}/minio/console-vehicles/*  ucloud-minio-s3/console-vehicles/
+
+
+
+
+
+
+
+

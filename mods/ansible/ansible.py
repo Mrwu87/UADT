@@ -53,7 +53,7 @@ class ResultsCollectorJSONCallback(CallbackBase):
     def v2_runner_on_failed(self, result, *args, **kwargs):
         host = result._host
         self.host_failed[host.get_name()] = result
-        print(json.dumps({host.name: result._result}, indent=20))
+        # print(json.dumps({host.name: result._result}, indent=20))
 
 #
 # def main():
@@ -293,7 +293,7 @@ class MyAnsiable():
         # 使用回调函数
         playbook._tqm._stdout_callback = self.results_callback
 
-        result = playbook.run()
+        self.result = playbook.run()
 
     def get_fact_result(self) -> str:  #得到主机变量状态
         result_raw = {'success': {}, 'failed': {}, 'unreachable': {}}
@@ -348,7 +348,7 @@ class MyAnsiable():
 
         if result_raw['failed'] != {} or result_raw['unreachable']  != {}:
             service_logger.info(result_raw)
-            return False
+            # return False
             # with open(f'{dir}/xxx.log','w') as f:
             #     f.write(result_raw)
 
@@ -363,6 +363,8 @@ class MyAnsiable():
         #pbar = manager.counter(total=len(self.stream['ansibletasks'])-1, desc='Run ansibletasks')
         success_count=0
         for i in self.stream['ansibletasks']:
+            App.file_status.set_value(i['playbookfile'].split('/')[-1])
+            App.file_status.display()
             ansible_count = count+ self.stream['ansibletasks'].index(i) + 1
             dir = "/".join([ s for s in  i['log'].split("/")[0:-1]])
             if i["playbookfile"].split("/")[-1] == 'getSysinfo.yaml':
@@ -375,15 +377,18 @@ class MyAnsiable():
                 #pbar.update()
                 if os.path.exists(f'{dir}/Success.log') == False:
                     self.playbook([i["playbookfile"], ])
-                    if self.get_result(dir)==False:
+                    self.get_result(dir)
+                    # if self.get_result(dir)==False:
+                    if self.result != 0:
                         service_logger.info(f'{i["playbookfile"]} This file  execute failed')
+                        App.run_status.set_value('Error')
                         break  #有失败消息的直接退出循环 并且打印文件failed
                     App.vc.set_value(ansible_count)
-                    App.F.display()
+                    App.vc.display()
                     success_count+=1
                 else:  #对于生成success.log的直接放过
                     App.vc.set_value(ansible_count)
-                    App.F.display()
+                    App.vc.display()
                     success_count += 1
                     continue
 
@@ -393,9 +398,11 @@ class MyAnsiable():
                 break
         #manager.stop()
         if success_count == len(self.stream['ansibletasks'])-1:
+            App.run_status.set_value('Completed')
+            App.run_status.display()
             service_logger.info(f'''\n===============================================\n  UA集群安装成功~~~! \n kubectl get pod -A / helm list 检查集群状态\n ===============================================''')
-        for play in range(5):
-            App.F.DISPLAY()
+        # for play in range(5):
+        #     App.F.DISPLAY()
 
 
 

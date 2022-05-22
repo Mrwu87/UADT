@@ -15,19 +15,19 @@
     # $KUBECONFIG	设置Kubernetes的可选配置文件(默认是"~/.kube/config")
     # $HELM_KUBECAFILE	设置Kubernetes证书机构文件   HELM_KUBECAFILE=~/.kube/ca.crt
     # $HELM_KUBECONTEXT	设置kubeconfig上下文的名称  HELM_KUBECONTEXT=kubernetes-admin@cluster.local
-    - name: env var
-      shell:
-       cmd: |
-          echo '''KUBECONFIG=~/.kube/config
-          HELM_KUBECAFILE=~/.kube/ca.crt
-          HELM_KUBECONTEXT=kubernetes-admin@cluster.local
-          ''' >>  ~/.profile
+#    - name: env var
+#      shell:
+#       cmd: |
+#          echo '''KUBECONFIG=~/.kube/config
+#          HELM_KUBECAFILE=~/.kube/ca.crt
+#          HELM_KUBECONTEXT=kubernetes-admin@cluster.local
+#          ''' >>  ~/.profile
+#
+#      args:
+#          creates:  "{{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready"
 
-      args:
-          creates:  "{{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready"
-
-    - name: creae
-      shell:  /bin/bash -c "source ~/.profile"
+#    - name: source env
+#      shell:  /bin/bash -c "source ~/.profile"
 
 
     - name: upload image/chart to harbor
@@ -38,10 +38,20 @@
 
     - name: change helmfile registry
       shell: sed -i "s%https://reg.uisee.ai%http://{{ deployip }}:31150%g"  {{ inventory_dir }}/Stepfiles/cloudbrain/helmfile.yaml
+    #new create ns
+    - name: create  ns
+      ignore_errors: yes
+      command: kubectl create ns {{ namespace }}
+      args:
+        creates: "{{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready"
 
+    - name: template version.yaml
+      template:
+        src:  version.j2
+        dest: "{{ inventory_dir }}/Stepfiles/cloudbrain/version.yaml"
 
     - name: create  k8s  serct
-      command: kubectl create secret docker-registry docker-reg-secret --docker-server={{ deployip }}:31150 --docker-username=admin --docker-password=uisee123.
+      command: kubectl create secret docker-registry docker-reg-secret -n {{ namespace }} --docker-server={{ deployip }}:31150 --docker-username=admin --docker-password=uisee123.
       args:
         creates: "{{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready"
 
@@ -85,6 +95,9 @@
 
     - name: helmfile-A deploy cluster
       shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-A.yaml apply"
+
+    - name: helmfile-B deploy cluster
+      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-B.yaml apply"
 
 
 

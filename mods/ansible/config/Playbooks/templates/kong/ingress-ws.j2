@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header Upgrade "websocket";
+      proxy_set_header Connection "Upgrade";
+  name: kong-new-gateway-proxy-ws
+  namespace: api-gateway-kong-new
+spec:
+  rules:
+  - host: {{ ingressdomain }}
+    http:
+      paths:
+      - backend:
+          serviceName: kong-new-gateway-proxy
+          servicePort: 80
+        path: /(hawkeye|mqtt|nacos|service)/(.*)$
+  tls:
+  - hosts:
+    - {{ ingressdomain }}
+    secretName: ingress-tls-cn

@@ -1,0 +1,49 @@
+namespace: {{ .Namespace }}
+service:
+   type: NodePort
+   port: 8848
+   nodePort: 31205
+
+env:
+  domainName: ""
+
+persistence:
+  enabled: true
+  storageClassName:
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - nacos
+        topologyKey: kubernetes.io/hostname
+      weight: 100
+
+resources:
+  limits:
+    cpu: "1"
+    memory: 4Gi
+  requests:
+    cpu: "0.5"
+    memory: 2Gi
+
+mysql:
+  master:
+    resources:
+      limits:
+        memory: 2Gi
+      requests:
+        memory: 1Gi
+  slave:
+    resources:
+      limits:
+        memory: 2Gi
+      requests:
+        memory: 1Gi

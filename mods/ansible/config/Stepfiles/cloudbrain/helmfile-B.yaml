@@ -1,4 +1,4 @@
-# helmfile --debug  -f helmfile-A.yaml  apply
+# helmfile --debug  -f helmfile-B.yaml  apply
 environments:
   default:
     values:

@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    meta.helm.sh/release-name: kong-new
+    meta.helm.sh/release-namespace: api-gateway-kong-new
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  labels:
+    app.kubernetes.io/instance: kong-new
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: gateway
+    app.kubernetes.io/version: 2.0.0
+    helm.sh/chart: kong-1.3.2
+  name: kong-new-gateway-proxy
+  namespace: api-gateway-kong-new
+spec:
+  rules:
+  - host: {{ ingressdomain }}
+    http:
+      paths:
+      - backend:
+          serviceName: kong-new-gateway-proxy
+          servicePort: 80
+        path: /api/(.*)
+  tls:
+  - hosts:
+    - {{ ingressdomain }}
+    secretName: ingress-tls-cn

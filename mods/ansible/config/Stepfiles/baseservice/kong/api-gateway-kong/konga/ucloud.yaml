@@ -1,0 +1,19 @@
+## Environment: shanghai ucloud
+
+mongodb:
+  tolerations:
+    - key: "key"
+      operator: "Equal"
+      value: "public"
+      effect: "NoSchedule"
+  nodeSelector:
+    feat: public
+
+tolerations:
+  - key: "key"
+    operator: "Equal"
+    value: "public"
+    effect: "NoSchedule"
+
+nodeSelector:
+  feat: public

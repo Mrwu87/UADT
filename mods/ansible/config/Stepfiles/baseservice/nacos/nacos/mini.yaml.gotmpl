@@ -1,0 +1,16 @@
+## Environment: minikube
+
+image:
+  repository: nacos/nacos-server
+  tag: 1.3.2
+
+mysql:
+  master:
+    persistence:
+      size: 10Gi
+  slave:
+    persistence:
+      size: 10Gi
+
+persistence:
+  size: 10Gi

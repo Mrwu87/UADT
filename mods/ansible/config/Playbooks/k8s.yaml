@@ -23,8 +23,7 @@
     - name: create harbor registry
       script: /home/{{ user }}/k8sInstall/harbor.sh
 
-#    - name: load images to docker
-#      command: sudo bash  k8sInstall/offline-installation-tool.sh -s -l k8sInstall/image.txt -d k8sInstall/image
+
     - name: push images to harbor
       shell:
         cmd: |

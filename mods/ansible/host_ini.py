@@ -16,6 +16,8 @@ def hostIni() -> str:
             deploy_ip = hostData['hosts'][hostData['hosts'].index(data)]['last_address']
     config.set('server:vars', 'deployIp', deploy_ip)
     config.set('deploy_ip', deploy_ip)
+    config.set('server:vars', 'namespace', hostData['namespace'])
+    config.set('server:vars', 'ingressDomain', hostData['ingressDomain'])
     for host in hostData['hosts']:
         config.set('server:vars', 'user', host['username'])
         A_record.append((host['hostname'], host['last_address'], host['password']))
@@ -37,3 +39,6 @@ def hostIni() -> str:
     with open('mods/ansible/config/host.ini', mode='w') as r:
         config.write(r)
     return user
+
+if __name__ == '__main__':
+    hostIni()

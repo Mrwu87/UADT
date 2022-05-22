@@ -1,0 +1,56 @@
+---
+- hosts: server
+  gather_facts:  false
+  tasks:
+#kong  image
+    - name: move minio image to servers
+      copy:
+          src: "{{ inventory_dir }}/Stepfiles/baseservice/minio/minio-image.tar"
+          dest: "baseservice_image/minio-image.tar"
+
+    - name: load and minio images
+      command: sudo docker load -i  baseservice_image/minio-image.tar
+#kong 安装
+- hosts: deploy_ip
+  vars:
+    - work_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
+  gather_facts:  false
+  tasks:
+    - name: create ns kube-public
+      command: kubectl create namespace kube-public
+      ignore_errors: yes
+
+    - name: helmchart push minio
+      command: helm cm-push {{ work_dir }}/minio/minio-5.0.33.tgz --version 5.0.33 stable -u admin -p uisee123.
+
+    - name: mv mc to /usr/local/bin/
+      command: sudo mv {{ work_dir }}/minio/mc  /usr/local/bin/mc
+      args:
+        creates: "/usr/local/bin/mc"
+
+    - name:  Kong install
+      command: bash {{ work_dir }}/minio/minio-s3/install.sh   {{ work_dir }}/minio/minio-s3
+      ignore_errors: yes
+
+#    - name: wait_for
+#      wait_for:
+#         host:  {{ deployip }}
+#         port: 30003
+#         delay: 60
+#         state: started
+
+    - name: add minio server address
+      command: mc config host add common-minio-s3  http://{{ deployip }}:30003 'cloud@uisee.com' 'cloud!234'
+
+
+    - name: add bucket
+      shell:
+        cmd: |
+          mc mb common-minio-s3/console-vehicles
+          mc mb common-minio-s3/maps
+          mc mb common-minio-s3/utc-map-gl
+          mc policy set public common-minio-s3/console-vehicles
+          mc policy set public common-minio-s3/maps
+          mc policy set public common-minio-s3/utc-map-gl
+          mc cp  {{ work_dir }}/minio/utc-map-gl/*  common-minio-s3/utc-map-gl/
+          mc cp {{ work_dir }}/minio/console-vehicles/*  ucloud-minio-s3/console-vehicles/

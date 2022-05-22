@@ -1,0 +1,21 @@
+## Environment: uisee private cloud
+
+mysql:
+  master:
+    tolerations:
+    - effect: NoSchedule
+      key: key
+      operator: Equal
+      value: product
+  slave:
+    tolerations:
+    - effect: NoSchedule
+      key: key
+      operator: Equal
+      value: product
+
+tolerations:
+  - effect: NoSchedule
+    key: key
+    operator: Equal
+    value: product

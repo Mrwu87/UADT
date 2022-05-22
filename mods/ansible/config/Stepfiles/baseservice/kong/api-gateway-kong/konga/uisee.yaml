@@ -1,0 +1,14 @@
+## Environment: uisee cloud
+
+mongodb:
+  tolerations:
+    - effect: NoSchedule
+      key: key
+      operator: Equal
+      value: product
+
+tolerations:
+  - effect: NoSchedule
+    key: key
+    operator: Equal
+    value: product

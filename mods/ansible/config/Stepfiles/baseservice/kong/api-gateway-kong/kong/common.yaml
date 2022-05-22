@@ -1,0 +1,23 @@
+## Environment: common cloud
+
+image:
+  repository: harbor.uisee.cn/cloud/kong
+  tag: v2.3.3-5c9e67e-20210720
+#  pullSecrets:
+#    - docker-reg-secret
+
+proxy:
+  ingress:
+    enabled: false
+#    annotations:
+#      kubernetes.io/ingress.class: nginx
+#      nginx.ingress.kubernetes.io/rewrite-target: /$1
+#      nginx.ingress.kubernetes.io/proxy-body-size: "0"
+#    hosts:
+#      - {{ env "DOMAIN" | default "console.uisee.cn" }}
+#    servicePort: 80
+#    path: /api/(.*)
+#    tls:
+#    - hosts:
+#      - {{ env "DOAMIN" | default "console.uisee.cn"}}
+#      secretName: ingress-tls

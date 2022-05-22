@@ -1,0 +1,28 @@
+## Environment: shanghai ucloud
+
+mysql:
+  master: 
+    tolerations:
+      - key: "key"
+        operator: "Equal"
+        value: "public"
+        effect: "NoSchedule"
+    nodeSelector:
+      feat: public
+  slave: 
+    tolerations:
+      - key: "key"
+        operator: "Equal"
+        value: "public"
+        effect: "NoSchedule"
+    nodeSelector:
+      feat: public
+
+tolerations:
+  - key: "key"
+    operator: "Equal"
+    value: "public"
+    effect: "NoSchedule"
+
+nodeSelector:
+  feat: public

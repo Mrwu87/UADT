@@ -5,6 +5,7 @@ deploy_ip=$2
 
 if [ "$ip"   ==  "$deploy_ip" ]; then
   echo """[ssh_connection]
+pipelining = True
 ssh_args = -o ControlMaster=auto -o ControlPersist=10d -o ServerAliveInterval=30 -o ServerAliveCountMax=4""" > ~/.ansible.cfg
   tar -xvf mods/services/config/ansiblecheck/pip-22.0.3.tar.gz -C  mods/services/config/ansiblecheck/
   cd mods/services/config/ansiblecheck/pip-22.0.3/

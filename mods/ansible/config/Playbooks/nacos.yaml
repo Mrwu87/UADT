@@ -1,0 +1,28 @@
+---
+- hosts: server
+  gather_facts:  false
+  tasks:
+#nacos  image
+
+    - name: move nacos plus image to server
+      copy:
+          src: "{{ inventory_dir }}/Stepfiles/baseservice/nacos/nacos-image.tar"
+          dest: "baseservice_image/nacos-image.tar"
+    - name: load nacos  images
+      command: sudo docker load -i  baseservice_image/nacos-image.tar
+
+
+- hosts: deploy_ip
+  vars:
+    - work_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
+  gather_facts:  false
+  tasks:
+    - name: replace reg.uisee
+      shell: sed -i 's$https://reg.uisee.ai$http://{{ deployip }}:31150$g'  {{ work_dir }}/nacos/helmfile.yaml
+
+    - name: helmchart push nacos
+      command: helm cm-push {{ work_dir }}/nacos/nacos-0.1.0.tgz --version 0.1.0 cloud -u admin -p uisee123.
+
+    - name:  nacos install
+      command: bash {{ work_dir }}/nacos/install.sh   {{ work_dir }}/nacos
+      ignore_errors: yes

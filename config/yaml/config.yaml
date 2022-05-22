@@ -1,8 +1,10 @@
-replicaCount: 3
+replicaCount: 1
+namespace: local-common
+ingressDomain: uisee.common.cn
 hosts:
 - last_address: 172.16.42.131
   new_address: 172.16.42.131/24
-  hostname: k8s-master1
+  hostname: Master1
   ssh_port: 22
   username: wlw
   password: 123

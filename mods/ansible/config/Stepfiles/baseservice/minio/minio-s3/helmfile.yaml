@@ -1,0 +1,17 @@
+environments:
+  uisee:
+  ucloud:
+  hkia-ucloud:
+  mini:
+
+releases:
+  - name: minio-s3-{{ .Namespace }}
+    labels:
+      type: obs
+      s3: true
+    chart: stable/minio
+    version: ~5.0.33
+    values:
+      - minio/values.yaml
+      - minio/{{ .Environment.Name }}.yaml.gotmpl
+      - fullnameOverride: minio-s3

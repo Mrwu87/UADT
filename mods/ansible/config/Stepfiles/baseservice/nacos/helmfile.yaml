@@ -1,0 +1,22 @@
+environments:
+  uisee:
+  ucloud:
+  hkia-ucloud:
+  mini:
+
+repositories:
+  - name: cloud
+    url: https://reg.uisee.ai/chartrepo/cloud
+
+releases:
+  - name: nacos-{{ .Namespace }}
+    labels:
+      type: tool
+      tool: nacos
+    chart: cloud/nacos
+    values:
+      - nacos/values.yaml.gotmpl
+      - nacos/{{ .Environment.Name }}.yaml.gotmpl
+      - fullnameOverride: nacos
+      - mysql:
+          fullnameOverride: nacos-mysql
