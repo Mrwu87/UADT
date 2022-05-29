@@ -4,6 +4,7 @@
   tasks:
     - name: install k8s init deb
       command: sudo apt install -y socat conntrack
+
 - hosts: deploy_ip
   gather_facts:  false
   tasks:
@@ -13,11 +14,11 @@
         creates: k8sInstall/kk
     - name: templates
       template:
-        src:  k8s.j2
+        src:  k8s/k8s.j2
         dest: k8sInstall/installConfig.yaml
     - name: templates
       template:
-          src:  harbor_registry.j2
+          src:  k8s/harbor_registry.j2
           dest: k8sInstall/harbor.sh
           mode: 0777
     - name: create harbor registry
@@ -40,6 +41,16 @@
 
     - name: check install process
       shell: cat  /home/{{ user }}/k8sInstall/installk8s.log | grep 'kubectl get pod -A'
+
+- hosts: server
+  gather_facts:  false
+  tasks:
+
+    - name: node limit pod
+      shell:  "sudo sed -i 's/maxPods: 110/maxPods: 800/g' /var/lib/kubelet/config.yaml"
+
+    - name: restart kubelet
+      command: sudo systemctl restart  kubelet
 
 
 

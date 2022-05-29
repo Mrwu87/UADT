@@ -93,11 +93,6 @@
     - name: create cstor nfs yaml
       shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-nfs.yaml
 
-    - name: helmfile-A deploy cluster
-      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-A.yaml apply"
-
-    - name: helmfile-B deploy cluster
-      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-B.yaml apply"
 
 
 

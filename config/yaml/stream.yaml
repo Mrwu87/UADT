@@ -1,27 +1,27 @@
 initasks:
      -   log: "mods/services/config/ipcheck/ipLastfail.log"
          sh: "mods/services/config/sh/check_ip.sh"
-         error_message: 'IP不可到达请检查主机IP，具体信息请查看IPfail文件'
+         error_message: 'The ip address is unreachable'
          task_id: 'checkip'
          vars: ['last_address']
      -   log: "mods/services/config/portcheck/ssh_fail.log"
          sh: "mods/services/config/sh/ssh.sh"
-         error_message: 'Port不可到达请检查主机PORT是否开放，具体信息请查看ssh_fail文件'
+         error_message: 'SSH port is unreachable'
          task_id: 'checkPort'
          vars: ['last_address','ssh_port']
      -   log: "mods/services/config/expectcheck/expectfail.log"
          sh: "mods/services/config/sh/expect.sh"
-         error_message: '具体信息请查看expectfail文件'
+         error_message: 'expect exec failed'
          task_id: 'expect_ip'
          vars: ['username','password','last_address','new_address','gateway','dns_server','interface','deploy_ip','hostname']
      -   log: "mods/services/config/sshcopycheck/sshcopyfail.log"
          sh: "mods/services/config/sh/ssh-copy-id.sh"
-         error_message: '具体信息请查看sshcopyfail文件'
+         error_message: 'ssh-key copy failed'
          task_id: 'ssh-copy'
          vars: ['username','last_address','password']
      -   log: "mods/services/config/ansiblecheck/ansiblefail.log"
          sh: "mods/services/config/sh/ansibleInstall.sh"
-         error_message: '具体信息请查看ansiblefail.log文件'
+         error_message: 'Pip install Ansible install process is failed'
          task_id: 'ansible-install'
          vars: ['last_address','deploy_ip']
 ansibletasks:
@@ -51,5 +51,17 @@ ansibletasks:
          playbookfile: 'mods/ansible/config/Playbooks/k9s.yaml'
      -   log: "mods/ansible/config/Stepfiles/cloudbrain/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/cloudbrain.yaml'
-
-         
+     -   log: "mods/ansible/config/Stepfiles/baseservice/ingress-nginx/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/ingressNginx.yaml'
+     -   log: "mods/ansible/config/Stepfiles/baseservice/kong/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/kong.yaml'
+     -   log: "mods/ansible/config/Stepfiles/baseservice/minio/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/minio.yaml'
+     -   log: "mods/ansible/config/Stepfiles/baseservice/nacos/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/nacos.yaml'
+     -   log: "mods/ansible/config/Stepfiles/baseservice/observability/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/observability.yaml'
+     -   log: "mods/ansible/config/Stepfiles/baseservice/kruise/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/kruise.yaml'
+     #-   log: "mods/ansible/config/Stepfiles/baseservice/brainconfig/Success.log"
+     #    playbookfile: 'mods/ansible/config/Playbooks/brainconfig.yaml'

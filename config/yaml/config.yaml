@@ -1,6 +1,7 @@
 replicaCount: 1
 namespace: local-common
 ingressDomain: uisee.common.cn
+clusterName: Uisee-common-test
 hosts:
 - last_address: 172.16.42.131
   new_address: 172.16.42.131/24

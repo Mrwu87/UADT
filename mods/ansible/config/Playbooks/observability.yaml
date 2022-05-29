@@ -1,0 +1,30 @@
+---
+- hosts: server
+  gather_facts:  false
+  tasks:
+#nginx ingress image
+    - name: move observability image to servers
+      copy:
+          src: "{{ inventory_dir }}/Stepfiles/baseservice/observability/fluent-bit.tar"
+          dest: "baseservice_image/fluent-bit.tar"
+
+    - name: load and observability images
+      command: sudo docker load -i  baseservice_image/fluent-bit.tar
+
+
+- hosts: deploy_ip
+  vars:
+    - work_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
+  gather_facts:  false
+  tasks:
+      - name: create namespace
+        command: kubectl create namespace observability
+        ignore_errors: yes
+
+      - name: template api.yaml
+        template:
+           src:  observability/fluent-bit-ds.j2
+           dest: "{{ work_dir }}/observability/fluent-bit-ds.yaml"
+
+      - name:  observability  install
+        command: bash {{ work_dir }}/observability/install.sh   {{ work_dir }}/observability

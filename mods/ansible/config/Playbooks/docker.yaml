@@ -7,7 +7,7 @@
       command: sudo systemctl restart docker
     - name: templates
       template:
-        src: docker_daemon.j2
+        src: docker/docker_daemon.j2
         dest: daemon.json
     - name: move file to /etc/docker
       command: sudo mv daemon.json /etc/docker/

@@ -1,0 +1,40 @@
+- hosts: deploy_ip
+  gather_facts:  false
+  vars:
+    - work_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
+  tasks:
+    - name: helmfile-A deploy cluster
+      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-A.yaml apply  >>  ~/UADT/mods/logs/config/runtime 2>&1 "
+      ignore_errors: yes
+
+    - name: helmfile-B deploy cluster
+      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-B.yaml apply >>  ~/UADT/mods/logs/config/runtime 2>&1"
+      ignore_errors: yes
+
+    - name: kong config
+      command: "python3 kong_standalone.py  https://{{ deployip }}:32444/ {{ ingressdomain }} {{ local-common }}"
+
+
+    - name: add minio server address
+      command: mc config host add common-minio-s3  http://{{ deployip }}:30003 'cloud@uisee.com' 'cloud!234'
+
+
+
+    - name: add bucket
+      shell:
+        cmd: |
+          mc mb common-minio-s3/console-vehicles
+          mc mb common-minio-s3/maps
+          mc mb common-minio-s3/utc-map-gl
+          mc mb common-minio-s3/ota
+          mc policy set public common-minio-s3/console-vehicles
+          mc policy set public common-minio-s3/maps
+          mc policy set public common-minio-s3/utc-map-gl
+          mc cp  {{ work_dir }}/minio/utc-map-gl/*  common-minio-s3/utc-map-gl/
+          mc cp {{ work_dir }}/minio/console-vehicles/*  ucloud-minio-s3/console-vehicles/
+
+
+    - name: nacos config
+        command: python3 nacos/nacos.py  http://{{ deployip }}:31205
+#    - name: emqx config
+#      command:

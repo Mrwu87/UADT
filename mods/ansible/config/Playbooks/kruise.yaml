@@ -1,0 +1,21 @@
+---
+- hosts: server
+  gather_facts:  false
+  tasks:
+#nginx ingress image
+    - name: move kruise image to servers
+      copy:
+          src: "{{ inventory_dir }}/Stepfiles/baseservice/kruise/kruise-manager.tar"
+          dest: "baseservice_image/kruise-manager.tar"
+
+    - name: load and kruise-manager images
+      command: sudo docker load -i  baseservice_image/kruise-manager.tar
+
+- hosts: deploy_ip
+  vars:
+    - work_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
+  gather_facts:  false
+  tasks:
+    - name: helm install kurise
+      command: helm install kruise  --version v1.1.0  {{ work_dir }}/kruise/kruise
+      ignore_errors: yes

@@ -22,11 +22,12 @@ import npyscreen
 
 class Npy(npyscreen.NPSApp):
     def thread_log(self):
+
         self.ml = self.F.add(npyscreen.BoxTitle, name='Running Logs....', scroll_exit=True, slow_scroll=True,
                              rely=self.F.nextrely + 1)
         log_file = '/home/wlw/UADT/mods/logs/config/runtime'
         txt = ''
-        time.sleep(2)
+        time.sleep(2)   #防止程序开头显示乱码，缓一下
         with tailf.Tail(log_file) as tail:
             while True:
 
@@ -37,17 +38,15 @@ class Npy(npyscreen.NPSApp):
                 text = txt.split('\n')
                 text.reverse()
                 for i in text:
-                    if i[190:] != '':
+                    if i[190:] != '': #每行只取出190个字符多的就接入下一行
                         text.insert(text.index(i) + 1, i[190:])
                         text[text.index(i)] = i[:190]
 
                 self.ml.values = text[:200]
-                # try:
-                #   os._exit()
+                time.sleep(1.5)  # 刷新率不能低过1.5秒
+                self.ml.display()  #局部控件更新
 
-                self.ml.display()
-                # except:
-                time.sleep(3)  # 刷新率不能低过
+
 
 
     def main(self):
@@ -77,7 +76,7 @@ class Npy(npyscreen.NPSApp):
         # print(pid)
         # self.F.how_exited_handers[npyscreen.wgwidget.EXITED_ESCAPE] = self.exit_application
         t1 = threading.Thread(target=self.thread_log, args=())
-        # t1.setDaemon(True)
+        t1.setDaemon(True)
         t1.start()
         # self.F.display()
 
@@ -90,7 +89,8 @@ class Npy(npyscreen.NPSApp):
             ansible.playbookRun(self, count)
         else:
             os.system(exit)
-        self.F.edit()
+        self.F.edit()  #最后阻塞
+
 
 
 if __name__ == "__main__":
