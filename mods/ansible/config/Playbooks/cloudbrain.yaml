@@ -52,7 +52,7 @@
       shell: touch {{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready
 
     - name: change harbor registry
-      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ bash change_harbor_registry.sh {{ deployip }}:31150 {{ ingressdomain }} {{ clustername }} {{ consoleinitproject }}"
+      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ bash change_harbor_registry.sh {{ deployip }}:31150 {{ ingressdomain }} {{ clustername }} {{ namespace }}"
 
     - name: update
       shell: helm repo update
