@@ -1,11 +1,13 @@
 replicaCount: 1
+nfsSize: 120Gi
 namespace: local-common
 ingressDomain: uisee.common.cn
 clusterName: Uisee-common-test
+consoleInitProject: common-project #project: dongwu替换
 hosts:
-- last_address: 172.16.42.131
-  new_address: 172.16.42.131/24
-  hostname: Master1
+- last_address: 172.16.42.138
+  new_address: 172.16.42.138/24
+  hostname: master1
   ssh_port: 22
   username: wlw
   password: 123
@@ -14,7 +16,20 @@ hosts:
   interface: ens33
   master: true
   deploy: true
-  deploy_ip: 172.16.42.131
+  deploy_ip: 172.16.42.138
+- last_address: 172.16.42.139
+  new_address: 172.16.42.139/24
+  hostname: node2
+  ssh_port: 22
+  username: wlw
+  password: 123
+  dns_server: 8.8.8.8
+  gateway: 172.16.42.3
+  interface: ens33
+  master: false
+  deploy: false
+  deploy_ip: 172.16.42.138
+
 
 
   #记得修改openebs的副本数 在cstor-sc.yaml中

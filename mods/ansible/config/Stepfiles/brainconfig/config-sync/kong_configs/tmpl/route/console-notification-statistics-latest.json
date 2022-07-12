@@ -1,0 +1,34 @@
+{
+    "path_handling": "v1",
+    "paths": [
+{%- if DOMAIN -%}
+"/console/notification/statistics"
+{% else %}
+"/{{   NAMESPACE  }}/latest/notification"
+{% endif %}
+],
+    "destinations": null,
+    "headers": null,
+    "protocols": [
+        "http",
+        "https"
+    ],
+    "snis": null,
+    "service": {
+        "name": "console-notification-statistics-latest.{{   NAMESPACE  }}"
+    },
+    "name": "console-notification-statistics-latest.{{   NAMESPACE  }}",
+    "strip_path": true,
+    "preserve_host": false,
+    "regex_priority": 0,
+    "sources": null,
+    "methods": null,
+    "https_redirect_status_code": 426,
+    "hosts": 
+            {%- if DOMAIN -%}
+            [{%- if OP_DOMAIN -%}"{{    OP_DOMAIN    }}",{% endif %}
+            "{{    DOMAIN    }}"
+            ]{% else %}null
+            {% endif %},
+    "tags": null
+}

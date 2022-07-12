@@ -1,0 +1,1479 @@
+      
+{
+    "ticker": {
+        "stateInfo": 3
+    },
+    "version": "V0.9.5.veh2.61388",
+    "service_mode_codes": {
+        "operation_code": [
+            1,
+            11,
+            12,
+            100
+        ],
+        "offline_code": [
+            0,
+            2
+        ]
+    },
+    "filter_events": {
+        "allowable": false,
+        "allowCodes": []
+    },
+    "veh_info_events": [
+        {
+            "type": "veh.info",
+            "code": "14",
+            "mark": "begin",
+            "name": "dolly_not_yet_detached",
+            "level": "5",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "4",
+            "mark": "begin",
+            "name": "obstacle_timeout",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "1",
+            "mark": "end",
+            "name": "emergency_stop",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "5",
+            "mark": "end",
+            "name": "manual",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "4",
+            "mark": "end",
+            "name": "obstacle_timeout",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "12",
+            "mark": "end",
+            "name": "va_human_intrusion",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "101",
+            "mark": "begin",
+            "name": "ah_pothook_failed",
+            "level": "3",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "12",
+            "mark": "begin",
+            "name": "va_human_intrusion",
+            "level": "5",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "11",
+            "mark": "end",
+            "name": "error_emergency_stop",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "11",
+            "mark": "begin",
+            "name": "error_emergency_stop",
+            "level": "5",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "2",
+            "mark": "begin",
+            "name": "low_power",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "5",
+            "mark": "begin",
+            "name": "manual",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "10",
+            "mark": "end",
+            "name": "obstacle_timeout_rear",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "15",
+            "mark": "begin",
+            "name": "detect_dropped_cargoes",
+            "level": "5",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "13",
+            "mark": "end",
+            "name": "va_barbed_wire_irregularity",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "103",
+            "mark": "begin",
+            "name": "ah_unhook_failed",
+            "level": "3",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "102",
+            "mark": "begin",
+            "name": "ah_unhook_success",
+            "level": "3",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "10",
+            "mark": "begin",
+            "name": "obstacle_timeout_rear",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "2",
+            "mark": "end",
+            "name": "low_power",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "9",
+            "mark": "begin",
+            "name": "obstacle_timeout_front",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "100",
+            "mark": "begin",
+            "name": "ah_pothook_success",
+            "level": "3",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "9",
+            "mark": "end",
+            "name": "obstacle_timeout_front",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "15",
+            "mark": "end",
+            "name": "detect_dropped_cargoes",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "14",
+            "mark": "end",
+            "name": "dolly_not_yet_detached",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.info",
+            "code": "13",
+            "mark": "begin",
+            "name": "va_barbed_wire_irregularity",
+            "level": "5",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.info",
+            "code": "1",
+            "mark": "begin",
+            "name": "emergency_stop",
+            "level": "5",
+            "cache_state": "1",
+            "emit_event": "1"
+        }
+    ],
+    "cloud_info_events": [
+        {
+            "type": "cloud.info",
+            "code": "105",
+            "mark": "begin",
+            "name": "is_packing_log",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "cloud.info",
+            "code": "carsClash",
+            "mark": "end",
+            "name": "carsClash",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "cloud.info",
+            "code": "taxiway",
+            "mark": "begin",
+            "name": "taxiway",
+            "level": "5",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "cloud.info",
+            "code": "carsClash",
+            "mark": "begin",
+            "name": "carsClash",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "cloud.info",
+            "code": "105",
+            "mark": "end",
+            "name": "is_packing_log",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "cloud.info",
+            "code": "taxiway",
+            "mark": "end",
+            "name": "taxiway",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        }
+    ],
+    "veh_nome_events": [
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Vehicle_collision",
+            "mark": "end",
+            "name": "abnormal_fault-Vehicle_collision",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_sick",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_sick",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_sonic",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_sonic",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_ideal_vehicle",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_ideal_vehicle",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Others_collision",
+            "mark": "begin",
+            "name": "abnormal_fault-Others_collision",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Others_collision",
+            "mark": "end",
+            "name": "abnormal_fault-Others_collision",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_navi",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_navi",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_chassis_ctrl",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_chassis_ctrl",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Vehicle_collision",
+            "mark": "begin",
+            "name": "abnormal_fault-Vehicle_collision",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_radar",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_radar",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_chassis_ctrl",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_chassis_ctrl",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_lidar_framework",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_lidar_framework",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Human_collision",
+            "mark": "begin",
+            "name": "abnormal_fault-Human_collision",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_navi",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_navi",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_daemon",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_daemon",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_cv_framework",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_cv_framework",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Others_invasion",
+            "mark": "end",
+            "name": "abnormal_fault-Others_invasion",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_radar",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_radar",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_cv_framework",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_cv_framework",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_planner",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_planner",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_ideal_vehicle",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_ideal_vehicle",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_sick",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_sick",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Vehicle_invasion",
+            "mark": "begin",
+            "name": "abnormal_fault-Vehicle_invasion",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Others_invasion",
+            "mark": "begin",
+            "name": "abnormal_fault-Others_invasion",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_daemon",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_daemon",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Human_invasion",
+            "mark": "end",
+            "name": "abnormal_fault-Human_invasion",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_control",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_control",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_sonic",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_sonic",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_planner",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_planner",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Human_invasion",
+            "mark": "begin",
+            "name": "abnormal_fault-Human_invasion",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Vehicle_invasion",
+            "mark": "end",
+            "name": "abnormal_fault-Vehicle_invasion",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_lidar_framework",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_lidar_framework",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_compass",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_compass",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Human_collision",
+            "mark": "end",
+            "name": "abnormal_fault-Human_collision",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_compass",
+            "mark": "begin",
+            "name": "abnormal_fault-Uos_compass",
+            "level": "4",
+            "cache_state": "0",
+            "emit_event": "1"
+        },
+        {
+            "type": "veh.nome",
+            "code": "abnormal_fault-Uos_control",
+            "mark": "end",
+            "name": "abnormal_fault-Uos_control",
+            "level": "0",
+            "cache_state": "0",
+            "emit_event": "0"
+        }
+    ],
+    "service_mode_events": [
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "100",
+            "pre_level": "2",
+            "service_mode": "100",
+            "name": "online",
+            "level": "100",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "12",
+            "pre_level": "100",
+            "service_mode": "12",
+            "name": "switched_to_emergency_mode",
+            "level": "12",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "100",
+            "pre_level": "11",
+            "service_mode": "100",
+            "name": "switched_to_auto_mode",
+            "level": "100",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "0",
+            "pre_level": "2",
+            "service_mode": "1",
+            "name": "disconnect",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0",
+            "clear": "clear_nome"
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "11",
+            "pre_level": "0",
+            "service_mode": "11",
+            "name": "online",
+            "level": "11",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "2",
+            "pre_level": "0",
+            "service_mode": "1",
+            "name": "abnormal_disconnect",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "0",
+            "clear": "clear_nome"
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "2",
+            "pre_level": "11",
+            "service_mode": "1",
+            "name": "abnormal_disconnect",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": "clear_nome"
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "2",
+            "pre_level": "100",
+            "service_mode": "1",
+            "name": "abnormal_disconnect",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": "clear_nome"
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "0",
+            "pre_level": "12",
+            "service_mode": "1",
+            "name": "disconnect",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": "clear_nome"
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "12",
+            "pre_level": "2",
+            "service_mode": "12",
+            "name": "online",
+            "level": "12",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "2",
+            "pre_level": "12",
+            "service_mode": "1",
+            "name": "abnormal_disconnect",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": "clear_nome"
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "11",
+            "pre_level": "12",
+            "service_mode": "11",
+            "name": "switched_to_manual_mode",
+            "level": "11",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "100",
+            "pre_level": "0",
+            "service_mode": "100",
+            "name": "online",
+            "level": "100",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "11",
+            "pre_level": "100",
+            "service_mode": "11",
+            "name": "switched_to_manual_mode",
+            "level": "11",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "0",
+            "pre_level": "11",
+            "service_mode": "1",
+            "name": "disconnect",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": "clear_nome"
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "100",
+            "pre_level": "12",
+            "service_mode": "100",
+            "name": "switched_to_auto_mode",
+            "level": "100",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "11",
+            "pre_level": "2",
+            "service_mode": "11",
+            "name": "online",
+            "level": "11",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "0",
+            "pre_level": "100",
+            "service_mode": "1",
+            "name": "disconnect",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": "clear_nome"
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "12",
+            "pre_level": "11",
+            "service_mode": "12",
+            "name": "switched_to_emergency_mode",
+            "level": "12",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "service_mode",
+            "mark": "12",
+            "pre_level": "0",
+            "service_mode": "12",
+            "name": "online",
+            "level": "12",
+            "cache_state": "1",
+            "emit_event": "1",
+            "clear": ""
+        }
+    ],
+    "switch_service_mode_events": [
+        {
+            "type": "veh.state",
+            "code": "switch_service_mode",
+            "mark": "2",
+            "pre_level": "",
+            "service_mode": "",
+            "name": "switch_service_mode",
+            "level": "2",
+            "cache_state": "1",
+            "emit_event": "0",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "switch_service_mode",
+            "mark": "1",
+            "pre_level": "",
+            "service_mode": "",
+            "name": "switch_service_mode",
+            "level": "1",
+            "cache_state": "1",
+            "emit_event": "0",
+            "clear": ""
+        },
+        {
+            "type": "veh.state",
+            "code": "switch_service_mode",
+            "mark": "0",
+            "pre_level": "",
+            "service_mode": "",
+            "name": "switch_service_mode",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0",
+            "clear": ""
+        }
+    ],
+    "compass_events": [
+        {
+            "type": "device.network",
+            "code": "compass",
+            "mark": "normal",
+            "name": "compass_heartbeat",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "device.network",
+            "code": "compass",
+            "mark": "reconnect",
+            "name": "compass_heartbeat",
+            "level": "2",
+            "cache_state": "1",
+            "emit_event": "1"
+        },
+        {
+            "type": "device.network",
+            "code": "compass",
+            "mark": "unknown",
+            "name": "compass_heartbeat",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "0"
+        }
+    ],
+    "ota_events": [
+        {
+            "type": "device.network",
+            "code": "ota",
+            "mark": "normal",
+            "name": "ota_status",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "device.network",
+            "code": "ota",
+            "mark": "unknown",
+            "name": "ota_status",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "0"
+        }
+    ],
+    "oam_events": [
+        {
+            "type": "device.network",
+            "code": "oam",
+            "mark": "normal",
+            "name": "oam_status",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "device.network",
+            "code": "oam",
+            "mark": "unknown",
+            "name": "oam_status",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "0"
+        }
+    ],
+    "efence_events": [
+        {
+            "type": "device.network",
+            "code": "efence",
+            "mark": "unknown",
+            "name": "efence_status",
+            "level": "3",
+            "cache_state": "1",
+            "emit_event": "0"
+        },
+        {
+            "type": "device.network",
+            "code": "efence",
+            "mark": "normal",
+            "name": "efence_status",
+            "level": "0",
+            "cache_state": "1",
+            "emit_event": "0"
+        }
+    ],
+    "merge_events": {
+        "is_show": 0,
+        "events": [
+            {
+                "type": "abnormal_fault-Uos_compass",
+                "desc": "车联网服务异常",
+                "codes": [
+                    "201326592",
+                    "201326593",
+                    "201326594",
+                    "201326595",
+                    "201326596",
+                    "201326597",
+                    "201326598",
+                    "201326599",
+                    "201326600",
+                    "201326601",
+                    "201326602"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Uos_sick",
+                "desc": "单线激光雷达",
+                "codes": [
+                    "83886080"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Human_invasion",
+                "desc": "行人侵入",
+                "codes": [
+                    "301989893"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Uos_cv_framework",
+                "desc": "视觉系统异常",
+                "codes": [
+                    "50331687",
+                    "50331688",
+                    "50331689",
+                    "50331690",
+                    "50331691",
+                    "50331692",
+                    "167772160",
+                    "167772161",
+                    "167772163",
+                    "167772164",
+                    "167772165",
+                    "167772166",
+                    "167772167",
+                    "167772168",
+                    "167772417",
+                    "167772419",
+                    "167772420",
+                    "167772421",
+                    "167772422",
+                    "167772423",
+                    "167772424",
+                    "167772673",
+                    "167772675",
+                    "167772676",
+                    "167772677",
+                    "167772678",
+                    "167772679",
+                    "167772680",
+                    "167772929",
+                    "167772931",
+                    "167772932",
+                    "167772933",
+                    "167772934",
+                    "167772935",
+                    "167772936",
+                    "167773185",
+                    "167773187",
+                    "167773188",
+                    "167773189",
+                    "167773190",
+                    "167773191",
+                    "167773192",
+                    "167773441",
+                    "167773443",
+                    "167773444",
+                    "167773445",
+                    "167773446",
+                    "167773447",
+                    "167773448"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Uos_lidar_framework",
+                "desc": "激光雷达异常",
+                "codes": [
+                    "50331649",
+                    "50331650",
+                    "50331651",
+                    "50331652",
+                    "50331653",
+                    "50331654",
+                    "50331655",
+                    "50331656",
+                    "50331657",
+                    "50331658",
+                    "50331659",
+                    "50331660",
+                    "50331661",
+                    "50331662",
+                    "50331663",
+                    "50331664",
+                    "50331665",
+                    "50331666",
+                    "50331667",
+                    "50331668",
+                    "50331669",
+                    "50331670",
+                    "50331671",
+                    "50331672",
+                    "50331673",
+                    "50331674",
+                    "50331675",
+                    "50331676",
+                    "50331677",
+                    "50331678",
+                    "50331679",
+                    "50331680",
+                    "50331681",
+                    "50331682",
+                    "50331683",
+                    "50331684",
+                    "50331685",
+                    "50331686",
+                    "50331693",
+                    "50331694",
+                    "50331695",
+                    "50331696",
+                    "50331697",
+                    "50331698",
+                    "50331699",
+                    "50331700",
+                    "50331701",
+                    "50331702",
+                    "50331703",
+                    "50331704",
+                    "50331705",
+                    "50331706",
+                    "50331707",
+                    "50331708",
+                    "50331709",
+                    "50331710",
+                    "50331711",
+                    "50331712",
+                    "50331713",
+                    "50331714",
+                    "50331715",
+                    "50331716",
+                    "50331717",
+                    "50331718",
+                    "50331719",
+                    "50331720",
+                    "50331721",
+                    "50331722",
+                    "50331723",
+                    "50331724",
+                    "50331725",
+                    "50331726",
+                    "50331727",
+                    "50331728",
+                    "50331729",
+                    "50331730",
+                    "50331731",
+                    "50331732",
+                    "50331733",
+                    "50331734",
+                    "50331735",
+                    "50331736",
+                    "50331737",
+                    "50331738",
+                    "50331739",
+                    "50331741",
+                    "50331742",
+                    "50331743",
+                    "50331744",
+                    "50331745",
+                    "50331746"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Uos_chassis_ctrl",
+                "desc": "底盘控制异常",
+                "codes": [
+                    "184549377",
+                    "184549378",
+                    "184549379",
+                    "184549380",
+                    "184549381",
+                    "184549383",
+                    "184549384",
+                    "184549385",
+                    "184549386",
+                    "184549387",
+                    "184549388",
+                    "184549389",
+                    "184549390",
+                    "184549391",
+                    "184549392",
+                    "184549393",
+                    "184549394",
+                    "184549395",
+                    "184549396",
+                    "184549397",
+                    "184549398",
+                    "184549399",
+                    "184549400",
+                    "184549401",
+                    "184549402",
+                    "184549403",
+                    "184549404",
+                    "184549405",
+                    "184549406",
+                    "184549407",
+                    "184549408",
+                    "184549409",
+                    "184549410",
+                    "184549411",
+                    "184549412",
+                    "184549413",
+                    "184549414",
+                    "184549415",
+                    "184549416",
+                    "184549417",
+                    "184549418",
+                    "184549419",
+                    "184549420",
+                    "184549421",
+                    "184549422",
+                    "184549423",
+                    "184549424",
+                    "184549425",
+                    "184549426",
+                    "184549427",
+                    "184549428",
+                    "184549429",
+                    "184549430",
+                    "184549431",
+                    "184549432",
+                    "184549433",
+                    "184549434",
+                    "184549435",
+                    "184549436",
+                    "184549437",
+                    "184549438",
+                    "184549439",
+                    "184549440",
+                    "184549441",
+                    "184549442",
+                    "184549443",
+                    "184549444",
+                    "184549445",
+                    "184549446",
+                    "184549447",
+                    "184549448",
+                    "184549449",
+                    "184549450",
+                    "184549451",
+                    "184549452",
+                    "184549453",
+                    "184549454",
+                    "184549455",
+                    "184549456",
+                    "184549457",
+                    "184549458",
+                    "184549459",
+                    "184549460",
+                    "184549461",
+                    "184549462",
+                    "184549463",
+                    "184549464",
+                    "184549465",
+                    "184549466",
+                    "184549467",
+                    "184549468",
+                    "184549469",
+                    "184549470",
+                    "184549471",
+                    "184549472",
+                    "184549473",
+                    "184549474",
+                    "184549475",
+                    "184549476"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Others_collision",
+                "desc": "其他障碍物碰撞",
+                "codes": [
+                    "301989898"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Uos_navi",
+                "desc": "导航模块异常",
+                "codes": [
+                    "67108865",
+                    "67108866",
+                    "67108867",
+                    "67108868",
+                    "67108869",
+                    "67108870",
+                    "67108871",
+                    "67108872",
+                    "67108873",
+                    "67108874",
+                    "67108875",
+                    "67108876",
+                    "67108877",
+                    "67108878",
+                    "67108879",
+                    "67108880",
+                    "67108881",
+                    "67108882",
+                    "67108883",
+                    "67108884",
+                    "67108885",
+                    "67108886",
+                    "67108887",
+                    "67108888",
+                    "67108889",
+                    "67108890",
+                    "67108891",
+                    "67108892",
+                    "134217728",
+                    "150994944",
+                    "150994947",
+                    "150994948",
+                    "150994949",
+                    "150994950",
+                    "150994951",
+                    "150994952",
+                    "150994953",
+                    "150994954",
+                    "150994955",
+                    "150994956"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Others_invasion",
+                "desc": "其他障碍物侵入",
+                "codes": [
+                    "301989895"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Uos_control",
+                "desc": "控制系统异常",
+                "codes": [
+                    "33554432",
+                    "33554433",
+                    "33554434",
+                    "33554435",
+                    "33554436",
+                    "33554437",
+                    "33554438",
+                    "33554439",
+                    "33554440",
+                    "33554441",
+                    "33554442",
+                    "33554443",
+                    "33554444",
+                    "33554445",
+                    "33554446",
+                    "33554447",
+                    "33554448"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Human_collision",
+                "desc": "行人碰撞",
+                "codes": [
+                    "301989896"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Vehicle_invasion",
+                "desc": "车辆侵入",
+                "codes": [
+                    "301989894"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Uos_planner",
+                "desc": "规划系统异常",
+                "codes": [
+                    "16777218",
+                    "16777219",
+                    "16777221",
+                    "16777222",
+                    "16777223",
+                    "16777225",
+                    "16777226",
+                    "16777227",
+                    "16777228",
+                    "16777229",
+                    "16777230",
+                    "16777231",
+                    "16777232",
+                    "16777233",
+                    "16777234",
+                    "16777235",
+                    "16777237",
+                    "16777238",
+                    "16777239",
+                    "16777240",
+                    "16777241"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Vehicle_collision",
+                "desc": "车辆碰撞",
+                "codes": [
+                    "301989897"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Uos_daemon",
+                "desc": "监控模块异常",
+                "codes": [
+                    "218103809",
+                    "218103810",
+                    "218103811",
+                    "218103812",
+                    "218103813",
+                    "234881024",
+                    "234881025",
+                    "234881026",
+                    "234881027",
+                    "251658240",
+                    "268435457",
+                    "268435458",
+                    "268435459",
+                    "268435460",
+                    "268435461",
+                    "268435462",
+                    "268435463",
+                    "268435464",
+                    "268435467",
+                    "268435468",
+                    "268435469",
+                    "285212673",
+                    "285212674",
+                    "301989889",
+                    "301989890",
+                    "301989891",
+                    "301989892",
+                    "301989900",
+                    "335544322"
+                ]
+            },
+            {
+                "type": "abnormal_fault-Uos_sonic",
+                "desc": "超声波异常",
+                "codes": [
+                    "100663296",
+                    "100663297",
+                    "100663298",
+                    "117440512"
+                ]
+            }
+        ]
+    }
+}

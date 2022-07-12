@@ -1,0 +1,53 @@
+[
+    {
+        "tags": null,
+        "enabled": true,
+        "name": "utc-auth",
+        "consumer": null,
+        "service": {
+            "name": "console-proxy-redmine-latest.hkia-exercise-2"
+        },
+        "route": null,
+        "config": {
+            "service_instance_name": "Kong Service Instance",
+            "timeout": 10000,
+            "keepalive": 60000,
+            "skip_paths": null,
+            "sample_ratio": 1,
+            "tls": false,
+            "anonymous_role_uuid": null,
+            "service_name": "Kong Service",
+            "namespace": "hkia-exercise-2",
+            "skywalking_uri": null,
+            "athuorize_service": "console-core-latest"
+        }
+    },
+    {
+        "tags": null,
+        "enabled": true,
+        "name": "jwt",
+        "consumer": null,
+        "service": {
+            "name": "console-proxy-redmine-latest.hkia-exercise-2"
+        },
+        "route": null,
+        "config": {
+            "secret_is_base64": false,
+            "run_on_preflight": true,
+            "uri_param_names": [
+                "auth_token"
+            ],
+            "key_claim_name": "iss",
+            "header_names": [],
+            "maximum_expiration": 0,
+            "anonymous": "6b70b2a4-98c7-4bd4-9b79-0f91be0d519f",
+            "claims_to_verify": [
+                "exp",
+                "nbf"
+            ],
+            "cookie_names": [
+                "auth_token"
+            ]
+        }
+    }
+]

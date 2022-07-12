@@ -19,6 +19,9 @@ def hostIni() -> str:
     config.set('server:vars', 'namespace', hostData['namespace'])
     config.set('server:vars', 'ingressDomain', hostData['ingressDomain'])
     config.set('server:vars', 'clusterName', hostData['clusterName'])
+    config.set('server:vars', 'nfsSize', hostData['nfsSize'])
+    config.set('server:vars', 'replicaCount', str(hostData['replicaCount']))
+    config.set('server:vars', 'consoleInitProject', hostData['consoleInitProject'])
     for host in hostData['hosts']:
         config.set('server:vars', 'user', host['username'])
         A_record.append((host['hostname'], host['last_address'], host['password']))

@@ -1,0 +1,50 @@
+[
+    {
+        "name": "地图",
+        "code": "MAP",
+        "description": "",
+        "feModel": "managementMap/getApplicableMaps.maps",
+        "primaryKey": "externalId",
+        "hostType": "ALL"
+    },
+    {
+        "name": "车辆",
+        "code": "VEHICLE",
+        "description": "",
+        "feModel": "managementVehicle/all.vehicles",
+        "primaryKey": "externalId",
+        "hostType": "ALL"
+    },
+    {
+        "name": "车辆类型",
+        "code": "CATEGORY",
+        "description": "",
+        "feModel": "managementVehicle/getCategories.categories",
+        "primaryKey": "id",
+        "hostType": "ALL"
+    },
+    {
+        "name": "前端菜单",
+        "code": "MENU",
+        "description": "",
+        "feModel": "systemMenu/all.menus",
+        "primaryKey": "uuid",
+        "hostType": "ROLE"
+    },
+    {
+        "name": "前端组件",
+        "code": "COMPONENT",
+        "description": "",
+        "feModel": "systemComponent/all.components",
+        "primaryKey": "uuid",
+        "hostType": "ROLE"
+    },
+    {
+        "name": "OSS 桶",
+        "code": "BUCKET",
+        "description": "",
+        "feModel": "managementOss/all.buckets",
+        "primaryKey": "id",
+        "hostType": "ALL"
+    }
+]

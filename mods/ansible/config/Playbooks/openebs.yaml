@@ -6,6 +6,10 @@
     - name: load and push openebs images
       command: sudo bash {{ inventory_dir }}/Stepfiles/openebs/openebsImage.sh {{ deployip }} {{ inventory_dir }}/Stepfiles/openebs/
 
+    - name: template cstor-sc.yaml
+      template:
+          src:  openebs/cstor-sc.j2
+          dest: "{{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-sc.yaml"
 
 - hosts: server
   gather_facts:  false
@@ -32,11 +36,21 @@
           sudo docker tag {{ deployip }}:31150/openebs/node-disk-exporter:1.8.0  openebs/node-disk-exporter:1.8.0
           sudo docker pull {{ deployip }}:31150/openebs/provisioner-localpv:3.1.0
           sudo docker tag  {{ deployip }}:31150/openebs/provisioner-localpv:3.1.0  openebs/provisioner-localpv:3.1.0
-
-    - name: move image to server
+#    - name: move image to server
+#      copy:
+#        src: "{{ inventory_dir }}/Stepfiles/openebs/nfs.tar"
+#        dest: "nfs.tar"
+    - name: move linux-utils  image to  server
       copy:
-        src: "{{ inventory_dir }}/Stepfiles/openebs/nfs.tar"
-        dest: "nfs.tar"
+        src: "{{ inventory_dir }}/Stepfiles/openebs/cstor/linux-utils-3.2.0.tar"
+        dest: "linux-utils-3.2.0.tar"
+
+    - name: move nfs image to  server
+      copy:
+        src: "{{ inventory_dir }}/Stepfiles/openebs/nfs-server/nfs-provisioner.tar"
+        dest: "nfs-provisioner.tar"
+
+
     - name: move cstor image to  server
       copy:
         src: "{{ inventory_dir }}/Stepfiles/openebs/openebs-cstor.tar"
@@ -47,10 +61,10 @@
         src: "{{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-nfs.tar"
         dest: "cstor-nfs.tar"
 
-    - name:  nfs images
-      shell: sudo docker load -i nfs.tar
-      args:
-              creates: "image-ready"
+#    - name:  nfs images
+#      shell: sudo docker load -i nfs.tar
+#      args:
+#              creates: "image-ready"
 
     - name: load target image
       shell:
@@ -59,16 +73,30 @@
       args:
           creates: "image-ready"
 
+    - name: load nfs-server image
+      shell:
+        cmd: |
+            sudo docker  load -i nfs-provisioner.tar
+      args:
+        creates: "image-ready"
 
     - name: load cstor image
       shell:
        cmd: |
          sudo docker  load -i openebs-cstor.tar
       args:
-              creates: "image-ready"
+        creates: "image-ready"
+
+    - name: load linux-utils image
+      shell:
+       cmd: |
+         sudo docker  load -i linux-utils-3.2.0.tar
+      args:
+        creates: "image-ready"
 
     - name: create jump
       shell: touch image-ready
+
 
 
 
@@ -80,8 +108,9 @@
     - name: openebs hostpath and local pv
       command:  kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/openebs.yaml
 
-    - name: openebs nfs
-      command: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/nfs.yaml
+
+#    - name: openebs nfs
+#      command: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/nfs.yaml
 
     - name:  create cstor cluster
       shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-operator.yaml

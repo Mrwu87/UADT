@@ -4,7 +4,6 @@ kind: StorageClass
 metadata:
   name: managed-nfs-storage
   annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
     openebs.io/cas-type: nfsrwx
     cas.openebs.io/config: |
       - name: NFSServerType

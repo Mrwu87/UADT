@@ -49,6 +49,8 @@ ansibletasks:
          playbookfile: 'mods/ansible/config/Playbooks/helm.yaml'
      -   log: "mods/ansible/config/Stepfiles/k9s/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/k9s.yaml'
+     -   log: "mods/ansible/config/Stepfiles/cloudimage/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/cloudimage.yaml'
      -   log: "mods/ansible/config/Stepfiles/cloudbrain/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/cloudbrain.yaml'
      -   log: "mods/ansible/config/Stepfiles/baseservice/ingress-nginx/Success.log"
@@ -63,5 +65,7 @@ ansibletasks:
          playbookfile: 'mods/ansible/config/Playbooks/observability.yaml'
      -   log: "mods/ansible/config/Stepfiles/baseservice/kruise/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/kruise.yaml'
-     #-   log: "mods/ansible/config/Stepfiles/baseservice/brainconfig/Success.log"
-     #    playbookfile: 'mods/ansible/config/Playbooks/brainconfig.yaml'
+#     -   log: "mods/ansible/config/Stepfiles/brainconfig/Success.log"
+#         playbookfile: 'mods/ansible/config/Playbooks/brainconfig.yaml'
+     -   log: "mods/ansible/config/Stepfiles/istio/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/istio.yaml'

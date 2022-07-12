@@ -20,6 +20,8 @@ import yaml
 import os
 import time
 from mods.logs.log import service_logger
+from func_timeout import func_set_timeout
+import func_timeout
 
 # Create a callback plugin so we can capture the output
 class ResultsCollectorJSONCallback(CallbackBase):
@@ -280,10 +282,9 @@ class MyAnsiable():
             if tqm is not None:
                 tqm.cleanup()
             shutil.rmtree(C.DEFAULT_LOCAL_TMP, True)
-
+    @func_set_timeout(1800)#设定超执行时间_单位s
     def playbook(self, playbooks) -> None:
         from ansible.executor.playbook_executor import PlaybookExecutor
-
         playbook = PlaybookExecutor(playbooks=playbooks,  # 注意这里是一个列表
                                     inventory=self.inv_obj,
                                     variable_manager=self.variable_manager,
@@ -315,17 +316,15 @@ class MyAnsiable():
             re=eval(result[i]['msg'])
             # print(type(re))
             result_list.append(json.loads(re))
-
         currentEnvTable = PrettyTable(['Hostname','Address', 'OS','vcpu', 'Kernel', 'Disk', 'x64/x32','Mem_total','Mem_free','python_version','datetime'])
-
         for ii in result_list:
-            if int(ii['Disk'][:-1]) <= 10 or round(float(ii['Mem_free'][:-1]),2) <= 2.0 or int(ii['vcpu']) < 2 :   #判断条件在这加系统的参数是否符合你的需求disk单位为G mem单位为M
+            if int(ii['Disk'][:-1]) <= 10 or round(float(ii['Mem_free'][:-1]),2) <= 2.0 or int(ii['vcpu']) < 2 :   #判断条件在这加 系统的参数是否符合需求disk单位为G mem单位为M
                 service_logger.info(f"{ii['Address']} this system is not avaible")
                 self.Countine = False
             total=str(round(float(ii['Mem_total'][:-1]),2))+'G'
             free=str(round(float(ii['Mem_free'][:-1]),2))+'G'
             currentEnvTable.add_row([ii['Hostname'],ii['Address'], ii['OS'], ii['vcpu'],ii['Kernel'], ii['Disk'], ii['x64/x32'],total,free,ii['python_version'],ii['datetime']])
-        with open('mods/logs/config/runtime','w') as f:
+        with open('mods/logs/config/runtime','a') as f:
             f.write(currentEnvTable.get_string()+'\n')
         # print(currentEnvTable)
 
@@ -342,7 +341,7 @@ class MyAnsiable():
         # if result_raw['success'] == {}:
         #     with open('Stepfiles/Success.log','w') as f:
         #         f.write(result_raw)
-        if result_raw['failed'] == {} and result_raw['unreachable'] == {}:
+        if result_raw['failed'] == {} and result_raw['unreachable'] == {} or self.result == 0:
             with open(f'{dir}/Success.log', 'w') as f:
                 f.write('Success')
 
@@ -371,13 +370,24 @@ class MyAnsiable():
                 self.playbook([i["playbookfile"], ])
                 self.get_fact_result()
                 continue
-            self.Countine=True
+            self.Countine=True  #无视硬件是否满足需求
             if self.Countine:
                 #time.sleep(0.3)
                 #pbar.update()
+                retries = 2
                 if os.path.exists(f'{dir}/Success.log') == False:
-                    self.playbook([i["playbookfile"], ])
-                    self.get_result(dir)
+                    for s in range(retries):  #每个任务重试次数为2
+                     try:
+                      App.F.DISPLAY()
+                      self.playbook([i["playbookfile"], ])
+                      self.get_result(dir)
+                      break
+                     except func_timeout.exceptions.FunctionTimedOut:
+                      service_logger.info('Playbook Execution timed out ! We will restart the playbook')
+                      # App.run_status.set_value('Replay')
+                      time.sleep(5)
+                      
+                      continue
                     # if self.get_result(dir)==False:
                     if self.result != 0:
                         service_logger.info(f'{i["playbookfile"]} This file  execute failed')

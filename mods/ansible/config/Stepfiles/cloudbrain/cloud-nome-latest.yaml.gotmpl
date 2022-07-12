@@ -21,7 +21,11 @@ etcd:
   extraEnvVars:
     - name: ETCD_AUTO_COMPACTION_RETENTION
       value: "1h"
-
+  image:
+    registry: harbor.uisee.cn
+    repository: bitnami/etcd
+    tag: 3.4.3-debian-10-r16
+    pullPolicy: IfNotPresent
   host: cloud-nome-{{ env "VER" | default "latest" }}-etcd:2379
   resources:
     limits:

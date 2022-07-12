@@ -9,7 +9,7 @@ configurationFiles:
         log_console: true
         elasticsearch_config:
           hosts:
-            - host: 10.23.120.78
+            - host: elasticsearch-master
               port: 9200 # 32481 test, 30843 product
           chunk_size: 400
           max_chunk_bytes: 268435456 # 256M = 268435456
@@ -17,7 +17,7 @@ configurationFiles:
           retry_interval_factor: 2
           retry_max_times: 3
         redis_config:
-          host: 10.23.29.25
+          host: loshu-lite-redis-latest-master
           port: 6379
           db: 0
           password: "loshu" # ePQ5GRpFBV test, UqD2dwMEAa product
@@ -35,7 +35,7 @@ configurationFiles:
         index_interval: 0.5
 
 persistence:
-  storageClass: managed-nfs-storage
+  #storageClass: managed-nfs-storage
   enabled: true
   size: 25Gi
 

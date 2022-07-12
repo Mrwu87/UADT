@@ -23,6 +23,10 @@ if [ "$?"   -eq "0" ]; then
     if [ "$?"   -ne  "0" ]; then
          echo  "Error: expect change_ip Error! config.yaml not change !" >> mods/services/config/expectcheck/expectfail.log
    fi
+   cat   /etc/netplan/config.yaml  | grep addresses
+   if [ "$?"   -ne  "0" ]; then
+           echo  "Error:  config.yaml is null !" > mods/services/config/expectcheck/expectfail.log
+   fi
 else
   echo "Error: expect not install !" > mods/services/config/expectcheck/expectfail.log
 fi

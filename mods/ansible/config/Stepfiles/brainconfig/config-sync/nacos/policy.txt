@@ -1,0 +1,489 @@
+package policy
+
+######## 云端故障策略 ########
+
+cloud_event_result := {name: event |
+  server := input.service_statuses[_]
+  name := server.service
+  event := getServiceEvent(server)
+}
+
+getServiceEvent(server) = event {
+	event := {
+    "service_name": server.service,
+    "level": getServiceLevel(server),
+    "show": getServiceShowModule(server),
+  }
+}
+
+getServiceShowModule(server) = module {
+	show := data.console_show[_]
+  server.service == show.services[_].name
+  server.namespace == show.services[_].namespace
+  module := show.showModule
+}
+
+getServiceLevel(server) = level {
+	cloud_event := data.cloud_events[_]
+  server.service == cloud_event.services[_].name 
+  server.namespace == cloud_event.services[_].namespace
+  ls := cloud_event.levels[_]
+  server.status == ls.status
+  level := ls.level
+}
+
+
+# 给前端的消息结构映射
+cloud_event = result {
+	show := data.console_show[_]
+  input.service == show.services[_].name
+  input.namespace == show.services[_].namespace
+  show_ops := show.showModule
+  
+  cloud_event := data.cloud_events[_]
+  input.service == cloud_event.services[_].name 
+  input.namespace == cloud_event.services[_].namespace
+  ls := cloud_event.levels[_]
+  input.status == ls.status
+  level := ls.level
+  
+  result := {
+      "service_name": input.service,
+      "level": level,
+      "show": show_ops,
+  }
+}
+
+######## 车端故障策略 ########
+vioation_check_timestamp="Check timestamp failure, the message should be generated within an hour"
+vioation_check_switch_service_mode="Check switch_service_mode failure"
+vioation_check_service_mode="Check service_mode failure"
+vioation_check_type_code_mark="Check type code mark pre_level to name level failure"
+vioation_check_filter_events="Check filter events config failure"
+vioation_check_is_show="Check is_show field failure"
+vioation_check_filter_codes="Check filter codes failure"
+
+# 车端事件
+vehicle_event = result {
+  result := {
+    "msg": event_check,
+    "data": event_data,
+  }
+}
+
+event_check[vioation_check_timestamp] {
+  not filter_timestamp
+}
+
+event_check[vioation_check_service_mode] {
+  not filter_srvice_mode
+}
+event_check[vioation_check_type_code_mark] {
+  not filter_type_code_mark(input.params.type, input.params.content.code) 
+}
+
+event_data[normal_data] {
+  normal_data := match_event(input.params.type)
+}
+
+#过滤 type、code、mark 字段
+filter_type_code_mark(type, code) {
+  type == "veh.info"
+  vi_event := data.veh_info_events[_]
+  vi_event.code == input.params.content.code
+  vi_event.mark == input.params.content.mark
+  vi_event.level != input.params.pre_level
+}
+
+filter_type_code_mark(type, code) {
+  type == "cloud.info"
+  ci_event := data.cloud_info_events[_]
+  ci_event.code == input.params.content.code
+  ci_event.mark == input.params.content.mark
+  ci_event.level != input.params.pre_level
+}
+
+filter_type_code_mark(type, code) {
+  type == "device.network"
+  code == "compass"
+  dn_event := data.compass_events[_]
+  dn_event.mark == input.params.content.mark
+  dn_event.level != input.params.pre_level
+}
+
+filter_type_code_mark(type, code) {
+  type == "device.network"
+  code == "ota"
+  dn_event := data.ota_events[_]
+  dn_event.mark == input.params.content.mark
+  dn_event.level != input.params.pre_level
+}
+
+filter_type_code_mark(type, code) {
+  type == "device.network"
+  code == "oam"
+  dn_event := data.oam_events[_]
+  dn_event.mark == input.params.content.mark
+  dn_event.level != input.params.pre_level
+}
+
+filter_type_code_mark(type, code) {
+  type == "device.network"
+  code == "efence"
+  dn_event := data.efence_events[_]
+  dn_event.mark == input.params.content.mark
+  dn_event.level != input.params.pre_level
+}
+
+filter_type_code_mark(type, code) {
+  type == "device.network"
+  code == "rsu"
+  dn_event := data.rsu_events[_]
+  dn_event.mark == input.params.content.mark
+}
+
+filter_type_code_mark(type, code) {
+  type == "veh.state"
+  code == "service_mode"
+  sm_event := data.service_mode_events[_]
+  sm_event.mark == input.params.content.mark
+  sm_event.pre_level == input.params.pre_level
+  sm_event.level != input.params.pre_level
+}
+
+filter_type_code_mark(type, code) {
+  type == "veh.state"
+  code == "switch_service_mode"
+  ssm_event := data.switch_service_mode_events[_]
+  ssm_event.mark == input.params.content.mark
+  ssm_event.level != input.params.pre_level
+}
+
+filter_type_code_mark(type, code) {
+  type == "veh.nome"
+  merge_event := data.merge_events.events[_]
+  merge_code := merge_event.codes[_]
+  merge_code == input.params.content.code
+
+  normal_event := data.veh_nome_events[_]
+  normal_event.code == merge_event.type
+  normal_event.mark == input.params.content.mark
+}
+
+# 过滤service_mode, 只有处于运营模式下才会产生通知
+filter_srvice_mode {
+  mode := data.service_mode_codes.operation_code[_]
+  input.params.status.service_mode == mode
+}
+
+filter_srvice_mode {
+  input.params.type == "cloud.info"
+}
+
+filter_srvice_mode {
+  mode := data.service_mode_codes.offline_code[_]
+  input.params.status.service_mode == mode
+  input.params.type == "veh.state"
+  input.params.content.code == "service_mode"
+}
+
+filter_srvice_mode {
+  input.params.type == "veh.state"
+  input.params.content.code == "switch_service_mode"
+}
+
+filter_srvice_mode {
+  mode := data.service_mode_codes.offline_code[_]
+  input.params.status.service_mode == mode
+  input.params.type == "device.network"
+  input.params.content.code == "compass"
+}
+
+#过滤时间戳，对于与当前时间相差太久的消息(3600s)，直接过滤掉，避免引起状态混乱
+filter_timestamp {
+  nt := time.now_ns() / 1000000000 
+  dif := nt - input.timestamp 
+  dif < 3600
+}
+
+#匹配 veh_info_events 配置
+match_event(type) = normal_data {
+  type == "veh.info"
+  veh_info_event := data.veh_info_events[_]
+  veh_info_event.code == input.params.content.code
+  veh_info_event.mark == input.params.content.mark
+  normal_data := {
+    "module": veh_info_event.type, 
+    "state_name": veh_info_event.name,
+    "name": veh_info_event.name,
+    "level": veh_info_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": veh_info_event.cache_state,
+    "emit_event": veh_info_event.emit_event,
+  }
+}
+
+#匹配 cloud_info_events 配置
+match_event(type) = normal_data {
+  type == "cloud.info"
+  cloud_info_event := data.cloud_info_events[_]
+  cloud_info_event.code == input.params.content.code
+  cloud_info_event.mark == input.params.content.mark
+  normal_data := {
+    "module": cloud_info_event.type,
+    "state_name": cloud_info_event.name,
+    "name": cloud_info_event.name,
+    "level": cloud_info_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": cloud_info_event.cache_state,
+    "emit_event": cloud_info_event.emit_event,
+  }
+}
+
+#匹配 device_network_event 配置
+match_event(type) = normal_data {
+  type == "device.network"
+  normal_data := match_device_network_code(input.params.content.code)
+}
+
+match_device_network_code(code) = code_match_data {
+  code == "compass"
+  compass_event := data.compass_events[_]
+  compass_event.mark == input.params.content.mark
+  code_match_data := {
+    "module": compass_event.type,
+    "state_name": compass_event.name,
+    "name": compass_event.name,
+    "level": compass_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": compass_event.cache_state,
+    "emit_event": compass_event.emit_event,
+  }
+}
+
+match_device_network_code(code) = code_match_data {
+  code == "ota"
+  compass_event := data.ota_events[_]
+  compass_event.mark == input.params.content.mark
+  code_match_data := {
+    "module": compass_event.type,
+    "state_name": compass_event.name,
+    "name": compass_event.name,
+    "level": compass_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": compass_event.cache_state,
+    "emit_event": compass_event.emit_event,
+  }
+}
+
+match_device_network_code(code) = code_match_data {
+  code == "oam"
+  compass_event := data.oam_events[_]
+  compass_event.mark == input.params.content.mark
+  code_match_data := {
+    "module": compass_event.type,
+    "state_name": compass_event.name,
+    "name": compass_event.name,
+    "level": compass_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": compass_event.cache_state,
+    "emit_event": compass_event.emit_event,
+  }
+}
+
+match_device_network_code(code) = code_match_data {
+  code == "efence"
+  compass_event := data.efence_events[_]
+  compass_event.mark == input.params.content.mark
+  code_match_data := {
+    "module": compass_event.type,
+    "state_name": compass_event.name,
+    "name": compass_event.name,
+    "level": compass_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": compass_event.cache_state,
+    "emit_event": compass_event.emit_event,
+  }
+}
+
+match_device_network_code(code) = code_match_data {
+  code == "rsu"
+  rsu_event := data.rsu_events[_]
+  rsu_event.mark == input.params.content.mark
+  code_match_data := {
+    "module": rsu_event.type,
+    "state_name": rsu_event.name,
+    "name": rsu_event.name,
+    "level": rsu_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": rsu_event.cache_state,
+    "emit_event": rsu_event.emit_event,
+  }
+}
+
+#匹配 veh_nome_events 配置
+match_event(type) = normal_data {
+  type == "veh.nome"
+  merge_event := data.merge_events.events[_]
+  merge_code := merge_event.codes[_]
+  merge_code == input.params.content.code
+
+  normal_event := data.veh_nome_events[_]
+  normal_event.type == input.params.type
+  normal_event.code == merge_event.type
+  normal_event.mark == input.params.content.mark
+  normal_data := {
+    "module": normal_event.type,
+    "state_name": normal_event.name,
+    "name": normal_event.name,
+    "level": normal_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": normal_event.cache_state,
+    "emit_event": normal_event.emit_event,
+  }
+}
+
+#匹配 service_mode 配置
+match_event(type) = normal_data {
+  type == "veh.state"
+  normal_data := match_code(input.params.content.code)
+}
+
+match_code(code) = code_match_data {
+  code == "service_mode"
+  service_mode_event := data.service_mode_events[_]
+  service_mode_event.mark == input.params.content.mark
+  service_mode_event.pre_level == input.params.pre_level
+  code_match_data := {
+    "module": service_mode_event.type,
+    "state_name": service_mode_event.code,
+    "name": service_mode_event.name,
+    "level": service_mode_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": service_mode_event.cache_state,
+    "emit_event": service_mode_event.emit_event,
+    "service_mode": service_mode_event.service_mode,
+    "clear": service_mode_event.clear,
+  }
+}
+
+match_code(code) = code_match_data {
+  code == "switch_service_mode"
+  ssm_event := data.switch_service_mode_events[_]
+  ssm_event.mark == input.params.content.mark
+  code_match_data := {
+    "module": ssm_event.type,
+    "state_name": ssm_event.code,
+    "name": ssm_event.name,
+    "level": ssm_event.level,
+    "source_id": input.source_id,
+    "pre_level": input.params.pre_level,
+    "cache_state": ssm_event.cache_state,
+    "emit_event": ssm_event.emit_event,
+  }
+}
+
+### 事件名称
+event_name = name {
+  name := get_event_name(input.params.type, input.params.content.code, input.params.content.mark)
+}
+
+# 获取 veh.info 事件名
+get_event_name(type, code, mark) = result {
+  type == "veh.info"
+  e := data.veh_info_events[_]
+  e.code == code 
+  e.mark == mark
+  result := e.name
+}
+
+# 获取 cloud.info 事件名
+get_event_name(type, code, mark) = result {
+  type == "cloud.info"
+  e := data.cloud_info_events[_]
+  e.code == code
+  e.mark == mark
+  result := e.name
+}
+
+# 获取 veh.state service_mode 事件名
+get_event_name(type, code, mark) = result {
+  type == "veh.state"
+  code == "service_mode"
+  e := data.service_mode_events[_]
+  e.mark == mark
+  result := e.name
+}
+
+# 获取 veh.state switch_service_mode 事件名
+get_event_name(type, code, mark) = result {
+  type == "veh.state"
+  code == "switch_service_mode"
+  e := data.switch_service_mode_events[_]
+  e.mark == mark
+  result := e.name
+}
+
+
+# 获取 device.network 事件名
+get_event_name(type, code, mark) = result {
+  type == "device.network"
+  code == "compass"
+  e := data.compass_events[_]
+  e.mark == mark
+  result := e.name
+}
+
+# 获取 device.network 事件名
+get_event_name(type, code, mark) = result {
+  type == "device.network"
+  code == "ota"
+  e := data.ota_events[_]
+  e.mark == mark
+  result := e.name
+}
+
+# 获取 device.network 事件名
+get_event_name(type, code, mark) = result {
+  type == "device.network"
+  code == "oam"
+  e := data.oam_events[_]
+  e.mark == mark
+  result := e.name
+}
+
+
+get_event_name(type, code, mark) = result {
+  type == "device.network"
+  code == "efence"
+  e := data.efence_events[_]
+  e.mark == mark
+  result := e.name
+}
+
+# 获取 device.network 事件名
+get_event_name(type, code, mark) = result {
+  type == "device.network"
+  code == "rsu"
+  e := data.rsu_events[_]
+  e.mark == mark
+  result := e.name
+}
+
+# 获取 veh.nome 事件名
+get_event_name(type, code, mark) = result {
+  type == "veh.nome"
+  e := data.merge_events.events[_]
+  c := e.codes[_]
+  code == c
+  result := e.type
+}

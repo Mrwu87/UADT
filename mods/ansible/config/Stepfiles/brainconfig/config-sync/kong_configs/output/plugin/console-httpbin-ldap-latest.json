@@ -1,0 +1,27 @@
+[
+    {
+        "tags": null,
+        "enabled": true,
+        "name": "ldap-auth",
+        "consumer": null,
+        "service": null,
+        "route": {
+            "name": "console-httpbin-ldap-latest.hkia-exercise-2"
+        },
+        "config": {
+            "start_tls": false,
+            "timeout": 10000,
+            "base_dn": "ou=People,dc=uisee,dc=cn",
+            "hide_credentials": false,
+            "header_type": "ldap",
+            "ldaps": false,
+            "ldap_port": 389,
+            "cache_ttl": 60,
+            "verify_ldap_host": false,
+            "anonymous": null,
+            "attribute": "uid",
+            "ldap_host": "ldap.uisee.ai",
+            "keepalive": 60000
+        }
+    }
+]

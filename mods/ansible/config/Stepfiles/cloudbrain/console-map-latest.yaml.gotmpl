@@ -11,17 +11,17 @@ initContainers:
   imagePullPolicy: IfNotPresent
   env:
   - name: DB_HOST
-    value: 10.23.189.252
+    value: console-mysql-latest
   - name: DB_PORT
     value: "3306"
   command: [ "/bin/sh", "-c", "until nc -zv $DB_HOST $DB_PORT -w1; do echo 'waiting for db'; sleep 5; done" ]
 
 mysql:
-  host: 10.23.189.252
+  host: console-mysql-latest
 
 redis:
-  dsn: 10.23.29.25:6379
-  password: uisee123
+  dsn: console-core-latest-redis-master:6379
+  password: ""
   db: "0"
 
 logging:

@@ -20,9 +20,17 @@
       template:
           src:  k8s/harbor_registry.j2
           dest: k8sInstall/harbor.sh
-          mode: 0777
+          mode: 0755
+
+    - name: metrics-server templates
+      template:
+          src:  k8s/metrics-server.j2
+          dest: k8sInstall/metrics-server.yaml
+          mode: 0755
+
     - name: create harbor registry
       script: /home/{{ user }}/k8sInstall/harbor.sh
+
 
 
     - name: push images to harbor
@@ -37,10 +45,21 @@
     - name: install k8s
       shell:
         cmd: |
-          /home/{{ user }}/k8sInstall/./kk  create cluster -y -f /home/{{ user }}/k8sInstall/installConfig.yaml 2>&1 | tee /home/{{ user }}/k8sInstall/installk8s.log
+          /home/{{ user }}/k8sInstall/./kk  create cluster -y -f /home/{{ user }}/k8sInstall/installConfig.yaml 2>&1 | tee /home/{{ user }}/k8sInstall/installk8s.log  ~/UADT/mods/logs/config/runtime
 
     - name: check install process
       shell: cat  /home/{{ user }}/k8sInstall/installk8s.log | grep 'kubectl get pod -A'
+
+#metrics install
+    - name: upload metrics image to harbor
+      shell:
+        cmd: |
+          sudo docker load -i ~/k8sInstall/metrics.tar
+          sudo docker tag anjia0532/google-containers.metrics-server.metrics-server:v0.6.1 {{ deployip }}:31150/library/metrics-server:v0.6.1
+          sudo docker push {{ deployip }}:31150/library/metrics-server:v0.6.1
+
+    - name: install metrics-server
+      shell: kubectl apply -f ~/k8sInstall/metrics-server.yaml
 
 - hosts: server
   gather_facts:  false

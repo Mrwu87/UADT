@@ -8,12 +8,12 @@ imagePullSecrets:
 
 passwordStrenth: LOW
 realMobile: true
-utcoreRedisDsn: "10.23.29.25:6379"
+utcoreRedisDsn: "console-core-latest-redis-master:6379"
 db:
-  host: 10.23.189.252
+  host: console-core-latest-mysql
 
 utcoreSso: loose
-mongoUri: mongodb://root:uisee%40123@10.23.19.227:27017
+mongoUri: mongodb://root:root@console-mongodb-latest:27017
 
 domain: "https://jiashan.uisee.com"
 
@@ -76,7 +76,7 @@ mysql:
   image: "harbor.uisee.cn/library/mysql"
   imageTag: "5.7.14"
   persistence:
-   storageClass: managed-nfs-storage
+   #storageClass: managed-nfs-storage
    enabled: true
    accessMode: ReadWriteOnce
    size: 20Gi

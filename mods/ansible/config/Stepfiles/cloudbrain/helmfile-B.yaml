@@ -80,22 +80,37 @@ releases:
         value: {{ .Environment.Values.console_proxy_log_latest.IMAGE_TAG }}
 
   # cloud-nome-latest
-
-
-  # cloud-nome-oam-latest
-  - name: cloud-nome-oam-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+  - name: cloud-nome-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
     labels:
       type: svc
-      svc: nome-oam
-    chart: cloud/nome-oam
+      svc: nome
+    chart: cloud/nome
     namespace: {{ .Environment.Values.Namespace }}
-    version: {{ .Environment.Values.cloud_nome_oam_latest.CHART_VER }}
+    version: {{ .Environment.Values.cloud_nome_latest.CHART_VER }}
     values:
-      - cloud-nome-oam-latest.yaml.gotmpl
-      - fullnameOverride: cloud-nome-oam-{{ env "VER" | default "latest" }}
+      - cloud-nome-latest.yaml.gotmpl
+      - fullnameOverride: cloud-nome-{{ env "VER" | default "latest" }}
+      - etcd:
+          fullnameOverride: "cloud-nome-{{ env "VER" | default "latest" }}-etcd"
     set:
       - name: image.tag
-        value: {{ .Environment.Values.cloud_nome_oam_latest.IMAGE_TAG }}
+        value: {{ .Environment.Values.cloud_nome_latest.IMAGE_TAG }}
+
+
+#  # cloud-nome-oam-latest
+#  - name: cloud-nome-oam-{{ .Environment.Values.Namespace }}-{{ env "VER" | default "latest" }}
+#    labels:
+#      type: svc
+#      svc: nome-oam
+#    chart: cloud/nome-oam
+#    namespace: {{ .Environment.Values.Namespace }}
+#    version: {{ .Environment.Values.cloud_nome_oam_latest.CHART_VER }}
+#    values:
+#      - cloud-nome-oam-latest.yaml.gotmpl
+#      - fullnameOverride: cloud-nome-oam-{{ env "VER" | default "latest" }}
+#    set:
+#      - name: image.tag
+#        value: {{ .Environment.Values.cloud_nome_oam_latest.IMAGE_TAG }}
 
 
   # data-aggregator-latest

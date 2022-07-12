@@ -13,13 +13,13 @@ env:
   hook_url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=c1243d57-36e8-48e7-92f1-7374267a46ae
   vehicleHost: vehicle-shadow-latest
   haDatabase: cloud_ha
-  haPassword: uisee@123
+  haPassword: uisee@2019
   haUsername: root
-  mysqlHost: 10.23.189.252
-  mysqlRootPass: uisee@123
+  mysqlHost: compass-mysql-latest
+  mysqlRootPass: uisee@2019
   mysqlRootUser: root
-  redisHost: 10.23.167.82
-  redisPass: uisee123
+  redisHost: compass-redis-latest-master
+  redisPass: redis
   redisPort: 6379
   memcacheLoc: compass-memcached-{{ env "VER" | default "latest" }}:11211
   mqttBrokerUrl: emqx-{{ env "VER" | default "latest" }}

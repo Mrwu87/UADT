@@ -12,12 +12,17 @@ spawn ssh $name@$ip
                "yes/no?" {send "yes\r";exp_continue;}
                "password:" { send "$passwd\r" }}
                expect "#"
+               set timeout 60
                send "echo $passwd | sudo -S chmod 644 /etc/sudoers\r"
                send "echo $passwd | sudo -S sed -i '26,26s/ALL=(ALL:ALL) ALL/ ALL=(ALL:ALL) NOPASSWD: ALL/g' /etc/sudoers\r"
                send "sudo rm -rf /etc/netplan/*\r"
                send "sudo touch /etc/netplan/config.yaml\r"
                send "sudo chmod 777 /etc/netplan/config.yaml\r"
-               send "sudo hostnamectl set-hostname $hostname\r"
+               send "sudo chmod 777 /etc/security/limits.conf\r"
+               send "sudo echo '''* soft nofile 204800
+* hard nofile 204800
+* soft nproc 204800
+* hard nproc 204800''' >  /etc/security/limits.conf\r"
                send "sudo echo '''network:
   ethernets:
     $interface:
@@ -28,4 +33,5 @@ spawn ssh $name@$ip
             dhcp4: no
   version: 2''' > /etc/netplan/config.yaml\r"
                send "sudo netplan apply\r"
+               send "sudo hostnamectl set-hostname $hostname\r"
                expect eof

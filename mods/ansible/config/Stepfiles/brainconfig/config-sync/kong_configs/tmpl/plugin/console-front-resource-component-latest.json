@@ -1,0 +1,53 @@
+[
+    {
+        "tags": null,
+        "enabled": true,
+        "name": "jwt",
+        "consumer": null,
+        "service": {
+            "name": "console-front-resource-component-latest.{{   NAMESPACE  }}"
+        },
+        "route": null,
+        "config": {
+            "secret_is_base64": false,
+            "run_on_preflight": true,
+            "uri_param_names": [
+                "auth_token"
+            ],
+            "key_claim_name": "iss",
+            "header_names": [],
+            "maximum_expiration": 0,
+            "anonymous": "{{ KONG_ANONYMOUS }}",
+            "claims_to_verify": [
+                "exp",
+                "nbf"
+            ],
+            "cookie_names": [
+                "auth_token"
+            ]
+        }
+    },
+    {
+        "tags": null,
+        "enabled": true,
+        "name": "utc-auth",
+        "consumer": null,
+        "service": {
+            "name": "console-front-resource-component-latest.{{   NAMESPACE  }}"
+        },
+        "route": null,
+        "config": {
+            "service_name": "Kong Service",
+            "timeout": 10000,
+            "keepalive": 60000,
+            "skip_paths": [],
+            "sample_ratio": 1,
+            "service_instance_name": "Kong Service Instance",
+            "tls": false,
+            "namespace": "{{   NAMESPACE  }}",
+            "anonymous_role_uuid": null,
+            "skywalking_uri": null,
+            "athuorize_service": "console-core-latest"
+        }
+    }
+]

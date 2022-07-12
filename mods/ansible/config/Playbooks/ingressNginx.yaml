@@ -54,8 +54,8 @@
       command: kubectl apply -f {{ work_dir }}/ingress-nginx/mandatory_1.19.yaml -n ingress-nginx
     - name: apply ingress type to nodeport
       command: kubectl apply -f {{ work_dir }}/ingress-nginx/ingress-nodeport.yaml -n ingress-nginx
-    - name: apply ingress HostPort 443
-      command: kubectl apply -f {{ work_dir }}/ingress-nginx/ingress-nginx-dp.yaml -n ingress-nginx
+#    - name: apply ingress HostPort 443
+#      command: kubectl apply -f {{ work_dir }}/ingress-nginx/ingress-nginx-dp.yaml -n ingress-nginx
 
 #kong 安装
 #    - name: template api.yaml

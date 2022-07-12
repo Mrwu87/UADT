@@ -1,0 +1,36 @@
+{
+    "strip_path": true,
+    "tags": null,
+    "destinations": null,
+    "headers": null,
+    "protocols": [
+        "http",
+        "https"
+    ],
+    "methods": null,
+    "service": {
+        "name": "console-vehicle-mode-latest.{{   NAMESPACE  }}"
+    },
+    "snis": null,
+    "hosts": 
+            {%- if DOMAIN -%}
+            [{%- if OP_DOMAIN -%}"{{    OP_DOMAIN    }}",{% endif %}
+            "{{    DOMAIN    }}"
+            ]{% else %}null
+            {% endif %},
+    "name": "console-vehicle-mode-latest.{{   NAMESPACE  }}",
+    "path_handling": "v0",
+    "paths": [
+{%- if DOMAIN -%}
+"/console/mode"
+{% else %}
+"/{{   NAMESPACE  }}/latest/mode"
+{% endif %}
+],
+    "preserve_host": false,
+    "regex_priority": 0,
+    "response_buffering": true,
+    "sources": null,
+    "https_redirect_status_code": 426,
+    "request_buffering": true
+}

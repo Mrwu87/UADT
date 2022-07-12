@@ -2,7 +2,7 @@
 - hosts: server
   gather_facts:  false
   tasks:
-#kong  image
+#minio  image
     - name: move minio image to servers
       copy:
           src: "{{ inventory_dir }}/Stepfiles/baseservice/minio/minio-image.tar"
@@ -10,7 +10,7 @@
 
     - name: load and minio images
       command: sudo docker load -i  baseservice_image/minio-image.tar
-#kong 安装
+#minio 安装
 - hosts: deploy_ip
   vars:
     - work_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
@@ -28,7 +28,7 @@
       args:
         creates: "/usr/local/bin/mc"
 
-    - name:  Kong install
+    - name:  minio install
       command: bash {{ work_dir }}/minio/minio-s3/install.sh   {{ work_dir }}/minio/minio-s3
       ignore_errors: yes
 
@@ -39,18 +39,18 @@
 #         delay: 60
 #         state: started
 
-    - name: add minio server address
-      command: mc config host add common-minio-s3  http://{{ deployip }}:30003 'cloud@uisee.com' 'cloud!234'
-
-
-    - name: add bucket
-      shell:
-        cmd: |
-          mc mb common-minio-s3/console-vehicles
-          mc mb common-minio-s3/maps
-          mc mb common-minio-s3/utc-map-gl
-          mc policy set public common-minio-s3/console-vehicles
-          mc policy set public common-minio-s3/maps
-          mc policy set public common-minio-s3/utc-map-gl
-          mc cp  {{ work_dir }}/minio/utc-map-gl/*  common-minio-s3/utc-map-gl/
-          mc cp {{ work_dir }}/minio/console-vehicles/*  ucloud-minio-s3/console-vehicles/
+#    - name: add minio server address
+#      command: mc config host add common-minio-s3  http://{{ deployip }}:30003 'cloud@uisee.com' 'cloud!234'
+#
+#
+#    - name: add bucket
+#      shell:
+#        cmd: |
+#          mc mb common-minio-s3/console-vehicles
+#          mc mb common-minio-s3/maps
+#          mc mb common-minio-s3/utc-map-gl
+#          mc policy set public common-minio-s3/console-vehicles
+#          mc policy set public common-minio-s3/maps
+#          mc policy set public common-minio-s3/utc-map-gl
+#          mc cp  {{ work_dir }}/minio/utc-map-gl/*  common-minio-s3/utc-map-gl/
+#          mc cp {{ work_dir }}/minio/console-vehicles/*  ucloud-minio-s3/console-vehicles/

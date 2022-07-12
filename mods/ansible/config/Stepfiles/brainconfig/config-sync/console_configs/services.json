@@ -1,0 +1,2900 @@
+[
+    {
+        "name": "核心权限服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "POST",
+                "path": "/security/login",
+                "title": "用户登录",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/security/profile",
+                "title": "用户信息",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/security/register",
+                "title": "用户注册",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/resources",
+                "title": "资源列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/security/profile/projects",
+                "title": "用户所属项目",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/batch/roles/scopes",
+                "title": "批量更新系统「角色-限界」映射",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/internal/kongServices",
+                "title": "获取 Kong 服务列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/resources",
+                "title": "创建资源类型",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/resources/:uuid",
+                "title": "获取资源类型详情",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/resources/:uuid",
+                "title": "更新资源详情",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/resources/:uuid",
+                "title": "删除资源详情",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/roles",
+                "title": "创建系统角色",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/roles",
+                "title": "获取系统角色列表",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/roles/:uuid",
+                "title": "更新系统角色",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/roles/:uuid",
+                "title": "删除系统角色",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/roles/:uuid/scopes",
+                "title": "更新角色对应限界组",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/roles/:uuid",
+                "title": "获取系统角色详情",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/roles/:uuid/resources",
+                "title": "批量绑定系统「角色 - 资源」",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/roles/:uuid/resources",
+                "title": "批量解绑系统「角色-资源」",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups",
+                "title": "获取所有群组",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/groups",
+                "title": "创建群组",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/groups/:uuid",
+                "title": "删除群组",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/groups/:uuid",
+                "title": "更新群组",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/groups/:uuid/avatar",
+                "title": "更新群组头像",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups/:uuid/roles",
+                "title": "获取群组角色",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/groups/:uuid/roles",
+                "title": "创建群组角色",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups/:uuid/roles/:roleUUID",
+                "title": "获取群组角色详情",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/groups/:uuid/roles/:roleUUID",
+                "title": "删除群组角色",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/groups/:uuid/roles/:roleUUID/scopes",
+                "title": "更新群组角色对应限界组",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups/:uuid/roles/:roleUUID/resources",
+                "title": "获取群组角色资源",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/groups/:uuid/roles/:roleUUID/resources",
+                "title": "添加群组角色资源",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/groups/:uuid/roles/:roleUUID/resources",
+                "title": "移除群组角色资源",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups/:uuid/members",
+                "title": "获取群组成员",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/groups/:uuid/members",
+                "title": "批量添加群组成员",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/groups/:uuid/members/:userUUID",
+                "title": "移除群组成员",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/groups/:uuid/members",
+                "title": "批量更新群组成员",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/groups/:uuid/members",
+                "title": "批量移除群组成员",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups/:uuid/members/:userUUID/resources",
+                "title": "获取群组成员资源",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/groups/:uuid/members/:userUUID/resources",
+                "title": "添加群组成员资源",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/groups/:uuid/members/:userUUID/resources",
+                "title": "移除群组成员资源",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/users",
+                "title": "获取用户",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/users/:uuid",
+                "title": "获取用户详情",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/users",
+                "title": "创建用户",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/users/:uuid",
+                "title": "更新用户",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/users/:uuid/active",
+                "title": "启用/禁用用户",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/users/:uuid/roles",
+                "title": "获取用户角色",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/users/:uuid/roles",
+                "title": "更新用户角色",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/users/:uuid/avatar",
+                "title": "更新用户头像",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/user/:uuid/groups",
+                "title": "获取用户所在群组",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/users/:uuid/projects",
+                "title": "获取用户所在项目",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/users/:uuid",
+                "title": "软删除用户",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/users/:uuid/hard",
+                "title": "硬删除用户",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/security/logout",
+                "title": "登出",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/security/profile",
+                "title": "更新个人信息",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/security/profile/avatar",
+                "title": "更新个人头像",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/security/profile/forget-password",
+                "title": "忘记密码",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/security/profile/change-password",
+                "title": "修改密码",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/security/profile/groups",
+                "title": "获取个人所在群组",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/services",
+                "title": "创建服务",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/services/:uuid",
+                "title": "获取服务详情",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/services",
+                "title": "获取服务",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/services/:uuid",
+                "title": "更新服务",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/services/:uuid/groups",
+                "title": "获取使用服务的群组",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/services/:uuid/avatar",
+                "title": "更新服务头像",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/services/:uuid",
+                "title": "删除服务",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/services/:uuid/apis",
+                "title": "添加服务API",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/services/:uuid/apis/clear",
+                "title": "清空服务API",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/services/:uuid/apis/import",
+                "title": "导入服务API",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/services/:uuid/apis/batch",
+                "title": "批量删除服务API",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/scopes",
+                "title": "创建限界",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/scopes",
+                "title": "获取限界",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/scopes/:uuid",
+                "title": "获取限界详情",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/scopes/:uuid",
+                "title": "更新限界",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/scopes/:uuid",
+                "title": "删除限界",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/scopes/:uuid/children",
+                "title": "更新子限界",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/scopes/:uuid/apis",
+                "title": "更新限界API",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/batch/groups/:uuid/roles/resources/:rCode",
+                "title": "批量获取群组角色资源",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/batch/groups/:uuid/roles/resources/:rCode",
+                "title": "批量更新群组资源角色",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/batch/roles/resources/:rCode",
+                "title": "批量获取系统角色资源",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/batch/roles/resources/:rCode",
+                "title": "批量更新系统角色资源",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups/:uuid",
+                "title": "获取群组详情",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/groups/:uuid/members/:userUUID",
+                "title": "更新成员角色",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/groups/:uuid/members/:userUUID/resources/deny",
+                "title": "禁用用户资源",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/groups/:uuid/members/:userUUID/resources/deny",
+                "title": "恢复用户资源",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/logs",
+                "title": "获取核心权限服务日志",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/groups/:uuid/roles/:roleUUID",
+                "title": "更新群组角色",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups/:uuid/members/:userUUID",
+                "title": "获取成员详情",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups/:uuid/universeResourceCodes",
+                "title": "获取群组默认全集资源 Codes",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/groups/:uuid/universeResourceCodes",
+                "title": "增加群组默认全集资源 Codes",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/groups/:uuid/universeResourceCodes/:rcode",
+                "title": "删除群组默认全集资源 Codes",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/groups/:uuid/logs",
+                "title": "获取群组操作记录",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/scopes/:uuid/apis",
+                "title": "获取限界绑定API列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/resources/:uuid/scopeMappings",
+                "title": "获取组件限界绑定关系",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/resources/:uuid/scopeMappings",
+                "title": "保存组件限界绑定关系",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/groups/:uuid/logs/query",
+                "title": "获取所有操作记录数据",
+                "description": ""
+            }
+        ],
+        "externalName": "console-core-latest"
+    },
+    {
+        "name": "用户偏好服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/preference/:externalId/:key",
+                "title": "查询偏好记录",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/preference/:externalId/:key",
+                "title": "添加或更新偏好记录",
+                "description": ""
+            }
+        ],
+        "externalName": "console-preference-latest"
+    },
+    {
+        "name": "前端组件资源服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "前端组件",
+                "code": "COMPONENT",
+                "description": "",
+                "feModel": "systemComponent/all.components",
+                "hostType": "ROLE",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/components",
+                "title": "获取全部组件",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/components",
+                "title": "添加组件",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/components/:UUID",
+                "title": "获取组件",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/components/:UUID",
+                "title": "更新组建",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/components/:UUID",
+                "title": "删除组件",
+                "description": ""
+            }
+        ],
+        "externalName": "console-front-resource-component-latest"
+    },
+    {
+        "name": "前端菜单资源服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "前端菜单",
+                "code": "MENU",
+                "description": "",
+                "feModel": "systemMenu/all.menus",
+                "hostType": "ROLE",
+                "services": null
+            },
+            {
+                "name": "前端组件",
+                "code": "COMPONENT",
+                "description": "",
+                "feModel": "systemComponent/all.components",
+                "hostType": "ROLE",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/menus",
+                "title": "获取菜单列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/menus/:MENU",
+                "title": "获取菜单详情",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/menus/:MENU",
+                "title": "更新菜单",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/menus",
+                "title": "创建菜单",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/menus/:MENU",
+                "title": "删除菜单",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/menus/:MENU/components",
+                "title": "更新菜单绑定组件",
+                "description": ""
+            }
+        ],
+        "externalName": "console-front-resource-menu-latest"
+    },
+    {
+        "name": "司南代理服务",
+        "indexPattern": "console-proxy-compass",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "地图",
+                "code": "MAP",
+                "description": "",
+                "feModel": "managementMap/getApplicableMaps.maps",
+                "hostType": "ALL",
+                "services": null
+            },
+            {
+                "name": "车辆",
+                "code": "VEHICLE",
+                "description": "",
+                "feModel": "managementVehicle/all.vehicles",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/diagnoses",
+                "title": "诊断检查 - 搜索",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/diagnoses/statistic",
+                "title": "诊断检查 - 统计",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/parkings/:id/histories/search",
+                "title": "泊车 - 历史记录",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/parkings/:id/stops/status",
+                "title": "泊车 - 站点状态",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/routes/:id",
+                "title": "线路 - 详细",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/vehicles",
+                "title": "车辆",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/versions",
+                "title": "UOS 版本",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/selfchecks",
+                "title": "发起自检",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/selfchecks",
+                "title": "自检 - 列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/selfchecks/:id",
+                "title": "自检 - 详细",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/startUOS",
+                "title": "控制 - 启动UOS",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/stopUOS",
+                "title": "控制 - 关闭UOS",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/selectStop",
+                "title": "控制 - 选择站点",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/selectParking",
+                "title": "控制 - 选择泊车点",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/confirmArrived",
+                "title": "控制 - 确认抵达",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/start",
+                "title": "控制 - 开始行程",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/pause",
+                "title": "控制 - 暂停",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/resume",
+                "title": "控制 - 继续",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/cancelRoute",
+                "title": "控制 - 取消规划",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/switchManu",
+                "title": "控制 - 切换手动",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/switchAuto",
+                "title": "控制 - 切换自动",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/cleanErrorHistory",
+                "title": "控制 - 清除错误历史",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/nudgeForward",
+                "title": "控制 - 稍微前进",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/nudgeBackward",
+                "title": "控制 - 稍微后退",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/resetLocation",
+                "title": "控制 - 重定位",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/releaseEmergencyStop",
+                "title": "控制 - 清除急停",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/releaseErrorEmergencyStop",
+                "title": "控制 - 清除故障急停",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/giveWay",
+                "title": "控制 - 避让",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/backToRoad",
+                "title": "控制 - 放行",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/speakerTwice",
+                "title": "控制 - 鸣笛",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/cleanLaybyZoneStatus",
+                "title": "控制 - 清除UISEE RSU车辆计数",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/controls/status",
+                "title": "控制 - 获取执行状态",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/moveTrailerForward",
+                "title": "控制 - 前进一个拖斗",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/setTrailerNum",
+                "title": "控制 - 设置拖斗数量",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/releaseManualControl",
+                "title": "控制 - 清除人工控制",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/startServiceMode",
+                "title": "控制 - 开始服务模式",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/stopServiceMode",
+                "title": "控制 - 停止服务模式",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/cleanEmergencyBrakeError",
+                "title": "控制 - 清除急停错误",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/camera/startDump",
+                "title": "开始 Dump 摄像头数据",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/camera/stopDump",
+                "title": "停止 Dump 摄像头数据",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/lidar/startDump",
+                "title": "开始 Dump Lidar 数据",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/lidar/stopDump",
+                "title": "停止 Dump Lidar 数据",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/speed",
+                "title": "设置限速",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/controls/nextstop",
+                "title": "控制 - 下发下一站命令",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/controls/selectline",
+                "title": "控制 - 切换车辆绑定路线",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/selectStops",
+                "title": "控制-下发路线",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/cancel/selectStops",
+                "title": "取消多站点下发",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/setVideoStatus",
+                "title": "控制 - 鹰眼开关",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/setTrailers",
+                "title": "控制 - 配置拖斗",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/stops/replan",
+                "title": "控制 - 重新规划",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/emergencyBrake",
+                "title": "控制 - 云端急停",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/startNOME",
+                "title": "控制 - 开启运营模式",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/stopNOME",
+                "title": "控制 - 关闭运营模式",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/vcc/flash/open",
+                "title": "开启双闪灯",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/vcc/flash/close",
+                "title": "关闭双闪灯",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/vcc/flash/state",
+                "title": "获取控制双闪灯的命令",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/controls/route/exec",
+                "title": "控制 - 下发业务路线",
+                "description": ""
+            }
+        ],
+        "externalName": "console-proxy-compass-latest"
+    },
+    {
+        "name": "地图资源服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "地图",
+                "code": "MAP",
+                "description": "",
+                "feModel": "managementMap/getApplicableMaps.maps",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/maps",
+                "title": "获取地图列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/:MAP",
+                "title": "获取地图",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/maps/:MAP",
+                "title": "删除地图",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps",
+                "title": "添加地图",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/maps/:MAP",
+                "title": "更新地图",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/internal/versionlist",
+                "title": "更新地图时使用",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/internal/vehicle/versionlist",
+                "title": "更新车端地图时使用",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/:MAP/geojson",
+                "title": "获取地图geojson",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/map/pool",
+                "title": "获取地图管理系统地图",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/internal/file",
+                "title": "获取地图文件",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/map/pool/dev",
+                "title": "获取所有 dev 地图",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/:MAP/versions/:version/geojson",
+                "title": "根据 version 获取 geojson",
+                "description": ""
+            }
+        ],
+        "externalName": "console-map-latest"
+    },
+    {
+        "name": "车辆资源服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "地图",
+                "code": "MAP",
+                "description": "",
+                "feModel": "managementMap/getApplicableMaps.maps",
+                "hostType": "ALL",
+                "services": null
+            },
+            {
+                "name": "车辆",
+                "code": "VEHICLE",
+                "description": "",
+                "feModel": "managementVehicle/all.vehicles",
+                "hostType": "ALL",
+                "services": null
+            },
+            {
+                "name": "车辆类型",
+                "code": "CATEGORY",
+                "description": "",
+                "feModel": "managementVehicle/getCategories.categories",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/vehicles",
+                "title": "Get Vehicles",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/vehicles",
+                "title": "新建车辆",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/vehicles/:VEHICLE",
+                "title": "更新车辆",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/vehicles/:VEHICLE",
+                "title": "删除车辆",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/vehicles/:VEHICLE",
+                "title": "获取车辆详情",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/vehicles/:VEHICLE/map",
+                "title": "更新车辆绑定地图",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/vehicles/:VEHICLE/route",
+                "title": "切换车辆线路",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/vehicles/batch/map",
+                "title": "批量更新车端地图",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/batch/map",
+                "title": "批量更新车端地图",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/vehicles/:VEHICLE/ota/map",
+                "title": "OTA 更新地图",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/vehicles/:VEHICLE/ota/map/cancel",
+                "title": "取消下载地图",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/vehicles/:VEHICLE/ota/map/download",
+                "title": "OTA下载地图",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/vehicles/:VEHICLE/ota/map/install",
+                "title": "OTA安装地图",
+                "description": ""
+            }
+        ],
+        "externalName": "console-vehicle-vehicle-latest"
+    },
+    {
+        "name": "车辆类型资源服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "车辆类型",
+                "code": "CATEGORY",
+                "description": "",
+                "feModel": "managementVehicle/getCategories.categories",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "POST",
+                "path": "/categories",
+                "title": "创建车辆形象",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/categories",
+                "title": "获取车辆形象列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/categories/:CATEGORY",
+                "title": "获取车辆形象详情",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/categories/:CATEGORY",
+                "title": "删除车辆形象",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/categories/:CATEGORY",
+                "title": "更新车辆形象",
+                "description": ""
+            }
+        ],
+        "externalName": "console-vehicle-category-latest"
+    },
+    {
+        "name": "项目元数据服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "POST",
+                "path": "/metadata",
+                "title": "创建 metadata",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/metadata",
+                "title": "删除 metadata",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/metadata",
+                "title": "获取 metadata",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/metadata",
+                "title": "修改 metadata",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/metadata/all",
+                "title": "获取所有 metadata",
+                "description": ""
+            }
+        ],
+        "externalName": "console-project-metadata-latest"
+    },
+    {
+        "name": "鹰眼服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/.*",
+                "title": "直播拉流",
+                "description": ""
+            }
+        ],
+        "externalName": "media-server"
+    },
+    {
+        "name": "云云消息通道服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/ws",
+                "title": "Websocket",
+                "description": ""
+            }
+        ],
+        "externalName": "cloud-emqx-latest"
+    },
+    {
+        "name": "洛书地图服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/maps/scenes",
+                "title": "场景列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes",
+                "title": "场景创建",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/scenes/:sid",
+                "title": "场景详情",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/maps/scenes/:sid",
+                "title": "场景修改",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/maps/scenes/:sid",
+                "title": "场景删除",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/devs",
+                "title": "dev数据新建",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/scenes/:sid/devs",
+                "title": "dev数据列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/scenes/:sid/devs/:id",
+                "title": "dev数据详情",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/maps/scenes/:sid/devs/:pk",
+                "title": "dev数据删除",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/devs/:pk/create_directory",
+                "title": "dev创建文件夹",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/maps/scenes/:sid/devs/:pk/delete_file_or_directory",
+                "title": "dev删除文件或文件夹",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/devs/:pk/finish_upload",
+                "title": "dev完成上传",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/devs/:pk/get_credentials",
+                "title": "dev获取临时凭证",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/originals",
+                "title": "original数据新建",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/scenes/:sid/originals",
+                "title": "originals数据列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/scenes/:sid/originals/:id",
+                "title": "originals数据详情",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/maps/scenes/:sid/originals/:id",
+                "title": "originals数据删除",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/originals/:id/get_credentials",
+                "title": "originals获取临时凭证",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/originals/:id/finish_upload",
+                "title": "original完成上传",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/originals/:pk/create_directory",
+                "title": "original创建文件夹",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/originals/:pk/delete_file_or_directory",
+                "title": "original删除文件或文件夹",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/scenes/:sid/releases",
+                "title": "项目场景RC版本列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/releases",
+                "title": "dev版本发布RC版本",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/scenes/:sid/releases/:pk",
+                "title": "查看项目场景RC版本详细数据",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/scenes/:sid/release/finish_check",
+                "title": "RC发布完成check",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/checks",
+                "title": "镜像检查版本列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/maps/checks",
+                "title": "新增镜像检查版本",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/maps/checks/:id",
+                "title": "镜像检查版本详细",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/maps/checks/:id",
+                "title": "删除镜像检查版本",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/maps/checks/:id",
+                "title": "更新镜像检查版本",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/maps/scenes/:sid/devs/:pk/clear_cache",
+                "title": "dev上传数据缓存清除",
+                "description": ""
+            }
+        ],
+        "externalName": "loshu-map-management-latest"
+    },
+    {
+        "name": "洛书lite服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/reports/download",
+                "title": "洛书报告下载",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/reports/summary",
+                "title": "车辆信息",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/reports/picture_type",
+                "title": "路线集合",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/reports/plot_data",
+                "title": "行驶信息",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/reports/list",
+                "title": "车辆列表",
+                "description": ""
+            }
+        ],
+        "externalName": "loshu-lite-data-report-api-latest"
+    },
+    {
+        "name": "车辆报告服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "地图",
+                "code": "MAP",
+                "description": "",
+                "feModel": "managementMap/getApplicableMaps.maps",
+                "hostType": "ALL",
+                "services": null
+            },
+            {
+                "name": "车辆",
+                "code": "VEHICLE",
+                "description": "",
+                "feModel": "managementVehicle/all.vehicles",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/transit/vehicle_info",
+                "title": "获取车辆信息",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/transit/operation_loops",
+                "title": "获取运营行程数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/transit/original_trips",
+                "title": "获取原始站点行程数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/transit/operation_loops/:_id",
+                "title": "获取运营行程详情",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/transit/export_loops",
+                "title": "导出运营行程数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/transit/export_trips",
+                "title": "导出原始站点行程数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/transit/alert_statistics",
+                "title": "获取告警数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/transit/export_alerts",
+                "title": "导出告警数据",
+                "description": ""
+            }
+        ],
+        "externalName": "console-vehicle-report-latest"
+    },
+    {
+        "name": "运维工具服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "POST",
+                "path": "/check",
+                "title": "发送检测命令",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/check/result",
+                "title": "获取检测结果",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/check/history",
+                "title": "获取车辆检测历史记录",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/check/grpcstatus",
+                "title": "获取grpc状态",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/check/list",
+                "title": "获取云端数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/check/rootpath",
+                "title": "获取根路径",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/check/download",
+                "title": "下载车辆文件到云端",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/check/delete",
+                "title": "删除车端文件",
+                "description": ""
+            }
+        ],
+        "externalName": "loshu-oam-data-latest"
+    },
+    {
+        "name": "工具链调试服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "车辆",
+                "code": "VEHICLE",
+                "description": "",
+                "feModel": "managementVehicle/all.vehicles",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "PATCH",
+                "path": "/operation/toolchain/switch/on",
+                "title": "打开工具链GRPC开关",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/operation/toolchain/switch/off",
+                "title": "关闭工具链GRPC开关",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/operation/toolchain/switch/status",
+                "title": "获取工具链GRPC服务状态",
+                "description": ""
+            }
+        ],
+        "externalName": "console-vehicle-operation-latest"
+    },
+    {
+        "name": "OTA云端服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/upgrade/version/",
+                "title": "获取可升级的版本列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/upgrade/request/",
+                "title": "下发升级指令",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/config/files/",
+                "title": "获取车辆对应的配置文件",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/config/histories/versions/",
+                "title": "获取车辆历史版本号",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/config/",
+                "title": "修改配置/解决配置冲突",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/config/",
+                "title": "获取配置内容",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/config/status/",
+                "title": "查询当前配置是否已经同步",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/veh/versions/",
+                "title": "获取车辆版本列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/config/v2c/",
+                "title": "同步车端配置到云端 ",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/package/:id",
+                "title": "删除指定包",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/packages/",
+                "title": "获取可升级的版本列表(全部)",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/upgrade/cancel/",
+                "title": "取消升级",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/config-service/configs/:category/:vin",
+                "title": "获取某个目录某辆车的所有配置",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/config-service/configs/:category/:vin/:nickname",
+                "title": "获取某个目录某辆车的所有配置（模糊查询）",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/config-service/config/",
+                "title": "上传车辆配置",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/config-service/config/:category/:vin/:nickname",
+                "title": "查看车辆配置",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/config-service/optimize/config/",
+                "title": "获取参数精简数据",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/config/",
+                "title": "保存参数",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/config/c2v/",
+                "title": "参数下发",
+                "description": ""
+            }
+        ],
+        "externalName": "ota-service-latest"
+    },
+    {
+        "name": "小程序redmine代理服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "车辆",
+                "code": "VEHICLE",
+                "description": "",
+                "feModel": "managementVehicle/all.vehicles",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/agent/redmine/faults",
+                "title": "获取列表数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/agent/redmine/faults/:_id",
+                "title": "获取单条数据",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/agent/redmine/faults",
+                "title": "创建数据",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/agent/redmine/upload",
+                "title": "上传文件",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/agent/redmine/faults/:_id",
+                "title": "更新数据",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/faults.json",
+                "title": "创建故障单",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/faults",
+                "title": "获取故障单列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/faults/${_id}.json",
+                "title": "获取故障单列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/faults/${_id}.json",
+                "title": "更新故障单",
+                "description": ""
+            }
+        ],
+        "externalName": "console-proxy-redmine-latest"
+    },
+    {
+        "name": "通知中心服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "POST",
+                "path": "/notification/internal/notify",
+                "title": "发送通知",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/records/search",
+                "title": "搜索历史通知记录",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/notification/templates",
+                "title": "创建通知模板",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/templates",
+                "title": "获取通知模板列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/templates/:uuid",
+                "title": "获取通知模板详情",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/notification/templates/:uuid",
+                "title": "更新通知模板",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/notification/upstreams",
+                "title": "新建上游",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/upstreams",
+                "title": "获取上游列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/upstreams/:uuid",
+                "title": "获取上游基本信息",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/notification/upstreams/:uuid/notifyConfigs",
+                "title": "添加上游通知配置",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/upstreams/:uuid/notifyConfigs/:configUUID",
+                "title": "获取上游通知配置详情",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/upstreams/:uuid/notifyConfigs",
+                "title": "获取上游通知配置列表",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/notification/upstreams/:uuid/notifyConfigs/:configUUID",
+                "title": "更新上游通知配置",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/notification/upstreams/:uuid/notifyConfigs/:configUUID",
+                "title": "删除上游通知配置",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/notification/upstreams/:uuid",
+                "title": "删除上游",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/notification/templates/:uuid",
+                "title": "删除模板",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/statistics",
+                "title": "获取事件日志统计",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/internal/records/search",
+                "title": "搜索历史通知记录 - 内部",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/addresses",
+                "title": "获取通知地址列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/maps/:id/upstreams",
+                "title": "地图绑定上游列表",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/notification/maps/:id/upstreams",
+                "title": "批量绑定地图上游",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/notification/maps/:id/upstreams/:uuid",
+                "title": "删除地图绑定上游",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/maps/:id/upstreams/:uuid",
+                "title": "地图绑定上游详情",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/maps/:id/upstreams/:uuid/notifyConfigs",
+                "title": "地图绑定上游通知配置列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/notification/maps/:id/upstreams/:uuid/notifyConfigs",
+                "title": "地图上游创建通知配置",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/public/templates",
+                "title": "获取公共模板",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/notification/upstreams/:uuid/notifyConfigs/:configUUID/switch-off",
+                "title": "关闭上游通知配置",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/notification/upstreams/:uuid/notifyConfigs/:configUUID/switch-on",
+                "title": "开启上游通知配置",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID",
+                "title": "地图上游通知配置详情",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID",
+                "title": "更新地图上游通知配置",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID",
+                "title": "删除地图上游通知配置",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID/switch-off",
+                "title": "关闭地图上游通知配置",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID/switch-on",
+                "title": "开启地图上游通知配置",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/notification/addresses/:uuid",
+                "title": "删除通知地址",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/notification/public/templates",
+                "title": "添加公共模板",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/notification/public/templates/:uuid",
+                "title": "删除单个公共模板",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/notification/public/templates/:uuid",
+                "title": "获取单个公共模板",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/notification/public/templates/:uuid",
+                "title": "更新单个公共模板",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/notification/templates",
+                "title": "导入通知模板",
+                "description": ""
+            }
+        ],
+        "externalName": "console-notification-latest"
+    },
+    {
+        "name": "车端日志代理服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "车辆",
+                "code": "VEHICLE",
+                "description": "",
+                "feModel": "managementVehicle/all.vehicles",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "POST",
+                "path": "/vehicle/log",
+                "title": "打包车端日志",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/vehicle/log",
+                "title": "上传车辆日志并修改对应 redmine",
+                "description": ""
+            }
+        ],
+        "externalName": "console-proxy-log-latest"
+    },
+    {
+        "name": "车辆模式服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/mode/:VEHICLE",
+                "title": "获取车辆模式",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/mode/:VEHICLE",
+                "title": "设置车辆模式",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/mode",
+                "title": "获取所有车辆模式",
+                "description": ""
+            }
+        ],
+        "externalName": "console-vehicle-mode-latest"
+    },
+    {
+        "name": "业务运营服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "地图",
+                "code": "MAP",
+                "description": "",
+                "feModel": "managementMap/getApplicableMaps.maps",
+                "hostType": "ALL",
+                "services": null
+            },
+            {
+                "name": "车辆",
+                "code": "VEHICLE",
+                "description": "",
+                "feModel": "managementVehicle/all.vehicles",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/biz/config/vehicle",
+                "title": "运营配置 - 获取车辆列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/biz/config/vehicle/:id",
+                "title": "运营配置 - 获取某辆车",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/biz/config/vehicle/:id",
+                "title": "运营配置 - 设置某辆车",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/biz/config/map",
+                "title": "运营配置 - 创建地图",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/biz/config/map/:id",
+                "title": "运营配置 - 获取地图配置",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/biz/config/map/:id",
+                "title": "运营配置 - 更新地图配置",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/biz/switch/system/on/:id",
+                "title": "开关 - 打开系统调度",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/biz/switch/system/off/:id",
+                "title": "开关 - 关闭系统调度",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/biz/switch/order/on/:id",
+                "title": "开关 - 打开任务调度",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/biz/switch/order/off/:id",
+                "title": "开关 - 关闭任务调度",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/biz/switch/scheduler/off/:id",
+                "title": "关闭调度开关",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/biz/switch/scheduler/on/:id",
+                "title": "开启调度开关",
+                "description": ""
+            }
+        ],
+        "externalName": "console-biz-latest"
+    },
+    {
+        "name": "任务订单服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "车辆",
+                "code": "VEHICLE",
+                "description": "",
+                "feModel": "managementVehicle/all.vehicles",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "POST",
+                "path": "/order/batch",
+                "title": "订单 - 创建订单",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/order/batch",
+                "title": "订单 - 获取列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/order/batch/:id",
+                "title": "订单 - 获取单个父订单",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/order/batch/:id/cancelappointed",
+                "title": "订单 - 取消预约",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/order/query/batch/appointed",
+                "title": "订单 - 获取预约订单",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/order/query/batch/immediate",
+                "title": "订单 - 获取即时订单",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/order/query/sub/inprocess",
+                "title": "订单 - 获取正在进行的子订单",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/order/sub/:id",
+                "title": "订单 - 获取单个子订单",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/order/sub/:id/abort",
+                "title": "订单 - 终止子订单",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/order/sub/:id/cancel",
+                "title": "订单 - 取消子订单",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/order/sub/:id/complete",
+                "title": "订单 - 完成子订单",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/order/ws",
+                "title": "订单 - WS",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/order/batch/:id/abort",
+                "title": "结束父订单",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/order/batch/:id/cancel",
+                "title": "取消父订单",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/order/batch/:id/complete",
+                "title": "完成父订单",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/order/query/sub/immediate",
+                "title": "订单 - 获取即时子订单",
+                "description": ""
+            }
+        ],
+        "externalName": "console-ticket-latest"
+    },
+    {
+        "name": "数据聚合服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/data/image",
+                "title": "获取图片数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/data/log",
+                "title": "获取日志数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/data/mqtt",
+                "title": "获取 MQTT 数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/data/videos",
+                "title": "获取视频数据",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/statuses",
+                "title": "获取落盘数据状态",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/statuses",
+                "title": "更新落盘数据状态",
+                "description": ""
+            }
+        ],
+        "externalName": "data-aggregator-latest"
+    },
+    {
+        "name": "流媒体服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "车辆",
+                "code": "VEHICLE",
+                "description": "",
+                "feModel": "managementVehicle/all.vehicles",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/api/controls/record-status",
+                "title": "获取落盘状态",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/api/controls/record-status/:VEHICLE",
+                "title": "获取单车落盘状态",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/api/controls/set-record-status",
+                "title": "设置落盘状态",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/api/streams",
+                "title": "获取直播流列表",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/api/videos",
+                "title": "获取视频",
+                "description": ""
+            }
+        ],
+        "externalName": "console-media-latest"
+    },
+    {
+        "name": "司图统计路线服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/mapservice/static/route",
+                "title": "获取统计路线",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/mapservice/static/route",
+                "title": "删除统计路线",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/mapservice/static/route/typea",
+                "title": "新增AB型统计路线",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/mapservice/static/route/typeb",
+                "title": "新增ABBA型统计路线",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/mapservice/static/route/update/typea",
+                "title": "更新AB型统计路线",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/mapservice/static/route/update/typeb",
+                "title": "更新ABBA型统计路线",
+                "description": ""
+            }
+        ],
+        "externalName": "situ-map-route-latest"
+    },
+    {
+        "name": "Event-Engine",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/settings/trip",
+                "title": "读取行程超时时间",
+                "description": ""
+            },
+            {
+                "method": "PUT",
+                "path": "/settings/trip",
+                "title": "设置行程超时时间",
+                "description": ""
+            }
+        ],
+        "externalName": "event-engine-latest"
+    },
+    {
+        "name": "对象存储查询服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [
+            {
+                "name": "OSS 桶",
+                "code": "BUCKET",
+                "description": "",
+                "feModel": "managementOss/all.buckets",
+                "hostType": "ALL",
+                "services": null
+            }
+        ],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/buckets",
+                "title": "获取桶列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/buckets/:id/build",
+                "title": "重建桶文件索引",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/buckets/build",
+                "title": "重建存储桶索引",
+                "description": ""
+            },
+            {
+                "method": "PATCH",
+                "path": "/object",
+                "title": "重命名文件",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/object/:id",
+                "title": "下载文件",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/objects",
+                "title": "删除文件",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/tasks",
+                "title": "文件批次列表",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/tasks",
+                "title": "创建文件批量下载",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/tasks/:id",
+                "title": "删除任务",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/objects",
+                "title": "检索文件列表",
+                "description": ""
+            }
+        ],
+        "externalName": "oss-browser-latest-backend"
+    },
+    {
+        "name": "地图业务层服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/business-map/mapservice/nextstop/v1/station/by/map",
+                "title": "获取地图下所有站点",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/business-map/mapservice/nextstop/v1/station/by/id",
+                "title": "获取站点",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/business-map/mapservice/nextstop/v1/create/station",
+                "title": "新增站点",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/business-map/mapservice/nextstop/v1/station/by/id",
+                "title": "删除站点",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/business-map/mapservice/nextstop/v1/update/station",
+                "title": "更新站点",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/business-map/mapservice/nextstop/v1/route",
+                "title": "获取地图下所有路线",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/business-map/mapservice/nextstop/v1/create/route",
+                "title": "新增路线",
+                "description": ""
+            },
+            {
+                "method": "DELETE",
+                "path": "/business-map/mapservice/nextstop/v1/route",
+                "title": "删除路线",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/business-map/mapservice/nextstop/v1/update/route",
+                "title": "更新路线",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/business-map/mapservice/nextstop/v1/publish/dev/station",
+                "title": "切换站点类型",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/business-map/mapservice/nextstop/v1/publish/dev/route",
+                "title": "切换路线类型",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/business-map/mapservice/nextstop/v1/vehicle/route/relation",
+                "title": "获取车辆绑定路线",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/business-map/mapservice/nextstop/v1/bundle/route2vehicle",
+                "title": "绑定路线到车辆",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/business-map/mapservice/nextstop/v1/unbundle/route2vehicle",
+                "title": "解绑路线",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/business-map/mapservice/nextstop/v1/vehicle/status",
+                "title": "获取车辆状态",
+                "description": ""
+            },
+            {
+                "method": "GET",
+                "path": "/business-map/mapservice/nextstop/v1/sync/data",
+                "title": "同步状态",
+                "description": ""
+            },
+            {
+                "method": "POST",
+                "path": "/business-map/mapservice/nextstop/v1/load/routefile",
+                "title": "导入文件",
+                "description": ""
+            }
+        ],
+        "externalName": "situ-map-business-latest"
+    },
+    {
+        "name": "全局规划服务",
+        "indexPattern": "",
+        "description": "",
+        "avatar": "",
+        "resources": [],
+        "apis": [
+            {
+                "method": "GET",
+                "path": "/planning/mapservice/planning/get/path",
+                "title": "获取规划路径点信息",
+                "description": ""
+            }
+        ],
+        "externalName": "global-planning-latest"
+    }
+]

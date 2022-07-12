@@ -1,0 +1,27 @@
+{
+    "path_handling": "v0",
+    "paths": ["/console/system"
+
+],
+    "destinations": null,
+    "headers": null,
+    "protocols": [
+        "http",
+        "https"
+    ],
+    "snis": null,
+    "service": {
+        "name": "console-core-latest.hkia-exercise-2"
+    },
+    "name": "console-core-latest.hkia-exercise-2",
+    "strip_path": true,
+    "preserve_host": false,
+    "regex_priority": 0,
+    "sources": null,
+    "methods": null,
+    "https_redirect_status_code": 426,
+    "hosts":[
+            "cb-2.uisee.com"
+            ],
+    "tags": null
+}

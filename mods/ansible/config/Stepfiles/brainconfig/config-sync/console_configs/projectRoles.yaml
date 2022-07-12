@@ -1,0 +1,453 @@
+consoleTestProjectRole:
+- 运维成员:
+    menus:
+      个人信息:
+      - 个人信息
+      管理:
+      - 项目管理
+      通知 - 地址:
+      - 项目管理
+      通知 - 地图相关:
+      - 项目管理
+      通知 - 模板:
+      - 项目管理
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - '13'
+      VEHICLE:
+      - .*
+- 【项目管理员】:
+    menus:
+      远程工具链:
+      - 工具链车辆列表
+      遥控器:
+      - 站点遥控器
+      车辆管理:
+      - OTA
+      地图管理:
+      - OTA
+      自检工具:
+      - 自检执行
+      - 自检记录
+      监控 - 园区:
+      - 园区监控 基本功能
+      - 园区监控 - 控车
+      上报问题:
+      - 故障上报管理
+      运维自检工具:
+      - 运维自检
+      数据记录:
+      - 洛书lite
+      监控 - 车辆遥控器:
+      - 车辆遥控器
+      管理:
+      - 项目管理
+      通知 - 地址:
+      - 项目管理
+      通知 - 地图相关:
+      - 项目管理
+      通知 - 模板:
+      - 项目管理
+      OSS 资源:
+      - OSS 资源
+      故障上报小程序:
+      - 故障上报小程序
+      OTA软件包管理:
+      - OTA metadata管理
+      个人信息:
+      - 个人信息
+      云端数据:
+      - 运维调试
+      车端远程数据管理:
+      - 运维调试
+      监控 - 运维平台:
+      - 运维回放
+      监控 - 鹰眼:
+      - 园区监控 - 视频实况
+      云母工具:
+      - 云母工具
+      事件日志记录:
+      - 事件历史记录
+      订单管理:
+      - 订单管理
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- 遥控器操作员:
+    menus:
+      个人信息:
+      - 个人信息
+      遥控器:
+      - 站点遥控器
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- 车辆遥控器操作员:
+    menus:
+      个人信息:
+      - 个人信息
+      监控 - 车辆遥控器:
+      - 车辆遥控器
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- FAE:
+    menus:
+      个人信息:
+      - 个人信息
+      车辆管理:
+      - OTA
+      地图管理:
+      - OTA
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- 运营操控成员:
+    menus:
+      个人信息:
+      - 个人信息
+      监控 - 园区:
+      - 园区监控 - 控车
+      - 园区监控 基本功能
+      监控 - 鹰眼:
+      - 园区监控 - 视频实况
+      云母工具:
+      - 云母工具
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - '15'
+      - .*
+      VEHICLE:
+      - .*
+- 运营只读成员:
+    menus:
+      个人信息:
+      - 个人信息
+      监控 - 鹰眼:
+      - 园区监控 - 视频实况
+      监控 - 园区:
+      - 园区监控 基本功能
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- 徐福记站点遥控器操作员:
+    menus:
+      个人信息:
+      - 个人信息
+      遥控器:
+      - 站点遥控器
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - '412'
+      VEHICLE:
+      - e100.mirror.car9
+- test:
+    menus:
+      个人信息:
+      - 个人信息
+      远程工具链:
+      - 工具链车辆列表
+      监控 - 园区:
+      - 园区监控 基本功能
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - e100.compass.ci.car9
+      - e100.mirror.car9
+      - e100.efence.car9
+      - e100.car100
+      - e100.car101
+      - e100.car102
+      - e100.car103
+      - e100.car104
+      - e100.car105
+      - e100.car106
+      - e100.car107
+      - e100.car108
+      - e100.car109
+      - e100.alert.car9
+      - e100.car110
+      - e100.car111
+      - e100.car112
+      - e100.car113
+      - e100.car114
+      - e100.car115
+      - e100.car116
+      - e100.car118
+      - e100.car119
+      - e100.car120
+      - e100.car121
+      - e100.car122
+      - e100.car123
+      - e100.car124
+      - e100.car125
+      - e100.car126
+      - e100.car127
+      - e100.car128
+      - e100.car129
+      - e100.car130
+      - e100.car131
+      - e100.car132
+      - e100.car133
+      - e100.car134
+      - e100.car135
+      - e100.car136
+      - e100.car137
+      - e100.car138
+      - e100.car139
+      - e100.car140
+      - e100.car141
+      - e100.car142
+      - e100.car143
+      - e100.car144
+      - e100.car145
+      - e100.car146
+      - e100.car147
+      - e100.car148
+      - e100.car149
+      - e100.car150
+      - e100.w.car107.HIL03
+      - e100.design.car9
+      - e100.car1
+      - e100.nightly.car9
+      - e100.test.car3
+      - e100.w.car999
+      - e100.w.car999HIL
+      - car8.test.4
+      - car8.test.2
+      - car8.test.1
+      - e100.w.car107.ybq
+      - e100.w.car108.ybq
+      - e100.ybq
+      - test_delete_log
+      - e100.ybq2
+      - car1.test1
+      - '444'
+      - test.hosted_ids.1
+      - e100.hosted_ids.car1
+      - '555'
+      - '666'
+      - e100.car8
+      - e100.jing.car8
+      - ceshi
+      - sss
+      - e100.test.car0310
+      - test.test11
+      - e100.jing.car9
+      - e100.cxy.car9
+      - e100.cxy123.car2
+      - e100.smoketest.car1
+      - e100.w.car107
+      - '333'
+      - e100.car110.zctest
+      - e100.car600.tgl
+      - e100.carxm.sim
+      - test111
+      - e100.smoketest.car1.seres.test
+      - test1
+      - tb25nh-r.car114HIL
+      - e100.car600.xmshuaishuai
+      - e100.wxt.car10
+      - e100.car600.xm666
+      - p3e.mirror.car1
+      - dv01.mirror.car1
+      - e100.test.car58
+      - e100.jing.car10
+      - e100.jing.car1011
+      - e100.jing.car11
+      - e100.jing.car90
+      - ota_master_test
+      - e100.gyc.car117
+      - e100.wxt.car8
+      - tb25nh-r.car199HIL
+      - e100.fjz.car10
+      - e100.carxm.sim0.situ
+      - e100.situ.car9
+      - e100.car600.xm0.situ
+      - situ.test.car
+      - e100.newgg.car9
+      - e100.gyc.car118
+      - tb25nr.jing.car9
+      - e100.vehicle_shadow.car9
+      - adssa
+      - tb25nr.wxt.car9
+      - e100.w.car108.gg1
+      - e100.car600.xmlxm0
+      - e100.car600.xm2
+      - e100.car600.xm3
+      - e100.car600.xm4
+      - e100.car600.xm5
+      - e100.car600.xm6
+      - e100.car600.xm7
+      - e100.car600.xm8
+      - e100.car600.xm9
+      - e100.car600.xm1
+      - e100.car600.xm0666
+      - e100.alert.car9.gg1
+      - e100.car600.xm10
+      - e100.test.car22
+      - e100.byz.car209
+      - tb25nh-r.car1HIL
+      - tb25nh-r.test.car22
+      - e100.sktest.car9
+      - car.test1
+      - selenium.test.car1
+      - selenium.test.car5
+- test123:
+    menus:
+      个人信息:
+      - 个人信息
+      监控 - 园区:
+      - 园区监控 - 控车
+      - 园区监控 基本功能
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - '224'
+      VEHICLE:
+      - e100.wxt.car10
+- 运维回放2.0测试:
+    menus:
+      个人信息:
+      - 个人信息
+      管理:
+      - 项目管理
+      通知 - 地址:
+      - 项目管理
+      通知 - 地图相关:
+      - 项目管理
+      通知 - 模板:
+      - 项目管理
+      监控 - 运维平台:
+      - 运维回放
+      监控 - 鹰眼:
+      - 园区监控 - 视频实况
+      车辆管理:
+      - OTA
+      地图管理:
+      - OTA
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- operator_test:
+    menus:
+      个人信息:
+      - 个人信息
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- test0001:
+    menus: {}
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- 高级放行专员:
+    menus:
+      个人信息:
+      - 个人信息
+      监控 - 园区:
+      - 园区监控 - 控车
+      - 园区监控 基本功能
+      监控 - 鹰眼:
+      - 园区监控 - 视频实况
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- test1:
+    menus: {}
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- 测试:
+    menus: {}
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- test_0113:
+    menus:
+      个人信息:
+      - 个人信息
+      OSS 资源:
+      - OSS 资源
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*
+- 小程序使用专员:
+    menus:
+      故障上报小程序:
+      - 故障上报小程序
+      管理:
+      - 项目管理
+      通知 - 地址:
+      - 项目管理
+      通知 - 地图相关:
+      - 项目管理
+      通知 - 模板:
+      - 项目管理
+      上报问题:
+      - 故障上报管理
+    detail:
+      CATEGORY:
+      - .*
+      MAP:
+      - .*
+      VEHICLE:
+      - .*

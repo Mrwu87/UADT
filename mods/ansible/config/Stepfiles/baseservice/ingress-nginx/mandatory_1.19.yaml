@@ -293,7 +293,7 @@ spec:
 ---
 # Source: https://github.com/kubernetes/ingress-nginx/tree/main/charts/ingress-nginx/templates/controller-deployment.yaml
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   labels:
     helm.sh/chart: ingress-nginx-4.0.10
@@ -320,6 +320,7 @@ spec:
         app.kubernetes.io/component: controller
     spec:
       dnsPolicy: ClusterFirst
+      hostNetwork: true
       containers:
         - name: controller
           image: uhub.service.ucloud.cn/library/ingress-nginx-controller:v1.1.0

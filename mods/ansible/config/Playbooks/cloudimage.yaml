@@ -1,0 +1,6 @@
+- hosts: deploy_ip
+  gather_facts:  false
+  tasks:
+    - name: get cloudbrain image file
+      shell: sudo docker load -i {{ inventory_dir }}/Playbooks/images/cloudbrain_images.tar
+      async: 0

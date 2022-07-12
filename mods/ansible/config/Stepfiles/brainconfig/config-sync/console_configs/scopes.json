@@ -1,0 +1,1502 @@
+[
+    {
+        "name": "Console Core - 普通系统用户",
+        "code": "SCOPE_USER_SYSTEM_NORMAL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "GET,/preference/:externalId/:key",
+            "POST,/preference/:externalId/:key",
+            "GET,/security/profile",
+            "PUT,/security/profile",
+            "PUT,/security/profile/avatar",
+            "POST,/security/login",
+            "POST,/security/logout",
+            "GET,/security/profile/projects",
+            "GET,/security/profile/groups",
+            "POST,/security/profile/change-password",
+            "POST,/security/profile/forget-password"
+        ],
+        "children": null
+    },
+    {
+        "name": "车辆服务 - 总",
+        "code": "SCOPE_VEHICLE_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "车辆 - 只读",
+                "code": "SCOPE_VEHICLE_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/vehicles",
+                    "GET,/vehicles/:VEHICLE"
+                ],
+                "children": null
+            },
+            {
+                "name": "车辆 - 读写",
+                "code": "SCOPE_VEHICLE_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/vehicles",
+                    "POST,/vehicles",
+                    "DELETE,/vehicles/:VEHICLE",
+                    "GET,/vehicles/:VEHICLE",
+                    "PATCH,/vehicles/:VEHICLE",
+                    "PUT,/vehicles/:VEHICLE/map",
+                    "PUT,/vehicles/:VEHICLE/route",
+                    "POST,/batch/map",
+                    "PUT,/vehicles/:VEHICLE/ota/map",
+                    "POST,/vehicles/batch/map",
+                    "POST,/vehicles/:VEHICLE/ota/map/download",
+                    "PUT,/vehicles/:VEHICLE/ota/map/install",
+                    "PUT,/vehicles/:VEHICLE/ota/map/cancel"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "地图服务 - 总",
+        "code": "SCOPE_MAP_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "地图 - 只读",
+                "code": "SCOPE_MAP_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/maps/:MAP",
+                    "GET,/internal/vehicle/versionlist",
+                    "GET,/maps/:MAP/geojson",
+                    "GET,/internal/versionlist",
+                    "GET,/maps",
+                    "GET,/map/pool",
+                    "GET,/internal/file",
+                    "GET,/map/pool/dev",
+                    "GET,/maps/:MAP/versions/:version/geojson"
+                ],
+                "children": null
+            },
+            {
+                "name": "地图 - 读写",
+                "code": "SCOPE_MAP_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "DELETE,/maps/:MAP",
+                    "GET,/maps/:MAP",
+                    "GET,/internal/vehicle/versionlist",
+                    "GET,/maps/:MAP/geojson",
+                    "PATCH,/maps/:MAP",
+                    "GET,/internal/versionlist",
+                    "GET,/maps",
+                    "POST,/maps",
+                    "GET,/map/pool",
+                    "GET,/map/pool/dev",
+                    "GET,/maps/:MAP/versions/:version/geojson"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "车辆形象服务 - 总",
+        "code": "SCOPE_CATEGORY_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "车辆类型 - 只读",
+                "code": "SCOPE_CATEGORY_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/categories",
+                    "GET,/categories/:CATEGORY"
+                ],
+                "children": null
+            },
+            {
+                "name": "车辆类型 - 读写",
+                "code": "SCOPE_CATEGORY_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/categories",
+                    "POST,/categories",
+                    "DELETE,/categories/:CATEGORY",
+                    "GET,/categories/:CATEGORY",
+                    "PATCH,/categories/:CATEGORY"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "前端菜单服务 - 总",
+        "code": "SCOPE_MENU_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "菜单 - 只读",
+                "code": "SCOPE_MENU_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/menus",
+                    "GET,/menus/:MENU"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "前端组件服务 - 总",
+        "code": "SCOPE_COMPONENT_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "组件 - 只读",
+                "code": "SCOPE_COMPONENT_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/components",
+                    "GET,/components/:UUID"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "司南代理服务 - 总",
+        "code": "SCOPE_PROXY_COMPASS_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "车辆控制",
+                "code": "SCOPE_CONTROLS",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "POST,/controls/backToRoad",
+                    "POST,/controls/cancelRoute",
+                    "POST,/controls/cleanErrorHistory",
+                    "POST,/controls/cleanLaybyZoneStatus",
+                    "POST,/controls/confirmArrived",
+                    "POST,/controls/giveWay",
+                    "POST,/controls/nudgeBackward",
+                    "POST,/controls/pause",
+                    "POST,/controls/nudgeForward",
+                    "POST,/controls/releaseEmergencyStop",
+                    "POST,/controls/releaseErrorEmergencyStop",
+                    "POST,/controls/resetLocation",
+                    "POST,/controls/resume",
+                    "POST,/controls/selectParking",
+                    "POST,/controls/selectStop",
+                    "POST,/controls/speakerTwice",
+                    "POST,/controls/start",
+                    "POST,/controls/startUOS",
+                    "GET,/controls/status",
+                    "POST,/controls/switchAuto",
+                    "POST,/controls/switchManu",
+                    "POST,/controls/moveTrailerForward",
+                    "POST,/controls/cleanEmergencyBrakeError",
+                    "POST,/controls/releaseManualControl",
+                    "POST,/controls/setTrailerNum",
+                    "POST,/controls/startServiceMode",
+                    "POST,/controls/stopServiceMode",
+                    "POST,/controls/speed",
+                    "PATCH,/controls/selectline",
+                    "PUT,/controls/nextstop",
+                    "POST,/controls/selectStops",
+                    "POST,/controls/cancel/selectStops",
+                    "POST,/controls/setTrailers",
+                    "POST,/controls/stops/replan",
+                    "POST,/controls/emergencyBrake",
+                    "POST,/controls/stopUOS",
+                    "POST,/controls/startNOME",
+                    "POST,/controls/stopNOME",
+                    "PUT,/vcc/flash/close",
+                    "PUT,/vcc/flash/open",
+                    "GET,/vcc/flash/state",
+                    "POST,/controls/route/exec"
+                ],
+                "children": null
+            },
+            {
+                "name": "Dump 摄像头、Lidar 数据",
+                "code": "SCOPE_PROXY_DUMP_CAMERA_LIDAR_DATA",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "POST,/controls/camera/startDump",
+                    "POST,/controls/camera/stopDump",
+                    "POST,/controls/lidar/startDump",
+                    "POST,/controls/lidar/stopDump"
+                ],
+                "children": null
+            },
+            {
+                "name": "鹰眼 - 控制",
+                "code": "SCOPE_HAWKEYE_CONTROL",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "POST,/controls/setVideoStatus"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "核心权限服务 - 总",
+        "code": "SCOPE_CONSOLE_CORE_ALL",
+        "description": "",
+        "domain": "DOMAIN_SYSTEM",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "系统管理",
+                "code": "SCOPE_SYSTEM_MANAGEMENT",
+                "description": "",
+                "domain": "DOMAIN_SYSTEM",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/batch/groups/:uuid/roles/resources/:rCode",
+                    "PUT,/batch/groups/:uuid/roles/resources/:rCode",
+                    "GET,/batch/roles/resources/:rCode",
+                    "PUT,/batch/roles/resources/:rCode",
+                    "PUT,/batch/roles/scopes",
+                    "GET,/groups",
+                    "POST,/groups",
+                    "DELETE,/groups/:uuid",
+                    "GET,/groups/:uuid",
+                    "PUT,/groups/:uuid",
+                    "PUT,/groups/:uuid/avatar",
+                    "DELETE,/groups/:uuid/members",
+                    "GET,/groups/:uuid/members",
+                    "POST,/groups/:uuid/members",
+                    "PUT,/groups/:uuid/members",
+                    "DELETE,/groups/:uuid/members/:userUUID",
+                    "DELETE,/groups/:uuid/members/:userUUID/resources",
+                    "GET,/groups/:uuid/members/:userUUID/resources",
+                    "POST,/groups/:uuid/members/:userUUID/resources",
+                    "GET,/groups/:uuid/roles",
+                    "POST,/groups/:uuid/roles",
+                    "DELETE,/groups/:uuid/roles/:roleUUID",
+                    "GET,/groups/:uuid/roles/:roleUUID",
+                    "DELETE,/groups/:uuid/roles/:roleUUID/resources",
+                    "GET,/groups/:uuid/roles/:roleUUID/resources",
+                    "POST,/groups/:uuid/roles/:roleUUID/resources",
+                    "PUT,/groups/:uuid/roles/:roleUUID/scopes",
+                    "GET,/internal/kongServices",
+                    "GET,/resources",
+                    "POST,/resources",
+                    "DELETE,/resources/:uuid",
+                    "GET,/resources/:uuid",
+                    "PUT,/resources/:uuid",
+                    "GET,/roles",
+                    "POST,/roles",
+                    "DELETE,/roles/:uuid",
+                    "GET,/roles/:uuid",
+                    "PUT,/roles/:uuid",
+                    "DELETE,/roles/:uuid/resources",
+                    "POST,/roles/:uuid/resources",
+                    "PUT,/roles/:uuid/scopes",
+                    "GET,/scopes",
+                    "POST,/scopes",
+                    "DELETE,/scopes/:uuid",
+                    "GET,/scopes/:uuid",
+                    "PUT,/scopes/:uuid",
+                    "PUT,/scopes/:uuid/children",
+                    "PUT,/scopes/:uuid/apis",
+                    "POST,/security/login",
+                    "POST,/security/logout",
+                    "GET,/security/profile",
+                    "PUT,/security/profile",
+                    "PUT,/security/profile/avatar",
+                    "POST,/security/profile/change-password",
+                    "POST,/security/profile/forget-password",
+                    "GET,/security/profile/groups",
+                    "GET,/security/profile/projects",
+                    "POST,/security/register",
+                    "GET,/services",
+                    "POST,/services",
+                    "DELETE,/services/:uuid",
+                    "GET,/services/:uuid",
+                    "PUT,/services/:uuid",
+                    "POST,/services/:uuid/apis",
+                    "DELETE,/services/:uuid/apis/batch",
+                    "DELETE,/services/:uuid/apis/clear",
+                    "POST,/services/:uuid/apis/import",
+                    "PUT,/services/:uuid/avatar",
+                    "GET,/services/:uuid/groups",
+                    "GET,/user/:uuid/groups",
+                    "GET,/users",
+                    "POST,/users",
+                    "DELETE,/users/:uuid",
+                    "GET,/users/:uuid",
+                    "PUT,/users/:uuid",
+                    "PUT,/users/:uuid/active",
+                    "PUT,/users/:uuid/avatar",
+                    "DELETE,/users/:uuid/hard",
+                    "GET,/users/:uuid/projects",
+                    "GET,/users/:uuid/roles",
+                    "PUT,/users/:uuid/roles",
+                    "GET,/logs",
+                    "GET,/scopes/:uuid/apis",
+                    "GET,/resources/:uuid/scopeMappings",
+                    "POST,/components",
+                    "GET,/components",
+                    "DELETE,/components/:UUID",
+                    "GET,/components/:UUID",
+                    "PUT,/components/:UUID",
+                    "GET,/menus",
+                    "POST,/menus",
+                    "DELETE,/menus/:MENU",
+                    "GET,/menus/:MENU",
+                    "PUT,/menus/:MENU",
+                    "PUT,/menus/:MENU/components",
+                    "GET,/preference/:externalId/:key",
+                    "POST,/preference/:externalId/:key",
+                    "GET,/groups/:uuid/universeResourceCodes",
+                    "POST,/groups/:uuid/universeResourceCodes",
+                    "DELETE,/groups/:uuid/universeResourceCodes/:rcode",
+                    "PUT,/groups/:uuid/roles/:roleUUID",
+                    "POST,/groups/:uuid/members/:userUUID/resources/deny",
+                    "DELETE,/groups/:uuid/members/:userUUID/resources/deny",
+                    "GET,/groups/:uuid/members/:userUUID",
+                    "PUT,/groups/:uuid/members/:userUUID",
+                    "GET,/groups/:uuid/logs",
+                    "PUT,/resources/:uuid/scopeMappings"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "自检工具 - 总",
+        "code": "SCOPE_SELFCHECK_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "自检工具 - 只读",
+                "code": "SCOPE_SELFCHECK_READONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/selfchecks",
+                    "GET,/selfchecks/:id",
+                    "GET,/vehicles",
+                    "GET,/controls/status",
+                    "GET,/maps"
+                ],
+                "children": null
+            },
+            {
+                "name": "自检工具 - 读写",
+                "code": "SCOPE_SELFCHECK_READWRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/vehicles",
+                    "GET,/controls/status",
+                    "GET,/selfchecks",
+                    "POST,/selfchecks",
+                    "GET,/selfchecks/:id",
+                    "GET,/maps"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "项目管理",
+        "code": "SCOPE_PROJECT_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "项目角色 - 读写",
+                "code": "SCOPE_PROJECT_ROLE_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/groups/:uuid/roles",
+                    "POST,/groups/:uuid/roles",
+                    "DELETE,/groups/:uuid/roles/:roleUUID",
+                    "GET,/groups/:uuid/roles/:roleUUID",
+                    "PUT,/batch/roles/scopes",
+                    "PUT,/groups/:uuid/roles/:roleUUID"
+                ],
+                "children": null
+            },
+            {
+                "name": "项目角色 - 只读",
+                "code": "SCOPE_PROJECT_ROLE_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/groups/:uuid/roles",
+                    "GET,/groups/:uuid/roles/:roleUUID"
+                ],
+                "children": null
+            },
+            {
+                "name": "项目成员 - 只读",
+                "code": "SCOPE_PROJECT_MEMBER_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/groups/:uuid/members",
+                    "GET,/groups/:uuid/members/:userUUID"
+                ],
+                "children": null
+            },
+            {
+                "name": "项目成员 - 读写",
+                "code": "SCOPE_PROJECT_MEMBER_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/groups/:uuid/members",
+                    "DELETE,/groups/:uuid/members",
+                    "POST,/groups/:uuid/members",
+                    "PUT,/groups/:uuid/members",
+                    "PUT,/groups/:uuid/members/:userUUID",
+                    "DELETE,/groups/:uuid/members/:userUUID",
+                    "GET,/users",
+                    "GET,/groups/:uuid/members/:userUUID"
+                ],
+                "children": null
+            },
+            {
+                "name": "项目成员资源 - 读写",
+                "code": "SCOPE_PROJECT_MEMBER_RESOURCE_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "DELETE,/groups/:uuid/members/:userUUID/resources",
+                    "GET,/groups/:uuid/members/:userUUID/resources",
+                    "POST,/groups/:uuid/members/:userUUID/resources",
+                    "GET,/groups/:uuid/members",
+                    "GET,/resources",
+                    "DELETE,/groups/:uuid/members/:userUUID/resources/deny",
+                    "POST,/groups/:uuid/members/:userUUID/resources/deny"
+                ],
+                "children": null
+            },
+            {
+                "name": "项目角色资源 - 读写",
+                "code": "SCOPE_PROJECT_ROLE_RESOURCE_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "PUT,/batch/groups/:uuid/roles/resources/:rCode",
+                    "GET,/batch/groups/:uuid/roles/resources/:rCode",
+                    "GET,/batch/roles/resources/:rCode",
+                    "PUT,/batch/roles/resources/:rCode",
+                    "DELETE,/groups/:uuid/roles/:roleUUID/resources",
+                    "GET,/groups/:uuid/roles/:roleUUID/resources",
+                    "POST,/groups/:uuid/roles/:roleUUID/resources",
+                    "PUT,/groups/:uuid/roles/:roleUUID/scopes",
+                    "GET,/resources"
+                ],
+                "children": null
+            },
+            {
+                "name": "项目基本功能",
+                "code": "SCOPE_PROJECT_BASIC",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/groups/:uuid",
+                    "PUT,/groups/:uuid/avatar",
+                    "GET,/groups/:uuid/universeResourceCodes",
+                    "POST,/groups/:uuid/universeResourceCodes",
+                    "DELETE,/groups/:uuid/universeResourceCodes/:rcode",
+                    "GET,/metadata"
+                ],
+                "children": null
+            },
+            {
+                "name": "系统角色详情 - 读写",
+                "code": "SCOPE_SYSTEM_ROLE_DETAIL_READ_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/roles/:uuid",
+                    "PUT,/roles/:uuid"
+                ],
+                "children": null
+            },
+            {
+                "name": "项目元数据 - 读写",
+                "code": "SCOPE_PROJECT_METADATA_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "DELETE,/metadata",
+                    "GET,/metadata",
+                    "PATCH,/metadata",
+                    "POST,/metadata"
+                ],
+                "children": null
+            },
+            {
+                "name": "项目元数据 - 只读",
+                "code": "SCOPE_PROJECT_METADATA_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/metadata"
+                ],
+                "children": null
+            },
+            {
+                "name": "项目操作记录 - 获取",
+                "code": "SCOPE_PROJECT_LOG_READ",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/services",
+                    "POST,/groups/:uuid/logs/query"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "鹰眼拉流",
+        "code": "SCOPE_HAWKEYE_SERVER",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "GET,/.*"
+        ],
+        "children": null
+    },
+    {
+        "name": "云云通道接入",
+        "code": "SCOPE_CLOUD_RABBITMQ",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "GET,/ws"
+        ],
+        "children": null
+    },
+    {
+        "name": "洛书lite服务",
+        "code": "SCOPE_LOSHU_LITE",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "GET,/reports/download",
+            "GET,/reports/picture_type",
+            "GET,/reports/list",
+            "GET,/reports/plot_data",
+            "GET,/reports/summary",
+            "GET,/transit/vehicle_info",
+            "GET,/transit/original_trips",
+            "GET,/transit/operation_loops/:_id",
+            "GET,/transit/operation_loops",
+            "GET,/transit/export_trips",
+            "GET,/transit/export_loops",
+            "GET,/transit/alert_statistics",
+            "GET,/transit/export_alerts"
+        ],
+        "children": null
+    },
+    {
+        "name": "小程序redmine代理服务",
+        "code": "SCOPE_PROXY_READMINE",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "GET,/agent/redmine/faults",
+            "POST,/agent/redmine/faults",
+            "GET,/agent/redmine/faults/:_id",
+            "POST,/agent/redmine/upload",
+            "PUT,/agent/redmine/faults/:_id"
+        ],
+        "children": null
+    },
+    {
+        "name": "通知中心服务 - 总",
+        "code": "SCOPE_NOTIFICATION_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "通知中心服务 - 管理",
+                "code": "SCOPE_NOTIFICATION_ADMIN",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/notification/templates",
+                    "POST,/notification/templates",
+                    "GET,/notification/templates/:uuid",
+                    "PATCH,/notification/templates/:uuid",
+                    "GET,/notification/upstreams",
+                    "POST,/notification/upstreams",
+                    "GET,/notification/upstreams/:uuid",
+                    "GET,/notification/upstreams/:uuid/notifyConfigs",
+                    "POST,/notification/upstreams/:uuid/notifyConfigs",
+                    "DELETE,/notification/upstreams/:uuid/notifyConfigs/:configUUID",
+                    "GET,/notification/upstreams/:uuid/notifyConfigs/:configUUID",
+                    "PUT,/notification/upstreams/:uuid/notifyConfigs/:configUUID",
+                    "DELETE,/notification/upstreams/:uuid",
+                    "DELETE,/notification/templates/:uuid"
+                ],
+                "children": null
+            },
+            {
+                "name": "通知中心服务 - 历史记录查询",
+                "code": "SCOPE_NOTIFICATION_RECORD_SEARCH",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/notification/records/search",
+                    "GET,/notification/statistics",
+                    "GET,/notification/internal/records/search"
+                ],
+                "children": null
+            },
+            {
+                "name": "通知中心服务 - 发送通知",
+                "code": "SCOPE_NOTIFICATION_NOTIFY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "POST,/notification/internal/notify"
+                ],
+                "children": null
+            },
+            {
+                "name": "通知中心服务-地图粒度管理",
+                "code": "SCOPE_NOTIFICATION_MAP_ADMIN",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/notification/addresses",
+                    "GET,/notification/internal/records/search",
+                    "GET,/notification/maps/:id/upstreams",
+                    "PUT,/notification/maps/:id/upstreams",
+                    "DELETE,/notification/maps/:id/upstreams/:uuid",
+                    "GET,/notification/maps/:id/upstreams/:uuid",
+                    "GET,/notification/maps/:id/upstreams/:uuid/notifyConfigs",
+                    "POST,/notification/maps/:id/upstreams/:uuid/notifyConfigs",
+                    "GET,/notification/public/templates",
+                    "GET,/notification/templates",
+                    "POST,/notification/templates",
+                    "DELETE,/notification/templates/:uuid",
+                    "GET,/notification/templates/:uuid",
+                    "PATCH,/notification/templates/:uuid",
+                    "GET,/notification/upstreams",
+                    "DELETE,/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID",
+                    "GET,/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID",
+                    "PUT,/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID",
+                    "PUT,/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID/switch-off",
+                    "PUT,/notification/maps/:id/upstreams/:uuid/notifyConfigs/:configUUID/switch-on",
+                    "DELETE,/notification/addresses/:uuid",
+                    "PUT,/notification/templates"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "车端日志代理服务",
+        "code": "SCOPE_PROXY_LOG",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "POST,/vehicle/log",
+            "PUT,/vehicle/log"
+        ],
+        "children": null
+    },
+    {
+        "name": "车辆模式服务",
+        "code": "SCOPE_VEHICLE_MODE",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "GET,/mode/:VEHICLE",
+            "PATCH,/mode/:VEHICLE",
+            "GET,/mode"
+        ],
+        "children": null
+    },
+    {
+        "name": "远程工具链调试服务",
+        "code": "SCOPE_OPERATION_TOOCHAIN",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "PATCH,/operation/toolchain/switch/off",
+            "PATCH,/operation/toolchain/switch/on",
+            "GET,/operation/toolchain/switch/status"
+        ],
+        "children": null
+    },
+    {
+        "name": "运维工具服务",
+        "code": "SCOPE_LOSHU_MAINTENANCE",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "运维检测服务",
+                "code": "SCOPE_LOSHU_MAINTENANCE_CHECK",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "POST,/check",
+                    "GET,/check/history",
+                    "GET,/check/result",
+                    "GET,/check/grpcstatus"
+                ],
+                "children": null
+            },
+            {
+                "name": "运维调试服务",
+                "code": "SCOPE_LOSHU_MAINTENANCE_DEBUG",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "POST,/check",
+                    "POST,/check/delete",
+                    "GET,/check/download",
+                    "GET,/check/history",
+                    "GET,/check/list",
+                    "GET,/check/result",
+                    "GET,/check/rootpath"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "配置管理",
+        "code": "SCOPE_CONFIG_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "配置管理 - 只读",
+                "code": "SCOPE_CONFIG_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/config/",
+                    "GET,/config/files/",
+                    "GET,/config/histories/versions/",
+                    "GET,/config/status/"
+                ],
+                "children": null
+            },
+            {
+                "name": "配置管理 - 读写",
+                "code": "SCOPE_CONFIG_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/config/",
+                    "POST,/config/",
+                    "GET,/config/files/",
+                    "GET,/config/histories/versions/",
+                    "GET,/config/status/",
+                    "POST,/config/v2c/",
+                    "POST,/config-service/config/",
+                    "GET,/config-service/config/:category/:vin/:nickname",
+                    "GET,/config-service/configs/:category/:vin",
+                    "GET,/config-service/configs/:category/:vin/:nickname"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "OTA软件管理",
+        "code": "SCOPE_OTA_SERVER_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "OTA软件 - 只读",
+                "code": "SCOPE_OTA_SERVER_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/upgrade/version/",
+                    "GET,/veh/versions/",
+                    "GET,/config-service/optimize/config/"
+                ],
+                "children": null
+            },
+            {
+                "name": "OTA软件 - 读写",
+                "code": "SCOPE_OTA_SERVER_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "POST,/upgrade/request/",
+                    "GET,/upgrade/version/",
+                    "GET,/veh/versions/",
+                    "POST,/upgrade/cancel/",
+                    "GET,/config-service/optimize/config/",
+                    "PUT,/config/",
+                    "POST,/config/c2v/"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "OTA软件包管理",
+        "code": "SCOPE_OTA_SERVER_PACKAGE_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "OTA软件包管理 - 只读",
+                "code": "SCOPE_OTA_SERVER_PACKAGE_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/packages/",
+                    "GET,/config-service/optimize/config/"
+                ],
+                "children": null
+            },
+            {
+                "name": "OTA软件包管理 - 读写",
+                "code": "SCOPE_OTA_SERVER_PACKAGE_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "DELETE,/package/:id",
+                    "GET,/packages/",
+                    "GET,/config-service/optimize/config/",
+                    "PUT,/config/",
+                    "POST,/config/c2v/"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "业务运营服务 - 总",
+        "code": "SCOPE_CONSOLE_BIZ_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "业务运营服务 - 控制",
+                "code": "SCOPE_CONSOLE_BIZ_CONTROL",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "PATCH,/biz/switch/order/off/:id",
+                    "PATCH,/biz/switch/order/on/:id",
+                    "PATCH,/biz/switch/system/off/:id",
+                    "PATCH,/biz/switch/system/on/:id",
+                    "PATCH,/biz/switch/scheduler/off/:id",
+                    "PATCH,/biz/switch/scheduler/on/:id"
+                ],
+                "children": null
+            },
+            {
+                "name": "业务运营服务 - 运营配置读写",
+                "code": "SCOPE_CONSOLE_BIZ_CONFIG_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "POST,/biz/config/map",
+                    "GET,/biz/config/map/:id",
+                    "PUT,/biz/config/map/:id",
+                    "GET,/biz/config/vehicle",
+                    "GET,/biz/config/vehicle/:id",
+                    "PUT,/biz/config/vehicle/:id"
+                ],
+                "children": null
+            },
+            {
+                "name": "业务运营服务 - 运营配置只读",
+                "code": "SCOPE_CONSOLE_BIZ_CONFIG_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/biz/config/vehicle",
+                    "GET,/biz/config/vehicle/:id",
+                    "GET,/biz/config/map/:id"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "任务订单服务 - 总",
+        "code": "SCOPE_CONSOLE_TICKET_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "任务订单服务 - 读写",
+                "code": "SCOPE_CONSOLE_TICKET_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/order/batch",
+                    "POST,/order/batch",
+                    "GET,/order/batch/:id",
+                    "PATCH,/order/batch/:id/cancelappointed",
+                    "GET,/order/query/batch/appointed",
+                    "GET,/order/query/batch/immediate",
+                    "GET,/order/query/sub/inprocess",
+                    "GET,/order/sub/:id",
+                    "PATCH,/order/sub/:id/abort",
+                    "PATCH,/order/sub/:id/cancel",
+                    "PATCH,/order/sub/:id/complete",
+                    "GET,/order/ws",
+                    "PATCH,/order/batch/:id/complete",
+                    "PATCH,/order/batch/:id/cancel",
+                    "PATCH,/order/batch/:id/abort",
+                    "GET,/order/query/sub/immediate"
+                ],
+                "children": null
+            },
+            {
+                "name": "任务订单服务 - 只读",
+                "code": "SCOPE_CONSOLE_TICKET_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/order/batch",
+                    "GET,/order/batch/:id",
+                    "GET,/order/query/batch/appointed",
+                    "GET,/order/query/batch/immediate",
+                    "GET,/order/query/sub/inprocess",
+                    "GET,/order/sub/:id",
+                    "GET,/order/ws",
+                    "GET,/order/query/sub/immediate"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "数据聚合服务",
+        "code": "SCOPE_DATA_AGGREGATOR",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "GET,/data/image",
+            "GET,/data/log",
+            "GET,/data/mqtt",
+            "GET,/data/videos",
+            "GET,/statuses",
+            "PUT,/statuses"
+        ],
+        "children": null
+    },
+    {
+        "name": "流媒体服务",
+        "code": "SCOPE_MEDIA_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "流媒体服务 - 只读",
+                "code": "SCOPE_MEDIA_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/api/controls/record-status",
+                    "GET,/api/controls/record-status/:VEHICLE",
+                    "GET,/api/streams",
+                    "GET,/api/videos"
+                ],
+                "children": null
+            },
+            {
+                "name": "流媒体服务 - 读写",
+                "code": "SCOPE_MEDIA_READ_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/api/controls/record-status",
+                    "GET,/api/controls/record-status/:VEHICLE",
+                    "POST,/api/controls/set-record-status",
+                    "GET,/api/streams",
+                    "GET,/api/videos"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "司图统计路线服务",
+        "code": "SCOPE_SITU_MAP_ROUTE",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "DELETE,/mapservice/static/route",
+            "GET,/mapservice/static/route",
+            "POST,/mapservice/static/route/typea",
+            "POST,/mapservice/static/route/typeb",
+            "PUT,/mapservice/static/route/update/typea",
+            "PUT,/mapservice/static/route/update/typeb"
+        ],
+        "children": null
+    },
+    {
+        "name": "行程超时设置",
+        "code": "SCOPE_TRIP_LIMIT_TIME_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "行程超时设置 - 只读",
+                "code": "SCOPE_TRIP_LIMIT_TIME_READ",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/settings/trip"
+                ],
+                "children": null
+            },
+            {
+                "name": "行程超时设置 - 读写",
+                "code": "SCOPE_TRIP_LIMIT_TIME_READWRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/settings/trip",
+                    "PUT,/settings/trip"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "OSS",
+        "code": "SCOPE_OSS",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "OSS - 只读",
+                "code": "SCOPE_OSS_READ_ONLY",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/buckets",
+                    "GET,/object/:id",
+                    "GET,/tasks",
+                    "GET,/objects"
+                ],
+                "children": null
+            },
+            {
+                "name": "OSS - 读写",
+                "code": "SCOPE_OSS_READ_WRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/buckets",
+                    "POST,/buckets/:id/build",
+                    "POST,/buckets/build",
+                    "PATCH,/object",
+                    "GET,/object/:id",
+                    "DELETE,/objects",
+                    "GET,/objects",
+                    "GET,/tasks",
+                    "POST,/tasks",
+                    "DELETE,/tasks/:id",
+                    "GET,/buckets",
+                    "POST,/buckets/:id/build",
+                    "POST,/buckets/build",
+                    "PATCH,/object",
+                    "GET,/object/:id",
+                    "DELETE,/objects",
+                    "GET,/objects",
+                    "GET,/tasks",
+                    "POST,/tasks",
+                    "DELETE,/tasks/:id"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "地图服务业务层 - 总",
+        "code": "SCOPE_BUSINESS_MAP_ALL",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": true,
+        "roles": null,
+        "apis": null,
+        "children": [
+            {
+                "name": "地图服务业务层 - 读写",
+                "code": "SCOPE_BUSINESS_MAP_READWRITE",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/business-map/mapservice/nextstop/v1/bundle/route2vehicle",
+                    "POST,/business-map/mapservice/nextstop/v1/create/route",
+                    "POST,/business-map/mapservice/nextstop/v1/create/station",
+                    "POST,/business-map/mapservice/nextstop/v1/load/routefile",
+                    "POST,/business-map/mapservice/nextstop/v1/publish/dev/route",
+                    "POST,/business-map/mapservice/nextstop/v1/publish/dev/station",
+                    "DELETE,/business-map/mapservice/nextstop/v1/route",
+                    "GET,/business-map/mapservice/nextstop/v1/route",
+                    "DELETE,/business-map/mapservice/nextstop/v1/station/by/id",
+                    "GET,/business-map/mapservice/nextstop/v1/station/by/id",
+                    "GET,/business-map/mapservice/nextstop/v1/station/by/map",
+                    "GET,/business-map/mapservice/nextstop/v1/sync/data",
+                    "GET,/business-map/mapservice/nextstop/v1/unbundle/route2vehicle",
+                    "POST,/business-map/mapservice/nextstop/v1/update/route",
+                    "POST,/business-map/mapservice/nextstop/v1/update/station",
+                    "GET,/business-map/mapservice/nextstop/v1/vehicle/route/relation",
+                    "GET,/business-map/mapservice/nextstop/v1/vehicle/status",
+                    "GET,/business-map/mapservice/nextstop/v1/bundle/route2vehicle",
+                    "POST,/business-map/mapservice/nextstop/v1/create/route",
+                    "POST,/business-map/mapservice/nextstop/v1/create/station",
+                    "POST,/business-map/mapservice/nextstop/v1/load/routefile",
+                    "POST,/business-map/mapservice/nextstop/v1/publish/dev/route",
+                    "POST,/business-map/mapservice/nextstop/v1/publish/dev/station",
+                    "DELETE,/business-map/mapservice/nextstop/v1/route",
+                    "GET,/business-map/mapservice/nextstop/v1/route",
+                    "DELETE,/business-map/mapservice/nextstop/v1/station/by/id",
+                    "GET,/business-map/mapservice/nextstop/v1/station/by/id",
+                    "GET,/business-map/mapservice/nextstop/v1/station/by/map",
+                    "GET,/business-map/mapservice/nextstop/v1/sync/data",
+                    "GET,/business-map/mapservice/nextstop/v1/unbundle/route2vehicle",
+                    "POST,/business-map/mapservice/nextstop/v1/update/route",
+                    "POST,/business-map/mapservice/nextstop/v1/update/station",
+                    "GET,/business-map/mapservice/nextstop/v1/vehicle/route/relation",
+                    "GET,/business-map/mapservice/nextstop/v1/vehicle/status",
+                    "GET,/business-map/mapservice/nextstop/v1/bundle/route2vehicle",
+                    "POST,/business-map/mapservice/nextstop/v1/create/route",
+                    "POST,/business-map/mapservice/nextstop/v1/create/station",
+                    "POST,/business-map/mapservice/nextstop/v1/load/routefile",
+                    "POST,/business-map/mapservice/nextstop/v1/publish/dev/route",
+                    "POST,/business-map/mapservice/nextstop/v1/publish/dev/station",
+                    "DELETE,/business-map/mapservice/nextstop/v1/route",
+                    "GET,/business-map/mapservice/nextstop/v1/route",
+                    "DELETE,/business-map/mapservice/nextstop/v1/station/by/id",
+                    "GET,/business-map/mapservice/nextstop/v1/station/by/id",
+                    "GET,/business-map/mapservice/nextstop/v1/station/by/map",
+                    "GET,/business-map/mapservice/nextstop/v1/sync/data",
+                    "GET,/business-map/mapservice/nextstop/v1/unbundle/route2vehicle",
+                    "POST,/business-map/mapservice/nextstop/v1/update/route",
+                    "POST,/business-map/mapservice/nextstop/v1/update/station",
+                    "GET,/business-map/mapservice/nextstop/v1/vehicle/route/relation",
+                    "GET,/business-map/mapservice/nextstop/v1/vehicle/status"
+                ],
+                "children": null
+            },
+            {
+                "name": "地图服务业务层 - 只读",
+                "code": "SCOPE_BUSINESS_MAP_READ",
+                "description": "",
+                "domain": ".*",
+                "isRoot": 0,
+                "isParent": false,
+                "roles": null,
+                "apis": [
+                    "GET,/business-map/mapservice/nextstop/v1/vehicle/status",
+                    "GET,/business-map/mapservice/nextstop/v1/vehicle/route/relation",
+                    "GET,/business-map/mapservice/nextstop/v1/unbundle/route2vehicle",
+                    "GET,/business-map/mapservice/nextstop/v1/sync/data",
+                    "GET,/business-map/mapservice/nextstop/v1/station/by/map",
+                    "GET,/business-map/mapservice/nextstop/v1/station/by/id",
+                    "GET,/business-map/mapservice/nextstop/v1/route",
+                    "GET,/business-map/mapservice/nextstop/v1/bundle/route2vehicle"
+                ],
+                "children": null
+            }
+        ]
+    },
+    {
+        "name": "全局规划服务",
+        "code": "SCOPE_GLOBAL_PLANNING",
+        "description": "",
+        "domain": ".*",
+        "isRoot": 1,
+        "isParent": false,
+        "roles": null,
+        "apis": [
+            "GET,/planning/mapservice/planning/get/path"
+        ],
+        "children": null
+    }
+]

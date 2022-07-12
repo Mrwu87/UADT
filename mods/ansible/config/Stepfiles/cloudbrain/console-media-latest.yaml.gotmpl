@@ -19,7 +19,7 @@ config:
     ssl: false
   combineVideo: NONE
   db:
-    host: 10.23.189.252
+    host: console-mysql-latest
     port: 3306
     username: utcmedia
     password: utcmedia
@@ -30,7 +30,7 @@ config:
   ffmpegArgs: ""
 
 persistence: 
-  storageClass: managed-nfs-storage
+  #storageClass: managed-nfs-storage
   enabled: true
   accessMode: ReadWriteOnce
   size: 20Gi

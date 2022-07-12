@@ -1,0 +1,21 @@
+[
+    {
+        "tags": null,
+        "enabled": true,
+        "name": "key-auth",
+        "consumer": null,
+        "service": {
+            "name": "console-vehicle-latest-internal.{{   NAMESPACE  }}"
+        },
+        "route": null,
+        "config": {
+            "key_names": [
+                "access_token"
+            ],
+            "run_on_preflight": true,
+            "anonymous": null,
+            "hide_credentials": false,
+            "key_in_body": false
+        }
+    }
+]

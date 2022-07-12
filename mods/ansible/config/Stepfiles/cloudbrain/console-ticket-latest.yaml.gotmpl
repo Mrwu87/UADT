@@ -16,10 +16,10 @@ biz:
 
 redis:
   nodes:
-    - addr: 10.23.29.25:6379
-  password: uisee123
+    - addr: scheduler-redis-latest-master:6379
+  password: redis
 mysql:
-  dsn: utc_ticket:utc_ticket@tcp(10.23.189.252:3306)/utc_ticket?charset=utf8&parseTime=True
+  dsn: utc_ticket:utc_ticket@tcp(console-mysql-latest:3306)/utc_ticket?charset=utf8&parseTime=True
   migrateDir: ./migrations
 
 resources:

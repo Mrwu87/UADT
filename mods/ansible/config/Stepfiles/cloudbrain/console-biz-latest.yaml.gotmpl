@@ -11,10 +11,10 @@ logging:
 
 redis:
   nodes:
-  - addr: 10.23.29.25:6379
-  password: uisee123
+  - addr: scheduler-redis-latest-master:6379
+  password: redis
 mysql:
-  dsn: utc_biz:utc_biz@tcp(10.23.189.252:3306)/utc_biz?charset=utf8&parseTime=True&loc=UTC
+  dsn: utc_biz:utc_biz@tcp(console-mysql-latest:3306)/utc_biz?charset=utf8&parseTime=True&loc=UTC
 biz:
   auto-switch-on: false
 

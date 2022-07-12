@@ -1,0 +1,295 @@
+[
+    {
+        "name": "监控",
+        "path": "/workspace/monitor",
+        "components": []
+    },
+    {
+        "name": "监控 - 园区",
+        "path": "/workspace/monitor/maps/*",
+        "components": [
+            {
+                "name": "园区监控 基本功能",
+                "code": "COMPONENT_MONITOR_BASIC"
+            },
+            {
+                "name": "园区监控 - 控车",
+                "code": "COMPONENT_MONITOR_VEHICLE_CONTROL"
+            }
+        ]
+    },
+    {
+        "name": "个人信息",
+        "path": "/workspace/profile/*",
+        "components": [
+            {
+                "name": "个人信息",
+                "code": "COMPONENT_PROFILE"
+            }
+        ]
+    },
+    {
+        "name": "管理",
+        "path": "/workspace/management/*",
+        "components": [
+            {
+                "name": "项目管理",
+                "code": "COMPONENT_PROJECT_MANAGEMENT"
+            }
+        ]
+    },
+    {
+        "name": "系统",
+        "path": "/workspace/system/*",
+        "components": [
+            {
+                "name": "系统管理",
+                "code": "COMPONENT_SYSTEM_MANAGEMENT"
+            }
+        ]
+    },
+    {
+        "name": "运维工具 - 检测工具",
+        "path": "/workspace/operation/check",
+        "components": []
+    },
+    {
+        "name": "监控 - 鹰眼",
+        "path": "/workspace/monitor/hawkEye/*",
+        "components": [
+            {
+                "name": "园区监控 - 视频实况",
+                "code": "COMPONENT_CONTROLS_HAWKEYE"
+            }
+        ]
+    },
+    {
+        "name": "自检工具",
+        "path": "/workspace/operation/check/selfcheck",
+        "components": [
+            {
+                "name": "自检记录",
+                "code": "COMPONENT_SELFCHECK_READ"
+            },
+            {
+                "name": "自检执行",
+                "code": "COMPONENT_SELFCHECK_WRITE"
+            }
+        ]
+    },
+    {
+        "name": "调试工具",
+        "path": "/workspace/operation/debug",
+        "components": []
+    },
+    {
+        "name": "远程工具链",
+        "path": "/workspace/operation/debug/toolchain",
+        "components": [
+            {
+                "name": "工具链车辆列表",
+                "code": "TOOL_CHAIN_VEHICLE_LIST"
+            }
+        ]
+    },
+    {
+        "name": "运维自检工具",
+        "path": "/workspace/operation/check/devopstool",
+        "components": [
+            {
+                "name": "运维自检",
+                "code": "COMPONENT_LOSHU_CHECK"
+            }
+        ]
+    },
+    {
+        "name": "云端数据",
+        "path": "/workspace/operation/debug/clouddata",
+        "components": [
+            {
+                "name": "运维调试",
+                "code": "COMPONENT_LOSHU_DEBUG"
+            }
+        ]
+    },
+    {
+        "name": "监控 - 车辆遥控器",
+        "path": "/workspace/monitor/vehicles/*",
+        "components": [
+            {
+                "name": "车辆遥控器",
+                "code": "COMPONENT_VEHICLE_CONTROLLER"
+            }
+        ]
+    },
+    {
+        "name": "车辆管理",
+        "path": "/workspace/management/vehicles/*",
+        "components": [
+            {
+                "name": "OTA",
+                "code": "COMPONENT_OTA"
+            }
+        ]
+    },
+    {
+        "name": "地图管理",
+        "path": "/workspace/management/maps/*",
+        "components": [
+            {
+                "name": "OTA",
+                "code": "COMPONENT_OTA"
+            }
+        ]
+    },
+    {
+        "name": "车端远程数据管理",
+        "path": "/workspace/operation/debug/vehiclelist/*",
+        "components": [
+            {
+                "name": "运维调试",
+                "code": "COMPONENT_LOSHU_DEBUG"
+            }
+        ]
+    },
+    {
+        "name": "上报问题",
+        "path": "/workspace/operation/check/faultreport/*",
+        "components": [
+            {
+                "name": "故障上报管理",
+                "code": "COMPONENT_FAULTS_MANAGEMENT"
+            }
+        ]
+    },
+    {
+        "name": "故障上报小程序",
+        "path": "/workspace/operation/check/faultapplet/*",
+        "components": [
+            {
+                "name": "故障上报小程序",
+                "code": "COMPONENT_FAULTS_REPORT_APPLET"
+            }
+        ]
+    },
+    {
+        "name": "运维工具",
+        "path": "/workspace/operation",
+        "components": []
+    },
+    {
+        "name": "OTA软件包管理",
+        "path": "/workspace/operation/debug/otaPackage",
+        "components": [
+            {
+                "name": "OTA metadata管理",
+                "code": "COMPONENT_OTA_METADATA_MANAGEMENT"
+            }
+        ]
+    },
+    {
+        "name": "监控 - 运维平台",
+        "path": "/workspace/monitor/devOps/*",
+        "components": [
+            {
+                "name": "运维回放",
+                "code": "COMPONENT_PLAYBACK"
+            }
+        ]
+    },
+    {
+        "name": "遥控器",
+        "path": "/workspace/monitor/controller/*",
+        "components": [
+            {
+                "name": "站点遥控器",
+                "code": "COMPONENT_CONTROLLER"
+            }
+        ]
+    },
+    {
+        "name": "事件日志记录",
+        "path": "/workspace/operation/debug/eventsLog/*",
+        "components": [
+            {
+                "name": "事件历史记录",
+                "code": "COMPONENT_EVENT_LOGS"
+            }
+        ]
+    },
+    {
+        "name": "数据记录",
+        "path": "/workspace/operation/visualReview/*",
+        "components": [
+            {
+                "name": "洛书lite",
+                "code": "COMPONENT_LOSHU_LITE"
+            }
+        ]
+    },
+    {
+        "name": "OSS 资源",
+        "path": "/workspace/management/resource-list/*",
+        "components": [
+            {
+                "name": "OSS 资源",
+                "code": "COMPONENT_OSS_RESOURCE"
+            }
+        ]
+    },
+    {
+        "name": "通知 - 地址",
+        "path": "/workspace/notification/addresses",
+        "components": [
+            {
+                "name": "项目管理",
+                "code": "COMPONENT_PROJECT_MANAGEMENT"
+            }
+        ]
+    },
+    {
+        "name": "通知 - 地图相关",
+        "path": "/workspace/notification/maps/*",
+        "components": [
+            {
+                "name": "项目管理",
+                "code": "COMPONENT_PROJECT_MANAGEMENT"
+            }
+        ]
+    },
+    {
+        "name": "通知 - 模板",
+        "path": "/workspace/notification/templates/*",
+        "components": [
+            {
+                "name": "项目管理",
+                "code": "COMPONENT_PROJECT_MANAGEMENT"
+            }
+        ]
+    },
+    {
+        "name": "通知",
+        "path": "/workspace/notification",
+        "components": []
+    },
+    {
+        "name": "云母工具",
+        "path": "/workspace/monitor/tools/*",
+        "components": [
+            {
+                "name": "云母工具",
+                "code": "WORKSPACE_MONITOR_TOOLS"
+            }
+        ]
+    },
+    {
+        "name": "订单管理",
+        "path": "/workspace/management/Orders/*",
+        "components": [
+            {
+                "name": "订单管理",
+                "code": "COMPONENT_ORDER_MANAGEMENT"
+            }
+        ]
+    }
+]

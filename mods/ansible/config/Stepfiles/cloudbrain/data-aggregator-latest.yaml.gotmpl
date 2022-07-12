@@ -22,12 +22,12 @@ utcdataStorageDSN: console-minio-latest:9000
 minioAccess: minio@console
 minioBucket: aggregator-video
 minioSecret: minio@console
-redisDSN: 10.23.29.25:6379
+redisDSN: console-core-latest-redis-master:6379
 
 mysql:
   configs: charset=utf8&parseTime=True
   db: utcdata
-  host: 10.23.189.252
+  host: console-mysql-latest
   port: 3306
 
 resources:

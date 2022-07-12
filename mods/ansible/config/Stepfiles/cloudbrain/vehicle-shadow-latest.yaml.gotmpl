@@ -7,13 +7,13 @@ image:
 imagePullSecrets: 
 - name: docker-reg-secret
 hmimysql:
-  dsn: root:uisee@123@tcp(10.23.189.252:3306)/hmi?charset=utf8&parseTime=True
+  dsn: root:uisee@2019@tcp(compass-mysql-latest:3306)/hmi?charset=utf8&parseTime=True
 
 redis:
   nodes:
-    - host: 10.23.167.82
+    - host: compass-redis-latest-master
       port: 6379
-  password: uisee123
+  password: redis
 
 
 logging:

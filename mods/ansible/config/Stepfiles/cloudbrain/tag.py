@@ -1,7 +1,7 @@
 import sys
 import subprocess
 import json, yaml
-from log import logger
+# from log import logger
 from datetime import datetime, timedelta
 from time import sleep
 import re
@@ -9,8 +9,8 @@ class deplopy:
     @classmethod
     def run_command(self, command, taskId, cwd=None, timeout=600):
         try:
-            logger.info('[COMMAND] [%s] RUN CMD: [%s], CWD: [%s], TIMEOUT: [%s]' %
-                        (taskId, command, cwd, timeout))
+            # logger.info('[COMMAND] [%s] RUN CMD: [%s], CWD: [%s], TIMEOUT: [%s]' %
+            #             (taskId, command, cwd, timeout))
             popen = subprocess.Popen(
                 command,
                 cwd=cwd,
@@ -32,19 +32,19 @@ class deplopy:
                 sleep(0.1)
                 if end_time <= datetime.now():
                     popen.kill()
-                    logger.critical('[COMMAND] [%s] EXEC TIMEOUT' % (taskId))
+                    # logger.critical('[COMMAND] [%s] EXEC TIMEOUT' % (taskId))
                     return False, None, None
 
             if popen.returncode > 0:
-                logger.info('[COMMAND] [%s] FAILED:[%s], CODE:[%s], \nSTDOUT:[\n%s\n]\nSTDERR:[\n%s\n]' % (
-                    taskId, command, popen.returncode, stdout_text, stderr_text))
+                # logger.info('[COMMAND] [%s] FAILED:[%s], CODE:[%s], \nSTDOUT:[\n%s\n]\nSTDERR:[\n%s\n]' % (
+                #     taskId, command, popen.returncode, stdout_text, stderr_text))
                 return False, stdout_text, stderr_text
             else:
-                logger.info('[COMMAND] [%s] SUCCESS:[%s], CODE:[%s]' %
-                            (taskId, command, popen.returncode))
+                # logger.info('[COMMAND] [%s] SUCCESS:[%s], CODE:[%s]' %
+                #             (taskId, command, popen.returncode))
                 return True, stdout_text, stderr_text
         except Exception as e:
-            logger.exception('[COMMAND] [%s] EXCEPTION:[%s]:' % (taskId, command))
+            # logger.exception('[COMMAND] [%s] EXCEPTION:[%s]:' % (taskId, command))
             return False, None, None
 
 with open(f'{sys.argv[2]}images_tongyong.txt') as f:
@@ -68,7 +68,7 @@ for i in a:
     command=f'sudo docker push {new}'
     deplopy.run_command(command, taskId='push images_tag')
 
-
+#chart 分离
 with open(f'{sys.argv[2]}repo_charts.yaml', mode='r') as r:
     a = yaml.safe_load(r)
 for i in a:

@@ -58,7 +58,7 @@ class Deployment(Command):
         for i in stream['initasks']:
             dir = "/".join([ s for s in  i['log'].split("/")[0:-1]])
             # print(dir)
-            # {key: index for index, key in enumerate(data)}.get('a')  #字典找下标
+            # {key: index for index, key in enumerate(data)}.get('a')  #字典找索引下标
             count=stream['initasks'].index(i)+1
             App.F.display()
             App.vc.set_value(count)

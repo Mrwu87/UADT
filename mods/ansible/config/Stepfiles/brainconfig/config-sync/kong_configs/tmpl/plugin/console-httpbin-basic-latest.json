@@ -1,0 +1,16 @@
+[
+    {
+        "tags": null,
+        "enabled": true,
+        "name": "basic-auth",
+        "consumer": null,
+        "service": null,
+        "route": {
+            "name": "console-httpbin-basic-latest.{{   NAMESPACE  }}"
+        },
+        "config": {
+            "hide_credentials": false,
+            "anonymous": null
+        }
+    }
+]

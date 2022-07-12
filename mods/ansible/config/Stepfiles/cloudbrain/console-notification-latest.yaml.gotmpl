@@ -5,16 +5,16 @@ image:
 imagePullSecrets:
 - name: docker-reg-secret
 migration:
-  compassDSN: root:uisee@123@tcp(10.23.189.252:3306)/hmi
+  compassDSN: root:uisee@2019@tcp(compass-mysql-latest:3306)/hmi
   cloudEventSource: cloud-nome-{{ env "VER" | default "latest" }}
 
-utcntRedisDsn: 10.23.29.25:6379
+utcntRedisDsn: console-core-latest-redis-master:6379
 
 mongodb:
-  host: 10.23.19.227
+  host: console-mongodb-latest
   port: 27017
   username: root
-  password: uisee%40123
+  password: root
 
 logging:
   enabled: true

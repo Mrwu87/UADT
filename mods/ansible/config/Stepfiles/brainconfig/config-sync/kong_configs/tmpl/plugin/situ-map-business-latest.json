@@ -1,0 +1,32 @@
+[
+    {
+        "tags": null,
+        "enabled": true,
+        "name": "jwt",
+        "consumer": null,
+        "service": {
+            "name": "situ-map-business-latest.{{   NAMESPACE  }}"
+        },
+        "route": null,
+        "config": {
+            "secret_is_base64": false,
+            "run_on_preflight": true,
+            "uri_param_names": [
+                "auth_token"
+            ],
+            "key_claim_name": "iss",
+            "header_names": [
+                "authorization"
+            ],
+            "maximum_expiration": 0,
+            "anonymous": null,
+            "claims_to_verify": [
+                "exp",
+                "nbf"
+            ],
+            "cookie_names": [
+                "auth_token"
+            ]
+        }
+    }
+]

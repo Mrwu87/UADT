@@ -2,12 +2,6 @@
 - hosts: deploy_ip
   gather_facts:  false
   tasks:
-    - name: get cloudbrain image file
-      shell: sudo docker load -i {{ inventory_dir }}/Playbooks/images/cloudbrain_images.tar
-      args:
-        creates:  "{{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready"
-      async: 0
-
     - name: rm -rf charts.txt
       command: rm -rf {{ inventory_dir }}/Stepfiles/cloudbrain/charts.txt
 
@@ -42,8 +36,7 @@
     - name: create  ns
       ignore_errors: yes
       command: kubectl create ns {{ namespace }}
-      args:
-        creates: "{{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready"
+
 
     - name: template version.yaml
       template:
@@ -59,7 +52,7 @@
       shell: touch {{ inventory_dir }}/Stepfiles/cloudbrain/docker-key-ready
 
     - name: change harbor registry
-      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ bash change_harbor_registry.sh {{ deployip }}:31150"
+      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ bash change_harbor_registry.sh {{ deployip }}:31150 {{ ingressdomain }} {{ clustername }} {{ consoleinitproject }}"
 
     - name: update
       shell: helm repo update
@@ -90,8 +83,16 @@
     - name: apply cstor storageclass yaml
       shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-sc.yaml
 
-    - name: create cstor nfs yaml
-      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-nfs.yaml
+#    - name: create cstor nfs yaml
+#      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-nfs.yaml
+    - name: create ns nfs
+      command: kubectl create ns nfs
+      ignore_errors: yes
+
+    - name: helm install nfs
+      shell: helm install  {{ inventory_dir }}/Stepfiles/openebs/nfs-server/nfs-server-provisioner-1.1.3.tgz  --generate-name   --namespace=nfs  --set=persistence.enabled=true,persistence.storageClass=cstor-csi-disk,persistence.size={{ nfssize }},storageClass.name=managed-nfs-storage,storageClass.provisionerName=openebs.io/nfs  >>  ~/UADT/mods/logs/config/runtime 2>&1
+
+
 
 
 

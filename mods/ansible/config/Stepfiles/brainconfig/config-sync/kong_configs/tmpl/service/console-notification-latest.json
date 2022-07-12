@@ -1,0 +1,16 @@
+{
+    "host": "console-notification-latest.{{   NAMESPACE  }}.svc.cluster.local",
+    "protocol": "http",
+    "read_timeout": 60000,
+    "tls_verify_depth": null,
+    "port": 80,
+    "ca_certificates": null,
+    "connect_timeout": 60000,
+    "write_timeout": 60000,
+    "name": "console-notification-latest.{{   NAMESPACE  }}",
+    "retries": 5,
+    "path": "/notification",
+    "tls_verify": null,
+    "tags": [],
+    "client_certificate": null
+}

@@ -1,0 +1,39 @@
+---
+- hosts: server
+  gather_facts:  false
+  tasks:
+
+    - name: mkdir istio
+      file:
+        path: istio
+        state: directory
+        owner: "{{ user }}"
+    - name: load istio images to  server
+      copy:
+            src: "{{ inventory_dir }}/Stepfiles/istio/istio.tar"
+            dest: "istio/istio.tar"
+
+    - name: load istio image
+      shell:
+          cmd: |
+            sudo docker  load -i istio/istio.tar
+- hosts: deploy_ip
+  gather_facts:  false
+  tasks:
+     - name: export istioctl to bin
+       shell: chdir={{ inventory_dir }}/Stepfiles/istio/istio-1.14.0/bin/ sudo mv istioctl /usr/bin/
+
+     - name: install istio demo
+       shell: istioctl install --set profile=demo -y  >>  ~/UADT/mods/logs/config/runtime 2>&1
+
+     - name:  automatic sidecar injection
+       shell: kubectl label namespace {{ namespace }} istio-injection=enabled
+
+     - name: init config yaml
+       shell: istioctl manifest generate > ~/generated-mainfest.yaml
+
+     - name: init istio cluster
+       shell: kubectl apply -f ~/generated-mainfest.yaml
+
+     - name: install kiali dashborad
+       shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/istio/kiali.yaml

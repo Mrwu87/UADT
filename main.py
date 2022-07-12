@@ -22,7 +22,6 @@ import npyscreen
 
 class Npy(npyscreen.NPSApp):
     def thread_log(self):
-
         self.ml = self.F.add(npyscreen.BoxTitle, name='Running Logs....', scroll_exit=True, slow_scroll=True,
                              rely=self.F.nextrely + 1)
         log_file = '/home/wlw/UADT/mods/logs/config/runtime'
@@ -38,10 +37,9 @@ class Npy(npyscreen.NPSApp):
                 text = txt.split('\n')
                 text.reverse()
                 for i in text:
-                    if i[190:] != '': #每行只取出190个字符多的就接入下一行
+                    if i[190:] != '': #每行只取出190个字符 超过的就接入下一行
                         text.insert(text.index(i) + 1, i[190:])
                         text[text.index(i)] = i[:190]
-
                 self.ml.values = text[:200]
                 time.sleep(1.5)  # 刷新率不能低过1.5秒
                 self.ml.display()  #局部控件更新
@@ -70,7 +68,7 @@ class Npy(npyscreen.NPSApp):
         self.vc = self.F.add(npyscreen.TitleSliderPercent, out_of=int(self.total_task), value=0, name='ProgressBar',
                              editable=False)
 
-        self.F.add(npyscreen.TitleText, name='LogFile:', editable=False, value='/var/log/nginx/wwa',
+        self.F.add(npyscreen.TitleText, name='LogFile:', editable=False, value='~/UADT/mods/logs/config/runtime',
                    rely=self.F.nextrely + 1)
         # pid=os.getpid()
         # print(pid)
