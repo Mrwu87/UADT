@@ -3,7 +3,7 @@ nfsSize: 120Gi
 namespace: local-common
 ingressDomain: uisee.common.cn
 clusterName: Uisee-common-test
-consoleInitProject: common-project #project: dongwu替换
+consoleInitProject: common-project
 hosts:
 - last_address: 172.16.42.138
   new_address: 172.16.42.138/24

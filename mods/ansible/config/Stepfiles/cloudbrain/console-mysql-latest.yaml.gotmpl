@@ -61,7 +61,11 @@ initializationFiles:
     GRANT ALL ON utc_ticket.* TO 'utc_ticket'@'%';
     GRANT SELECT ON performance_schema.user_variables_by_thread TO 'utc_ticket'@'%';
     FLUSH PRIVILEGES;
-
+    CREATE DATABASE `utcdata` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+    CREATE USER 'utcdata'@'%' IDENTIFIED BY 'utcdata';
+    GRANT ALL ON utcdata.* TO 'utcdata'@'%';
+    GRANT SELECT ON performance_schema.user_variables_by_thread TO 'utcdata'@'%';
+    FLUSH PRIVILEGES;
 service:
   type: NodePort
 
