@@ -4,32 +4,30 @@
     - work_dir: "{{ inventory_dir }}/Stepfiles/brainconfig"
     - base_service_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
   tasks:
-    - name: helmfile-A deploy cluster
-      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-A.yaml apply  >>  ~/UADT/mods/logs/config/runtime 2>&1 "
-
-    - name: wait for task A
-      pause: seconds=600
-
-    - name: helmfile-B deploy cluster
-      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-B.yaml apply  2>&1"
-
     - name: pip install yaml
       command: "chdir={{ inventory_dir }}/Stepfiles/brainconfig/  sudo pip install --no-index --find-links=. ruamel.yaml"
       args:
         creates: "{{ work_dir }}/pre"
 
-
     - name: skip pip install and host
       command: touch {{ work_dir }}/pre
 
-#    - name: monitor port healthy
-#      shell: python3 {{ work_dir }}/config-sync/watch_dog.py {{ client.0.1 }} >>  ~/UADT/mods/logs/config/runtime 2>&1
+    - name: mv file
+      shell: mv ~/UADT/mods/logs/config/runtime ~/UADT/mods/logs/config/runtime.bak
 
-    - name: wait for task B
-      pause: seconds=600
+    - name: monitor port healthy
+      shell: python3 {{ work_dir }}/config-sync/watch_dog.py {{ client.0.1 }}  {{ user }}
+
+    - name: mv file to back
+      shell: mv ~/UADT/mods/logs/config/runtime.bak ~/UADT/mods/logs/config/runtime
 
     - name: kong config
       command: "python3 {{ work_dir }}/config-sync/kong_standalone.py  https://{{ deployip }}:32444/ {{ ingressdomain }} {{ namespace }} {{ work_dir }}/config-sync"
+      args:
+              creates: "{{ work_dir }}/kong_ready"
+
+    - name: kong is ready
+      shell: "touch {{ work_dir }}/kong_ready"
 
 
     - name: add minio server address
@@ -48,19 +46,29 @@
           mc policy set public common-minio-s3/utc-map-gl
           mc cp  {{ base_service_dir }}/minio/utc-map-gl/*  common-minio-s3/utc-map-gl/
           mc cp {{ base_service_dir }}/minio/console-vehicles/*  ucloud-minio-s3/console-vehicles/
-
-
+      args:
+          creates: "{{ work_dir }}/minio_ready"
+    - name:  minio is ready
+      shell: "touch {{ work_dir }}/minio_ready"
 
     - name: nacos config
       command: python3 {{ work_dir }}/config-sync/nacos.py  {{ deployip }}:31205  {{ work_dir }}/config-sync {{ namespace }}
+      args:
+          creates: "{{ work_dir }}/nacos_ready"
+    - name:  nacos is ready
+      shell: "touch {{ work_dir }}/nacos_ready"
 
     - name: emqx config
       command: "python3 {{ work_dir }}/config-sync/emqx.py  {{ deployip }} {{ work_dir }}/config-sync"
-
-#    - name: console test
-#      command: python3 {{ work_dir }}/config-sync/watch_console.py  null {{ ingressdomain }}
+      args:
+          creates: '{{ work_dir }}/emqx_ready'
+    - name:  emqx is ready
+      shell: "touch {{ work_dir }}/emqx_ready"
 
     - name: console config
       shell: python3 {{ work_dir }}/config-sync/console_standalone.py  https://{{ ingressdomain }}/  {{ consoleinitproject }}  {{ work_dir }}/config-sync >>  ~/UADT/mods/logs/config/runtime 2>&1
+      args:
+          creates: "{{ work_dir }}/console_ready"
 
-
+    - name:  console is ready
+      shell: "touch {{ work_dir }}/console_ready"

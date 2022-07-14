@@ -52,5 +52,5 @@ def import_file(cloud_result,emqx_result):
     service_logger.info(import_result.json())
 
 if __name__ == '__main__':
-    upload()
-    import_file()
+    cloud_result, emqx_result= upload()
+    import_file(cloud_result,emqx_result)

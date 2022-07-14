@@ -1,0 +1,17 @@
+- hosts: deploy_ip
+  gather_facts:  false
+  vars:
+    - work_dir: "{{ inventory_dir }}/Stepfiles/brainconfig"
+    - base_service_dir: "{{ inventory_dir }}/Stepfiles/baseservice"
+  tasks:
+    - name: helmfile-A deploy cluster
+      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-A.yaml apply  >>  ~/UADT/mods/logs/config/runtime 2>&1 "
+
+    - name: wait for task A
+      pause: seconds=1200
+
+    - name: helmfile-B deploy cluster
+      shell: "chdir={{ inventory_dir }}/Stepfiles/cloudbrain/ helmfile -f  helmfile-B.yaml apply  2>&1"
+
+    - name: wait for task B
+      pause: seconds=1200

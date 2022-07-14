@@ -32,7 +32,7 @@ ansibletasks:
      -   log: "mods/ansible/config/Stepfiles/ntp/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/ntp.yaml'
      -   log: "mods/ansible/config/Stepfiles/basetools/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/basetools.yaml'
+         playbookfile: 'mods/ansible/config/Playbooks/baseTools.yaml'
 #     -   log: "mods/ansible/config/Stepfiles/dns/Success.log"
 #         playbookfile: 'mods/ansible/config/Playbooks/dns.yaml'
      -   log: "mods/ansible/config/Stepfiles/hosts/Success.log"
@@ -50,9 +50,9 @@ ansibletasks:
      -   log: "mods/ansible/config/Stepfiles/k9s/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/k9s.yaml'
      -   log: "mods/ansible/config/Stepfiles/cloudimage/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/cloudimage.yaml'
+         playbookfile: 'mods/ansible/config/Playbooks/cloudImage.yaml'
      -   log: "mods/ansible/config/Stepfiles/cloudbrain/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/cloudbrain.yaml'
+         playbookfile: 'mods/ansible/config/Playbooks/cloudBrain.yaml'
      -   log: "mods/ansible/config/Stepfiles/baseservice/ingress-nginx/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/ingressNginx.yaml'
      -   log: "mods/ansible/config/Stepfiles/baseservice/kong/Success.log"
@@ -65,7 +65,9 @@ ansibletasks:
          playbookfile: 'mods/ansible/config/Playbooks/observability.yaml'
      -   log: "mods/ansible/config/Stepfiles/baseservice/kruise/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/kruise.yaml'
-#     -   log: "mods/ansible/config/Stepfiles/brainconfig/Success.log"
-#         playbookfile: 'mods/ansible/config/Playbooks/brainconfig.yaml'
-     -   log: "mods/ansible/config/Stepfiles/istio/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/istio.yaml'
+     -   log: "mods/ansible/config/Stepfiles/deploycloud/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/deployCloud.yaml'
+     -   log: "mods/ansible/config/Stepfiles/brainconfig/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/brainConfig.yaml'
+#     -   log: "mods/ansible/config/Stepfiles/istio/Success.log"
+#         playbookfile: 'mods/ansible/config/Playbooks/istio.yaml'

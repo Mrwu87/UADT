@@ -14,51 +14,53 @@ services = {
     # 'console':f'https://{sys.argv[2]}/api/console/system/security/login'
 }
 service_ready = []
+
 service_status = {'kong': "NotReady", 'minio': "NotReady", 'nacos': "NotReady", 'cloud-emqx': "NotReady",
                   'emqx': "NotReady"}
+
+
 # service_status = {'kong': "NotReady", 'minio': "NotReady", 'nacos': "NotReady", 'cloud-emqx': "NotReady",
 #                   'emqx': "NotReady",'console':'NotReady'}
-
 def kong(baseurl, name):
     # global service_status
-    while True:
-        try:
-            #        if name=='console':
-            #           s = requests.Session()
+    try:
+        #        if name=='console':
+        #           s = requests.Session()
 
-            #          adminAccount = {'username': 'admin',
-            #                     'password': 'uisee@future'}
-            #         status_num=s.post(url=baseurl, data=adminAccount, verify=False).status_code
+        #          adminAccount = {'username': 'admin',
+        #                     'password': 'uisee@future'}
+        #         status_num=s.post(url=baseurl, data=adminAccount, verify=False).status_code
 
-            if name == 'minio':
-                head = {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36'}
-                status_num = requests.get(url=baseurl, verify=False, timeout=10, headers=head).status_code
+        if name == 'minio':
+            head = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.63 Safari/537.36'}
+            status_num = requests.get(url=baseurl, verify=False, timeout=10, headers=head).status_code
 
-            else:
-                status_num = requests.get(url=baseurl, verify=False, timeout=10).status_code
+        else:
+            status_num = requests.get(url=baseurl, verify=False, timeout=10).status_code
+    except  Exception as e:
+        status_num = 500
+    if status_num == 200:
+        service_status[name] = 'Ready'
+        #   service_ready.append(True)
+        #    service_status[name] = 'Ready'
+        from prettytable import PrettyTable
+        x = PrettyTable()
+        x.field_names = ["Service", "Status"]
+        x.add_row(["kong", service_status['kong']])
+        x.add_row(["minio", service_status['minio']])
+        x.add_row(["nacos", service_status['nacos']])
+        x.add_row(["cloud-emqx", service_status['cloud-emqx']])
+        x.add_row(["emqx", service_status['emqx']])
+        with open(f'/home/{sys.argv[2]}/UADT/mods/logs/config/runtime', 'w') as f:
+            f.write(x.get_string() + '\n')
 
-        except  Exception as e:
-            status_num = 500
-        if status_num == 200:
-            with m_lock:
-                service_ready.append(True)
-                service_status[name] = 'Ready'
-            break
-        time.sleep(3)
-
-
-for key, value in services.items():
-    th = threading.Thread(target=kong, args=(value, key))
-    th.daemon = True
-    th.start()
-
+    time.sleep(1)
 while 1:
-    time.sleep(0.5)
-    print(f'{service_status}\r', end='', flush=True)
-    if len(service_ready) == 5:
+    service_ready = []
+    for key, value in services.items():
+        kong(value, key)
+    [service_ready.append(value) for key, value in service_status.items() if value == 'Ready']
+    # print(service_ready)
+    if len(service_ready) >= 5:
         break
-
-print('============================================================================================')
-print('Ready! Import config for Kong,minio,nacos,cloud-emqx,emqx ')
-time.sleep(2)
