@@ -35,9 +35,13 @@
   tasks:
      -   name: apt client config backup
          shell: 'cd /etc/apt/;sudo cp -p sources.list sources.list.back'
+     -   name: remove apt cache
+         shell: 'sudo rm -rf /etc/apt/sources.list.d/original.list'
      -   name: create sources file
          shell: 'sudo touch /etc/apt/sources.list;sudo chmod 777 /etc/apt/sources.list'
      -   name: apt sources file config
          shell: sudo echo 'deb [trusted=yes] http://{{ deployip }}:31111/repo ./' > /etc/apt/sources.list
      -   name: update apt
          command: 'sudo apt update'
+     -   name: configure apt
+         command: 'sudo dpkg --configure -a'

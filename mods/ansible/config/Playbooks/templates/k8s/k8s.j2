@@ -17,14 +17,14 @@ spec:
         - {{ host.0 }}
 {% endfor %}
     worker:
-{% for host in  dns_a_record  %}
-{% if  loop.length == 1 %}
-        - {{ host.0 }}
-{% endif %}
-{% endfor %}
 {% for host in  client  %}
         - {{ host.0 }}
 {% endfor %}
+{% if  multiplexing == "enable" %}
+{% for host in  master  %}
+        - {{ host.0 }}
+{% endfor %}
+{% endif %}
   controlPlaneEndpoint:
     internalLoadbalancer: haproxy
     domain: lb.kubesphere.local

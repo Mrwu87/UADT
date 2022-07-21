@@ -32,7 +32,6 @@
       script: /home/{{ user }}/k8sInstall/harbor.sh
 
 
-
     - name: push images to harbor
       shell:
         cmd: |

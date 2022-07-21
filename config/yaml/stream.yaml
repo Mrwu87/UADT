@@ -43,12 +43,15 @@ ansibletasks:
          playbookfile: 'mods/ansible/config/Playbooks/harbor.yaml'
      -   log: "mods/ansible/config/Stepfiles/k8s/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/k8s.yaml'
-     -   log: "mods/ansible/config/Stepfiles/openebs/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/openebs.yaml'
-     -   log: "mods/ansible/config/Stepfiles/helm/Success.log"
-         playbookfile: 'mods/ansible/config/Playbooks/helm.yaml'
      -   log: "mods/ansible/config/Stepfiles/k9s/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/k9s.yaml'
+         #-   log: "mods/ansible/config/Stepfiles/openebs/Success.log"
+       #    playbookfile: 'mods/ansible/config/Playbooks/openebs.yaml'
+         # -   log: "mods/ansible/config/Stepfiles/helm/Success.log"
+       #         playbookfile: 'mods/ansible/config/Playbooks/helm.yaml'
+     -   log: "mods/ansible/config/Stepfiles/ceph/Success.log"
+         playbookfile: 'mods/ansible/config/Playbooks/ceph.yaml'
+
      -   log: "mods/ansible/config/Stepfiles/cloudimage/Success.log"
          playbookfile: 'mods/ansible/config/Playbooks/cloudImage.yaml'
      -   log: "mods/ansible/config/Stepfiles/cloudbrain/Success.log"

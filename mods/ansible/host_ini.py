@@ -19,9 +19,11 @@ def hostIni() -> str:
     config.set('server:vars', 'namespace', hostData['namespace'])
     config.set('server:vars', 'ingressDomain', hostData['ingressDomain'])
     config.set('server:vars', 'clusterName', hostData['clusterName'])
-    config.set('server:vars', 'nfsSize', hostData['nfsSize'])
-    config.set('server:vars', 'replicaCount', str(hostData['replicaCount']))
+    # config.set('server:vars', 'nfsSize', hostData['nfsSize'])
+    # config.set('server:vars', 'replicaCount', str(hostData['replicaCount']))
     config.set('server:vars', 'consoleInitProject', hostData['consoleInitProject'])
+    config.set('server:vars', 'multiplexing', hostData['multiplexing'])
+    config.set('server:vars', 'cephHA', hostData['cephHA'])
     for host in hostData['hosts']:
         config.set('server:vars', 'user', host['username'])
         A_record.append((host['hostname'], host['last_address'], host['password']))
@@ -39,6 +41,7 @@ def hostIni() -> str:
     config.set('server:vars', 'client', str(clientList))
     config.set('server:vars', 'dns_A_record', str(A_record))
     config.set('server:vars', 'domain', 'uisee')
+
 
     with open('mods/ansible/config/host.ini', mode='w') as r:
         config.write(r)

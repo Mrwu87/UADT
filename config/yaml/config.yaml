@@ -1,35 +1,46 @@
-replicaCount: 1
-nfsSize: 120Gi
+#replicaCount: 1   # 1 or 3
+#nfsSize: 120Gi
 namespace: local-common
 ingressDomain: uisee.common.cn
 clusterName: Uisee-common-test
 consoleInitProject: common-project
+multiplexing: enable    #enable/unable  Master node as worker
+cephHA: enable
 hosts:
-- last_address: 172.16.42.138
-  new_address: 172.16.42.138/24
+- last_address: 10.0.169.35
+  new_address: 10.0.169.35/24
   hostname: master1
   ssh_port: 22
   username: wlw
   password: 123
   dns_server: 8.8.8.8
-  gateway: 172.16.42.3
+  gateway: 10.0.169.254
   interface: ens33
   master: true
   deploy: true
-  deploy_ip: 172.16.42.138
-- last_address: 172.16.42.139
-  new_address: 172.16.42.139/24
-  hostname: node2
+  deploy_ip: 10.0.169.35
+- last_address: 10.0.169.114
+  new_address: 10.0.169.114/24
+  hostname: master2
   ssh_port: 22
   username: wlw
   password: 123
   dns_server: 8.8.8.8
-  gateway: 172.16.42.3
+  gateway: 10.0.169.254
   interface: ens33
-  master: false
+  master: true
   deploy: false
-  deploy_ip: 172.16.42.138
+  deploy_ip: 10.0.169.35
+- last_address: 10.0.169.157
+  new_address: 10.0.169.157/24
+  hostname: master3
+  ssh_port: 22
+  username: wlw
+  password: 123
+  dns_server: 8.8.8.8
+  gateway: 10.0.169.254
+  interface: ens33
+  master: true
+  deploy: false
+  deploy_ip: 10.0.169.35
 
-
-
-  #记得修改openebs的副本数 在cstor-sc.yaml中

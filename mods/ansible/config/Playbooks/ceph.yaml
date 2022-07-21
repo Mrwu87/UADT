@@ -1,0 +1,65 @@
+---
+- hosts: server
+  gather_facts:  false
+  tasks:
+    - name: copy image
+      copy:
+        src: "{{ inventory_dir }}/Stepfiles/ceph/images/ceph.tar.gz"
+        dest: "ceph.tar.gz"
+
+
+    - name: load image
+      command: sudo docker load -i ceph.tar.gz
+      args:
+        creates: ceph_ready
+
+    - name: ready ceph_ready
+      command: touch ceph_ready
+
+    #when判断在调用变量时，不用加"{{ }}"
+- hosts: deploy_ip
+  tasks:
+    - name: change sc name
+      shell: "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples/csi/cephfs  sed -i 's/rook-cephfs/managed-nfs-storage/g' storageclass.yaml"
+
+    - name: create opeater
+      command:  "chdir={{ inventory_dir }}/Stepfiles/ceph/chart/rook-ceph-v1.9.7/rook-ceph helm install  --create-namespace --namespace rook-ceph rook-ceph ."
+      ignore_errors: yes
+
+    - name: wait
+      pause: seconds=20
+
+    - name: create HA cluster
+      command:  "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples kubectl apply -f cluster.yaml"
+      when:  cephha  == "enable"
+
+    - name: create HA cluster
+      command:  "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples kubectl apply -f filesystem.yaml"
+      when:  cephha  == "enable"
+
+    - name: create deploy HA sc
+      command: "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples/csi/rbd kubectl create -f storageclass.yaml"
+      when:  cephha  == "enable"
+
+
+      #single cluster config
+
+    - name: create single cluster
+      command:  "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples kubectl apply -f cluster-test.yaml"
+      when:  cephha  == "disable"
+
+    - name: create single cluster
+      command:  "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples kubectl apply -f filesystem-test.yaml"
+      when:  cephha  == "disable"
+
+    - name: create deploy single sc
+      command: "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples/csi/rbd kubectl create -f storageclass-test.yaml"
+      when:  cephha  == "disable"
+
+
+    - name:  create  cluster
+      command: "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples/csi/cephfs  kubectl apply -f storageclass.yaml"
+
+    - name: set default storageClass
+      command:  "chdir={{ inventory_dir }}/Stepfiles/ceph bash patch.sh"
+
