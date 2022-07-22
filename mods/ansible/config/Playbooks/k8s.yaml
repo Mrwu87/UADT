@@ -41,6 +41,7 @@
       args:
         creates: /home/{{ user }}/k8sInstall/image_ready
       async: 0
+
     - name: install k8s
       shell:
         cmd: |
@@ -50,12 +51,12 @@
       shell: cat  /home/{{ user }}/k8sInstall/installk8s.log | grep 'kubectl get pod -A'
 
 #metrics install
-    - name: upload metrics image to harbor
-      shell:
-        cmd: |
-          sudo docker load -i ~/k8sInstall/metrics.tar
-          sudo docker tag anjia0532/google-containers.metrics-server.metrics-server:v0.6.1 {{ deployip }}:31150/library/metrics-server:v0.6.1
-          sudo docker push {{ deployip }}:31150/library/metrics-server:v0.6.1
+#    - name: upload metrics image to harbor
+#      shell:
+#        cmd: |
+#          sudo docker load -i ~/k8sInstall/metrics.tar
+#          sudo docker tag anjia0532/google-containers.metrics-server.metrics-server:v0.6.1 {{ deployip }}:31150/library/metrics-server:v0.6.1
+#          sudo docker push {{ deployip }}:31150/library/metrics-server:v0.6.1
 
     - name: install metrics-server
       shell: kubectl apply -f ~/k8sInstall/metrics-server.yaml

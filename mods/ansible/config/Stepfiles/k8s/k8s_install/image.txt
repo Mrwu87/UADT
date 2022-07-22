@@ -37,3 +37,15 @@ nginx:1.14-alpine
 java:openjdk-8-jre-alpine
 fluent/fluentd:v1.4.2-2.0
 perl:latest
+##ceph
+ceph/rook-ceph:v1.9.7
+ceph/ceph:v17
+ceph/cephcsi:v3.6.2
+ceph/csi-snapshotter:v6.0.1
+ceph/csi-node-driver-registrar:v2.5.1
+ceph/csi-resizer:v1.4.0
+ceph/csi-snapshotter:v5.0.1
+ceph/csi-provisioner:v3.1.0
+ceph/csi-attacher:v3.4.0
+##metrics
+metrics-server:v0.6.1

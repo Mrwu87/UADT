@@ -68,30 +68,31 @@
       shell: sudo docker tag {{ deployip }}:31150/library/busybox:1.30.1 busybox:latest
 
 
-- hosts: deploy_ip
-  gather_facts:  false
-  tasks:
-    - name: get blockdevice info
-      shell:  kubectl get bd -n openebs | grep Active | awk '{print $1,$2}' > {{ inventory_dir }}/Stepfiles/openebs/cstor/blockdevice.txt
-
-    - name: insert python script
-      shell: python3 {{ inventory_dir }}/Stepfiles/openebs/cstor/blockdevice.py  {{ inventory_dir }}/Stepfiles/openebs/cstor
-
-    - name: create cstor poll
-      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor_pool.yaml
-
-    - name: apply cstor storageclass yaml
-      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-sc.yaml
-
-#    - name: create cstor nfs yaml
-#      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-nfs.yaml
-    - name: create ns nfs
-      command: kubectl create ns nfs
-      ignore_errors: yes
-
-    - name: helm install nfs
-      shell: helm install  {{ inventory_dir }}/Stepfiles/openebs/nfs-server/nfs-server-provisioner-1.1.3.tgz  --generate-name   --namespace=nfs  --set=persistence.enabled=true,persistence.storageClass=cstor-csi-disk,persistence.size={{ nfssize }},storageClass.name=managed-nfs-storage,storageClass.provisionerName=openebs.io/nfs  >>  ~/UADT/mods/logs/config/runtime 2>&1
-
+#openebs settings
+#- hosts: deploy_ip
+#  gather_facts:  false
+#  tasks:
+#    - name: get blockdevice info
+#      shell:  kubectl get bd -n openebs | grep Active | awk '{print $1,$2}' > {{ inventory_dir }}/Stepfiles/openebs/cstor/blockdevice.txt
+#
+#    - name: insert python script
+#      shell: python3 {{ inventory_dir }}/Stepfiles/openebs/cstor/blockdevice.py  {{ inventory_dir }}/Stepfiles/openebs/cstor
+#
+#    - name: create cstor poll
+#      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor_pool.yaml
+#
+#    - name: apply cstor storageclass yaml
+#      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-sc.yaml
+#
+##    - name: create cstor nfs yaml
+##      shell: kubectl apply -f {{ inventory_dir }}/Stepfiles/openebs/cstor/cstor-nfs.yaml
+#    - name: create ns nfs
+#      command: kubectl create ns nfs
+#      ignore_errors: yes
+#
+#    - name: helm install nfs
+#      shell: helm install  {{ inventory_dir }}/Stepfiles/openebs/nfs-server/nfs-server-provisioner-1.1.3.tgz  --generate-name   --namespace=nfs  --set=persistence.enabled=true,persistence.storageClass=cstor-csi-disk,persistence.size={{ nfssize }},storageClass.name=managed-nfs-storage,storageClass.provisionerName=openebs.io/nfs  >>  ~/UADT/mods/logs/config/runtime 2>&1
+#
 
 
 

@@ -1,9 +1,13 @@
 ---
 - hosts: deploy_ip
   tasks:
-    - name: unarchive tar.gz
-      #copy：在解压文件之前，是否先将文件复制到远程主机，默认为yes。若为no，则要求目标主机上压缩包必须存在。
-      unarchive: src="{{inventory_dir }}/Playbooks/images/harbor.v2.3.2.tar.gz" dest="/home/{{ user }}/" copy=no
+#    - name: unarchive tar.gz
+#      #copy：在解压文件之前，是否先将文件复制到远程主机，默认为yes。若为no，则要求目标主机上压缩包必须存在。
+#      unarchive: src="{{inventory_dir }}/Playbooks/images/harbor.v2.3.2.tar.gz" dest="/home/{{ user }}/" copy=no
+    - name: mv harbor
+      command:  mv {{inventory_dir }}/Stepfiles/harbor/harbor  /home/{{ user }}/
+      args:
+         creates: /home/{{ user }}/harbor
     - name: install docker-compose
       command: sudo mv harbor/docker-compose /usr/bin/docker-compose
     - name: chmod

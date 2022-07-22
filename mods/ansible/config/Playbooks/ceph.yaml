@@ -1,20 +1,18 @@
 ---
-- hosts: server
-  gather_facts:  false
-  tasks:
-    - name: copy image
-      copy:
-        src: "{{ inventory_dir }}/Stepfiles/ceph/images/ceph.tar.gz"
-        dest: "ceph.tar.gz"
+#- hosts: server
+#  gather_facts:  false
+#  tasks:
+#    - name: copy image
+#      copy:
+#        src: "{{ inventory_dir }}/Stepfiles/ceph/images/ceph.tar.gz"
+#        dest: "ceph.tar.gz"
+#    - name: load image
+#      command: sudo docker load -i ceph.tar.gz
+#      args:
+#        creates: ceph_ready
 
-
-    - name: load image
-      command: sudo docker load -i ceph.tar.gz
-      args:
-        creates: ceph_ready
-
-    - name: ready ceph_ready
-      command: touch ceph_ready
+#    - name: ready ceph_ready
+#      command: touch ceph_ready
 
     #when判断在调用变量时，不用加"{{ }}"
 - hosts: deploy_ip
@@ -22,12 +20,27 @@
     - name: change sc name
       shell: "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples/csi/cephfs  sed -i 's/rook-cephfs/managed-nfs-storage/g' storageclass.yaml"
 
+# --set   CSI_VOLUME_REPLICATION_IMAGE: dockerhub.kubekey.local:9443/kubesphere/volumereplication-operator:v0.3.0
+
     - name: create opeater
-      command:  "chdir={{ inventory_dir }}/Stepfiles/ceph/chart/rook-ceph-v1.9.7/rook-ceph helm install  --create-namespace --namespace rook-ceph rook-ceph ."
+      command:  "chdir={{ inventory_dir }}/Stepfiles/ceph/chart/rook-ceph-v1.9.7/rook-ceph helm install  --create-namespace --namespace rook-ceph rook-ceph .
+      --set image.repository={{ deployip }}:31150/ceph/rook-ceph
+      --set image.tag=v1.9.7
+      --set   provisioner.image={{ deployip }}:31150/ceph/csi-provisioner:v3.1.0
+      --set   registrar.image={{ deployip }}:31150/ceph/csi-node-driver-registrar:v2.5.1
+      --set   resizer.image={{ deployip }}:31150/ceph/csi-resizer:v1.4.0
+      --set   snapshotter.image={{ deployip }}:31150/ceph/csi-snapshotter:v5.0.1
+      --set   attacher.image={{ deployip }}:31150/ceph/csi-attacher:v3.4.0
+      --set   cephcsi.image={{ deployip }}:31150/ceph/cephcsi:v3.6.2
+      --set   csiAddons.image={{ deployip }}:31150/ceph/k8s-sidecar:v0.4.0"
       ignore_errors: yes
 
     - name: wait
       pause: seconds=20
+
+    - name: script cluster.yaml
+      shell: sed -i 's#quay.io/ceph/ceph:v16.2.9#{{ deployip }}:31150/ceph/ceph:v17#g' {{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples/cluster.yaml
+      when:  cephha  == "enable"
 
     - name: create HA cluster
       command:  "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples kubectl apply -f cluster.yaml"
@@ -43,8 +56,11 @@
 
 
       #single cluster config
+    - name: script cluster.yaml
+      shell: sed -i 's#quay.io/ceph/ceph:v17#{{ deployip }}:31150/ceph/ceph:v17#g' {{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples/cluster-test.yaml
+      when:  cephha  == "disable"
 
-    - name: create single cluster
+    - name: create single disable
       command:  "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples kubectl apply -f cluster-test.yaml"
       when:  cephha  == "disable"
 
@@ -56,7 +72,7 @@
       command: "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples/csi/rbd kubectl create -f storageclass-test.yaml"
       when:  cephha  == "disable"
 
-
+# both
     - name:  create  cluster
       command: "chdir={{ inventory_dir }}/Stepfiles/ceph/rook-1.9.7/deploy/examples/csi/cephfs  kubectl apply -f storageclass.yaml"
 

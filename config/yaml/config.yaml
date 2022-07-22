@@ -4,7 +4,7 @@ namespace: local-common
 ingressDomain: uisee.common.cn
 clusterName: Uisee-common-test
 consoleInitProject: common-project
-multiplexing: enable    #enable/unable  Master node as worker
+multiplexing: enable    #enable/disable: Master node as worker
 cephHA: enable
 hosts:
 - last_address: 10.0.169.35
